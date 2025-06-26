@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DSRS Overview | WV Consolidated Public Retirement Board</title>
+  <!-- Web Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <style>
+    :root {
+      --primary-color: #012e5a;
+      --accent-color: #0066cc;
+      --nav-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      display: flex; flex-direction: column; min-height: 100vh;
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: #f9f9f9; color: #333; line-height: 1.6;
+    }
+    .top-bar {
+      display: flex; align-items: center; flex-wrap: wrap;
+      background: #012e5a; color: #fff; padding: 8px 20px;
+    }
+    .top-left { display: flex; align-items: center; margin-right: 20px; }
+    .logo img { width: 70px; margin-right: 12px; }
+    .board-text { display: flex; flex-direction: column; gap: 3px; }
+    .board-name { font-size: 1.2em; font-weight: 600; }
+    .brand-separator { border: none; border-top: 1px solid #ffc; margin: 4px 0; }
+    .board-slogan { font-size: .95em; font-style: italic; opacity: .9; }
+    .top-right {
+      margin-left: auto; text-align: right;
+      font-family: 'Roboto', sans-serif; font-size: .85em; line-height: 1.4;
+      max-width: 350px;
+    }
+    .top-right a { color: #ffc; text-decoration: none; }
+    .top-right a:hover { text-decoration: underline; }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; box-shadow: var(--nav-shadow);
+      padding: 7px 20px; position: relative; z-index: 1;
+    }
+    .main-menu { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;}
+    .main-menu > li { position: relative; }
+    .main-menu > li > a {
+      text-decoration: none; color: #012e5a; font-weight: 600; padding: 5px 0;
+      display: inline-block; font-size: 1em;
+    }
+    .main-menu > li > a:hover, .main-menu > li > a.active { color: #005bb5; }
+    .submenu {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #ddd; border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,.1); min-width: 200px; z-index: 999;
+    }
+    .submenu ul { list-style: none; margin: 0; padding: 0; }
+    .submenu li a {
+      display: block; padding: 8px 15px; color: #012e5a; font-weight: 400; font-size: .95em; text-decoration: none;
+    }
+    .submenu li a:hover { background: #f0f0f0; color: #005bb5; }
+    .main-menu li:hover .submenu { display: block; }
+    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+    .nav-buttons button,
+    .nav-buttons a {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #0066cc; color: #fff; border: none;
+      padding: 8px 14px; border-radius: 4px;
+      font-weight: bold; cursor: pointer; text-decoration: none;
+      transition: background .3s; font-size: 1em;
+    }
+    .nav-buttons button:hover,
+    .nav-buttons a:hover { background: #005bb5; }
+    .button-icon { width: 18px; height: 18px; display: inline-flex; }
+    .button-icon svg { width: 100%; height: 100%; fill: #fff; }
+    #mega-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(1,46,90,0.32); z-index: 9998;
+    }
+    #mega-menu {
+      display: none; position: fixed;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 95vw; max-width: 1100px; max-height: 90vh; overflow-y: auto;
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18); z-index: 9999;
+    }
+    .mega-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 32px 10px 32px; border-bottom: 1px solid #eee; background: #f5f8fa;
+    }
+    .mega-header h2 { margin: 0; font-size: 1.5em; color: #012e5a; }
+    .mega-close {
+      background: none; border: none; font-size: 2em; cursor: pointer;
+      color: #333; transition: color .2s;
+      padding: 0 8px;
+    }
+    .mega-close:hover { color: #005bb5; }
+    .mega-content {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px;
+      padding: 22px 32px 28px 32px;
+    }
+    .mega-column h3 {
+      margin: 0 0 10px 0; font-size: 1.08em; color: #005bb5;
+    }
+    .mega-column ul { padding: 0; margin: 0; list-style: none; }
+    .mega-column li { margin-bottom: 8px; }
+    .mega-column a { color: #0073e6; text-decoration: none; }
+    .mega-column a:hover { text-decoration: underline; color: #012e5a; }
+    main { flex: 1; display: flex; justify-content: center; padding: 24px 0 32px 0; background: #f9f9f9; }
+    .content-panel {
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,.09);
+      width: 90%; max-width: 950px; padding: 40px 30px;
+      display: flex; flex-direction: column;
+      margin: 0 auto;
+    }
+    .content-panel h1 { font-size: 2em; color: #012e5a; margin-bottom: .8em; }
+    .content-panel h2 { font-size: 1.4em; color: #012e5a; margin-top: 2rem; margin-bottom: 1rem; }
+    .content-panel ul { margin: 0 0 1.1em 1.4em; padding: 0; }
+    .content-panel ul li { margin-bottom: 0.65em; }
+    .content-panel p { margin-bottom: 1rem; }
+    .content-panel a { color: #0073e6; text-decoration: none; }
+    .content-panel a:hover { text-decoration: underline; }
+    footer.footer {
+      background: #012e5a; color: #fff; padding: 20px 0; width: 100%;
+    }
+    .footer-container {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; padding: 0 20px; font-size: .96em;
+    }
+    .footer-logo img {
+      width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;
+    }
+    .footer-text a { color: #ffc; text-decoration: none; }
+    .footer-text a:hover { text-decoration: underline; }
+    @media (max-width: 1000px) {
+      .mega-content { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 800px) {
+      .mega-content { grid-template-columns: 1fr 1fr; }
+      .content-panel { padding: 22px 8vw; }
+    }
+    @media (max-width:600px) {
+      .top-bar, .nav-bar, .footer-container { flex-direction: column; align-items: flex-start; }
+      .nav-buttons { margin-top: 10px;}
+      .footer-text { text-align: left; margin-top: 10px;}
+      .mega-content { grid-template-columns: 1fr;}
+      .content-panel { width: 99%; padding: 14px 2vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVY TOP BAR -->
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html" class="logo">
+        <img src="Images/Logo.png" alt="CPRB Logo">
+      </a>
+      <div class="board-text">
+        <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+        <hr class="brand-separator">
+        <div class="board-slogan">Serving those who serve West Virginia</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <address>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> | <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+        <em>Please do not send personal info via plain email.</em>
+      </address>
+    </div>
+  </div>
+
+  <!-- WHITE NAV BAR -->
+  <nav class="nav-bar">
+    <ul class="main-menu">
+      <li>
+        <a href="#">Board of Trustees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Active Members</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">Trooper Plan A</a></li>
+            <li><a href="PlanB.html">Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Retirees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+            <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+            <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Participating Employers</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employer Forms</a></li>
+            <!--  -->
+            <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+            <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+            <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+            <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+            <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+            <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Publications</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/>
+          </svg>
+        </span>
+        Find It Fast
+      </button>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+         class="service-btn" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+            <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+            <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+            <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+          </svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+         class="service-btn" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+          </svg>
+        </span>
+        Employer Login
+      </a>
+    </div>
+  </nav>
+
+  <!-- MEGA MENU BACKDROP -->
+  <div id="mega-backdrop"></div>
+  <!-- MEGA MENU -->
+  <div id="mega-menu" role="dialog" aria-modal="true" aria-labelledby="findItFastTitle">
+    <div class="mega-header">
+      <h2 id="findItFastTitle">Find It Fast</h2>
+      <button id="mega-close" class="mega-close" aria-label="Close Find It Fast">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS: Teachers’ Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">ESS Portal</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          <li><a href="Forms/WVTF0015.pdf" target="_blank">Critical Need Substitute Teacher Affidavit</a></li>
+          <li><a href="Forms/WVTF0016.pdf" target="_blank">Critical Need Substitute Bus Operator Affidavit</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT PANEL -->
+  <main>
+    <div class="content-panel">
+  <h1>Deputy Sheriffs' Retirement System (DSRS)</h1>
+  <p>
+    The Deputy Sheriff Retirement System (DSRS), a multiple-employer defined benefit employee retirement system, was established for all deputy sheriffs hired on or after July 1, 1998. DSRS currently has more than 1,500 members and 500 retired members. Service as a sheriff may also be considered covered employment in DSRS under certain circumstances. Individuals elected as Sheriff should contact CPRB to determine his or her eligibility to participate in DSRS.
+  </p>
+  <p>
+    Active members contribute 8.5% of their gross monthly salary pre-tax and the Sheriff's Office contributes an additional 17% of the member's gross monthly salary. In addition, the county contributes certain fees charged for reports and other services provided by Sheriff's Offices. A member is vested after completion of 60 months of covered employment.
+  </p>
+  <p>
+    "Board" when used in the following sections of this brochure refers to the West Virginia Consolidated Public Retirement Board.
+  </p>
+
+  <h2>Retirement Benefits</h2>
+  <!-- <p>
+    <a href="#">PDF print friendly version</a> &nbsp; | &nbsp; <a href="#">Print friendly version</a>
+  </p> -->
+  <p>
+    Retirement benefits are not automatic. You must apply to the Board for your retirement benefits.<br>
+    Distributions must start by April 1 of the year following the later of:<br>
+    a) the date you reach age 73 if you were born after December 31, 1950, or<br>
+    b) the date upon which you terminate employment.
+  </p>
+
+  <p>
+    In order to qualify for regular retirement benefits, a member of DSRS must meet one of the following requirements:<br>
+    <strong>While still in covered employment, a member may:</strong>
+    <ul>
+      <li>Retire with full benefits at the age of 50 if age plus service equals or exceeds 70 (excluding military service).</li>
+      <li>Retire with full benefits at age 60 with 5 full years of service (excluding military service).</li>
+    </ul>
+    <strong>When covered employment has ceased, a member may:</strong>
+    <ul>
+      <li>Retire with full benefits at age 50 with 20 years of service (excluding military service), or with reduced benefits at age 40 with 20 years of service (excluding military service).</li>
+      <li>Retire with full benefits at age 62 with 5 or more years of service (excluding military service).</li>
+    </ul>
+  </p>
+  <p>
+    A regular retirement benefit, paid in equal monthly installments, is an amount equal to 2.5% of a member's final average salary multiplied by the member's years of credited service. Final average salary refers to the average of the highest annual compensation received for covered employment by the member during any five consecutive plan years within the member's last ten years of service. A plan year is July 1 through June 30.
+  </p>
+  <p>
+    <strong>Final Average Salary x Years of Credited Service x 2.5% = Annual Retirement Benefit</strong>
+  </p>
+  <p>
+    Retirement income payments shall commence on the first day of the calendar month following:<br>
+    1) The Board's receipt of the member's voluntary application to retire;<br>
+    2) The member's termination of covered employment; and<br>
+    3) The member's attainment of early or normal retirement criteria.
+  </p>
+  <p>
+    The very first benefit payment due to a retiree or beneficiary will be mailed directly to the recipient's home address. Following the first payment, barring any unforeseen circumstances, benefit payments are credited by direct deposit to retiree accounts on the 25th of each month, except the month of December, when retiree accounts are credited on the 18th. If the 25th (or December 18th) falls on a weekend or holiday, direct deposits are processed on the prior full business day.
+  </p>
+
+  <h3>5 Annuity Options Upon Retirement</h3>
+  <ul>
+    <li><strong>Straight Life Annuity:</strong> A lifetime annuity payable monthly to the member determined under the regular benefit formula without adjustment. There are no death benefits payable under this option.</li>
+    <li><strong>True Joint & Survivor Annuity:</strong> A reduced annuity payable monthly to the member. Upon the death of either the member or the beneficiary, the annuity is further reduced to either 50%, 66 2/3%, 75% or 100% of the original monthly amount, dependent on the original option elected by the member. The reduced benefit is payable to the surviving member or beneficiary for the remainder of his or her life.</li>
+    <li><strong>Joint & Survivor Annuity:</strong> A reduced annuity payable monthly to the member. Upon the death of the member, a reduced annuity of either 50%, 66 2/3 %, 75% or 100% of the original monthly amount, dependent on the original option elected by the member, is payable to the beneficiary. There is no change in the original monthly amount if the beneficiary pre-deceases the member.</li>
+    <li><strong>Ten Years Certain & Life Annuity:</strong> A reduced annuity payable monthly to the member. If the member dies before receiving 120 monthly payments, the remainder of the 120 monthly payments shall be payable to the member's beneficiary or the member's estate.</li>
+    <li><strong>Level Income Annuity:</strong> An increased annuity payable monthly to the member until the member attains Social Security Retirement Age. After Social Security Retirement Age is met, the benefit is reduced by the estimated Primary Insurance Amount determined at retirement. The reduced benefit is payable monthly for the remaining lifetime of the member. There are no death benefits under this option.</li>
+  </ul>
+  <p>
+    A retiree who is married and elects a survivor option naming someone other than their spouse must have their spouse complete a voluntary spousal waiver. A named survivor must be a natural person with an insurable interest in the member's life. An option may not be revoked or changed after the member receives their first annuity payment unless permitted pursuant to W.Va. Code §7-14D-12. If a named survivor under an option dies before a retiree, the retiree may elect a new survivor option; however, the new option will result in a further reduction in the retiree's monthly annuity benefit.
+  </p>
+
+  <h3>Disability Retirement Benefits</h3>
+  <p>
+    <strong>Totally Disabled</strong> means a member's inability to engage in substantial gainful activity by reason of any medically determined physical or mental impairment that can be expected to result in death or that has lasted or can be expected to last for a continuous period of not less than 12 months. A member is totally disabled only if his or her physical or mental impairment is so severe that he or she is not only unable to perform his or her previous work as a deputy sheriff but also cannot, considering the member's age, education and work experience, engage in any other kind of substantial gainful employment which exists in the state.
+  </p>
+  <p>
+    <strong>Partially Disabled</strong> means a member's inability to engage in the duties of deputy sheriff by reason of any medically determinable physical or mental impairment that can be expected to result in death or that has lasted or can be expected to last for a continuous period of not less than 12 months. A member may be determined partially disabled and maintain the ability to engage in other gainful employment which exists within the state but which ability would not enable him or her to earn an amount at least equal to 2/3 of the average annual compensation earned by all active members of this plan during the plan year ending the most recent 30th day of June.
+  </p>
+  <h4>Duty Related Disability Benefits</h4>
+  <ul>
+    <li><strong>Total Duty:</strong> 90% of the member's average monthly compensation for the full 12 month period preceding his or her disability, payable for lifetime.</li>
+    <li><strong>Partial Duty:</strong> 45% of the member's average monthly compensation for the full 12 month period preceding his or her disability until age 60, then reverts to normal retirement.</li>
+  </ul>
+  <h4>Non-Duty Related Disability Benefits</h4>
+  <ul>
+    <li><strong>Total Non-Duty:</strong> 66 2/3% of the member's average monthly compensation for the full 12 month period preceding his or her disability until age 60, then reverts to normal retirement.</li>
+    <li><strong>Partial Non-Duty:</strong> 33 1/3% of the member's average monthly compensation for the full 12 month period preceding his or her disability until age 60, then reverts to normal retirement.</li>
+  </ul>
+  <p>
+    <strong>Continued Disability:</strong> The Board may require subsequent medical evaluations to determine if a disability retiree has fully or partially recovered from such disability. The Board may also require a disability benefit recipient to file an annual statement of earnings and any other information required in rules adopted by the Board.
+  </p>
+
+  <h3>Beneficiary Options Prior to Retirement</h3>
+  <ul>
+    <li><strong>Less than 10 years of contributory service:</strong> A member with less than 10 years of contributory service may elect to name a beneficiary(ies) on a Pre-Retirement Beneficiary form to receive a return of accumulated contributions upon his or her death. Said Pre-Retirement Beneficiary form must be on file with CPRB prior to the member's death.</li>
+    <li><strong>10 or more years of contributory service:</strong> After obtaining 10 years of contributory service, a member's spouse is the primary beneficiary according to WV Code. If the member is not married, the dependent child(ren) surviving the member is the primary beneficiary according to WV Code. If the member is not married nor has dependent child(ren) nor dependent parent(s), the member may elect to name a beneficiary to receive a return of accumulated contributions at his or her death.</li>
+  </ul>
+  <p>
+    If a member's family situation changes or upon attaining 10 years of contributory service, a member's pre-retirement beneficiary designation should be re-evaluated.
+  </p>
+
+  <h3>Death Benefits</h3>
+  <p>
+    <strong>Duty Related</strong> -The surviving spouse of any member who, while in covered employment, has died or dies by reason of injury, illness or disease resulting from an occupational risk or hazard inherent in or peculiar to the service required of members, while the member was or is engaged in the performance of his or her duties as a deputy sheriff, or the surviving spouse of a member who dies from any cause after having been retired with a duty related disability shall be entitled to receive the greater of 2/3 of the annual compensation received by the deceased member during the last full 12 months of contributory service; or if the member dies after his or her early or normal retirement age the monthly amount the spouse would have received had the member retired the day before his or her death and elected a 100% Joint and Survivor annuity with the spouse as the joint annuitant, and then died. This benefit is payable to the surviving spouse during his or her lifetime.
+  </p>
+  <p>
+    <strong>Non-Duty Related</strong> - The surviving spouse of any member who has been a member for at least 10 years who, while in covered employment, has died or dies from non-duty related causes and not due to vicious habits, intemperance or willful misconduct on his or her part shall receive the greater of 50% of the annual compensation received by the deceased member during the last full 12 months of contributory service; or if the member dies after his or her early or normal retirement age, the monthly amount which the spouse would have received had the member retired the day before his or her death, elected a 100% Joint and Survivor annuity with the spouse as the joint annuitant, and then died. This benefit is payable to the surviving spouse during his or her lifetime.
+  </p>
+  <p>
+    <strong>Dependent Benefits</strong> - In addition to spouse death benefits, a surviving spouse of a member who dies of a duty or non-duty related death is also entitled to receive $100 monthly for each dependent child. If the surviving spouse dies, or if there is no surviving spouse, the fund shall pay monthly to each dependent child a sum equal to 1/4 of the surviving spouse's entitlement. If there is neither a surviving spouse nor a dependent child, the fund shall pay to the dependent parents of the deceased member a sum equal to what the surviving spouse would have received without children. When there is only one dependent parent surviving, that parent is entitled to receive 1/2 the amount which both parents would have been entitled to receive.
+  </p>
+  <p>
+    <strong>Dependent Child Scholarship</strong> - Any person qualifying as a dependent child of a deceased member of DSRS shall be entitled to receive scholarship monies, not to exceed $7,500 per year, to be applied to the career development education of that dependent at a West Virginia institution.
+  </p>
+  <p>
+    <strong>Burial Benefits</strong> - Any member who dies as a result of any duty related illness or injury is entitled to receive a lump sum burial benefit of $5,000, to be paid to the member's spouse, or to the member's estate if not married. Any unspent balance shall be distributed as part of the member's estate.
+  </p>
+
+  <h3>Military Service</h3>
+  <p>
+    Any member of DSRS who previously served on active duty in the armed forces of the United States and was honorably discharged is entitled to apply for up to 5 years of credited service for that active duty upon time of retirement. Military service credit will not be credited for the purpose of meeting initial retirement eligibility. In addition, any member of this plan who is called to active duty while in covered employment with a DSRS participating employer and who returns to covered employment within the allowable time frame following an honorable discharge may be eligible to purchase up to 5 years of additional military service credit under the provisions of federal law.
+  </p>
+
+  <h3>Workers' Compensation</h3>
+  <p>
+    Any member who is receiving Workers' Compensation benefits may receive credited service for time absent from work due to temporary disability. Credited service ceases when a member returns to paid employment with a covered employer or is granted a disability or regular retirement under the provisions of DSRS.
+  </p>
+
+  <h3>Concurrent Employment</h3>
+  <p>
+    Any active member who has concurrent employment in an additional job or jobs that requires participation in another retirement system administered by CPRB must contribute 8.5% of his or her monthly salary from such additional employment to DSRS.
+  </p>
+
+  <h3>Termination of Employment</h3>
+  <p>
+    Any member who terminates employment and is not immediately eligible for a retirement benefits is entitled to receive from the fund the member's accumulated contributions, which includes regular interest. Any member who withdraws his or her contributions forfeits all rights to any future retirement or disability benefits under DSRS. Any member who completes 60 months of covered employment and ceases employment prior to age 60 is eligible to either withdraw his or her accumulated contributions or receive retirement income payments upon attaining normal retirement age.
+  </p>
+
+  <h3>Employment After Retirement</h3>
+  <p>
+    If a DSRS retiree resumes service in DSRS covered employment, payment of his or her annuity shall be suspended during his or her reemployment and he or she shall again become a contributing member of DSRS. At the conclusion of such resumed service in covered employment, the member shall have his or her annuity recalculated to take into account the entirety of service in covered employment.
+  </p>
+  <p>
+    A DSRS retiree who resumes service in DSRS covered employment with an employer who has fewer than 5 deputies should refer to WV Code §7-14D-24a(b) for various conditions that must be met to avoid having his or her retirement suspended.
+  </p>
+  <p>
+    Any retired member of DSRS who accepts employment with an agency who participates in the Public Employees Retirement System (PERS) may choose whether he or she wishes to become a participating member of PERS. Any DSRS retiree who begins participation for the first time in PERS on or after July 1, 2005, may not receive a combined retirement benefit in excess of 105% of the member's highest annual salary earned while either a member of PERS or while a member of DSRS when adding the retirement benefit from PERS to the retirement benefit received by that member from DSRS.
+  </p>
+
+  <h3>Reinstatement</h3>
+  <p>
+    Any member who withdraws his or her accumulated contributions after terminating employment and thereafter becomes reemployed in covered employment may elect to redeposit the amount of the withdrawn covered employment contributions, together with interest. Upon repayment, the member shall receive the same credit for his or her former covered employment as if no refund had been made. The repayment must be made in a lump sum within 60 months of the deputy sheriff's reemployment. Rollovers and plan transfers shall be accepted on behalf of the member, but solely for the purpose of purchasing permissive service credit or repayment of withdrawn contributions.
+  </p>
+
+  <h3>Loans</h3>
+  <p>
+    An active member who was hired before July 1, 2005 may borrow up to 50% of his or her contributions, but the total existing loan may not exceed $8,000. Refinancing existing loans is not permitted.<br>
+    Any outstanding loan balance must be paid in full before a member can receive full retirement benefits. A member may elect to receive a lifetime actuarial reduction of their monthly retirement benefit to payoff their outstanding loan balance.
+  </p>
+
+  <h3>Sick and Annual Leave at Retirement</h3>
+  <p>
+    Any member of DSRS who has accrued annual and/or sick leave days at the time of retirement may elect to acquire additional credited service under DSRS. The accrued days shall be applied on the basis of 2 workdays' credit granted for each 1 day of accrued annual and/or sick leave. However, such credited service shall not be used in meeting initial eligibility for retirement. If the member elects to convert his or her unused leave to acquire additional credited service and he or she plans to separate from employment prior to eligibility for a retirement annuity (deferred retirement), the member should contact a Uniformed Services Retirement Advisor before terminating employment to determine if this option is available.
+  </p>
+  <p>
+    In the alternative to increasing retirement benefits, certain members of DSRS who are at least age 55 at the time of retirement and who also participate in a PEIA insurance plan at the time of retirement may be eligible to elect to use accrued annual and/or sick leave to purchase health insurance under PEIA. Please contact PEIA for further information.
+  </p>
+  <p>
+    Accrued leave cannot be divided and used for both additional service credit and PEIA coverage.
+  </p>
+
+  <h3>Appointments</h3>
+  <p>
+    Most retirement related matters can be handled from the convenience of your home via mail and telephone. However, members who wish to visit CPRB to discuss related matters with a CPRB staff member are required to make an appointment.
+  </p>
+
+  <h3>Questions</h3>
+  <p>
+    Should you have any questions regarding the Deputy Sheriff Retirement System, please feel free to contact us in writing or by phone at the Consolidated Public Retirement Board, Monday through Friday, 8:00 a.m. to 5:00 p.m.
+  </p>
+
+  <h3>Note</h3>
+  <p>
+    Information contained in this publication illustrates the Board's understanding of the current provisions of the West Virginia Code as it applies to the Deputy Sheriff Retirement System. These provisions are contained in the current plan statutes, and are subject to modification by the West Virginia Legislature each year. This is for general guidance purposes only. In the event there is a discrepancy between information contained in this brochure and the WV State Code and Rules or any applicable case law, the language in the Code and Rules or any applicable case law shall prevail.
+  </p>
+</div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="Images/WV.png" alt="WV State Logo">
+      </div>
+      <div class="footer-text">
+        CPRB © 2025 – State of West Virginia – For general guidance only. In the event of any discrepancy, State Code and Rules prevail. |
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Find It Fast Mega Menu Logic
+    const findItFastBtn = document.getElementById('findItFastBtn');
+    const megaMenu = document.getElementById('mega-menu');
+    const megaBackdrop = document.getElementById('mega-backdrop');
+    const megaClose = document.getElementById('mega-close');
+    function openMegaMenu() {
+      megaMenu.style.display = 'block';
+      megaBackdrop.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      megaClose.focus();
+    }
+    function closeMegaMenu() {
+      megaMenu.style.display = 'none';
+      megaBackdrop.style.display = 'none';
+      document.body.style.overflow = '';
+      findItFastBtn.focus();
+    }
+    findItFastBtn.addEventListener('click', openMegaMenu);
+    megaClose.addEventListener('click', closeMegaMenu);
+    megaBackdrop.addEventListener('click', closeMegaMenu);
+    document.addEventListener('keydown', function(e) {
+      if (megaMenu.style.display === 'block' && (e.key === 'Escape' || e.key === 'Esc')) {
+        closeMegaMenu();
+      }
+    });
+  </script>
+</body>
+</html>

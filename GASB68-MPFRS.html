@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GASB 68 MPFRS Schedules | WV Consolidated Public Retirement Board</title>
+
+  <!-- Web Fonts -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+
+  <style>
+    /* GLOBAL RESET & BODY */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family:'Open Sans',Arial,sans-serif;
+      background:#f9f9f9; color:#333; line-height:1.6;
+    }
+
+    /* NAVY TOP BAR */
+    .top-bar {
+      display:flex; align-items:center; flex-wrap:wrap;
+      background:#012e5a; color:#fff; padding:8px 20px;
+      min-height:70px;
+    }
+    .top-left { display:flex; align-items:center; }
+    .logo img { width:70px; margin-right:10px; }
+    .board-text { display:flex; flex-direction:column; gap:3px; }
+    .board-name { font-size:1.2em; font-weight:600; }
+    .brand-separator { border:none; border-top:1px solid #ffc; margin:4px 0; }
+    .board-slogan { font-size:.95em; font-style:italic; opacity:.9; }
+    .top-right {
+      margin-left:auto; text-align:right;
+      font-family:'Roboto',sans-serif; font-weight:700;
+      font-size:.85em; line-height:1.4; max-width:350px;
+    }
+    .top-right a { color:#ffc; text-decoration:none; }
+    .top-right a:hover { text-decoration:underline; }
+
+    /* WHITE NAV BAR */
+    .nav-bar {
+      display:flex; align-items:center; justify-content:space-between;
+      background:#fff; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+      padding:7px 20px; position:relative; z-index:1;
+    }
+    .main-menu { list-style:none; display:flex; gap:20px; margin:0; padding:0; }
+    .main-menu li { position:relative; }
+    .main-menu > li > a {
+      text-decoration:none; color:#012e5a; font-size:1em; font-weight:600;
+      padding:5px 0; display:inline-block;
+    }
+    .main-menu > li > a:hover,
+    .main-menu > li > a.active { color:#005bb5; }
+    .submenu {
+      display:none; position:absolute; left:0; top:100%;
+      background:#fff; border:1px solid #ddd; border-radius:4px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.1); min-width:220px;
+      z-index:2;
+    }
+    .submenu ul { list-style:none; margin:0; padding:0; }
+    .submenu li a {
+      display:block; padding:8px 15px; color:#012e5a;
+      font-weight:400; font-size:.95em; text-decoration:none;
+    }
+    .submenu li a:hover { background:#f0f0f0; color:#005bb5; }
+    .main-menu li:hover .submenu { display:block; }
+
+    /* NAV BUTTONS */
+    .nav-buttons { display:flex; gap:10px; }
+    .service-btn,
+    .ess-login,
+    #findItFastBtn {
+      background:#0066cc; color:#fff;
+      padding:8px 14px; border-radius:4px;
+      display:inline-flex; align-items:center;
+      font-weight:bold; font-size:1em;
+      text-decoration:none; cursor:pointer;
+      border:none; transition:background .3s;
+    }
+    .service-btn:hover,
+    .ess-login:hover,
+    #findItFastBtn:hover { background:#005bb5; }
+    .button-icon {
+      display:inline-flex; width:16px; height:16px;
+      margin-right:6px; fill:currentColor;
+    }
+
+    /* MEGA MENU & BACKDROP */
+    #mega-backdrop {
+      display:none; position:fixed; top:0; left:0;
+      width:100%; height:100%; background:rgba(0,0,0,0.5);
+      z-index:9998;
+    }
+    #mega-menu {
+      display:none; position:fixed;
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      background:#fff; width:95vw; max-height:90vh;
+      overflow-y:auto; border-radius:4px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3); z-index:9999;
+    }
+    .mega-header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 30px; background:#f5f5f5; border-bottom:1px solid #ddd;
+      border-top-left-radius:4px; border-top-right-radius:4px;
+    }
+    .mega-header h2 { margin:0; font-size:1.6em; color:#012e5a; }
+    .mega-close {
+      background:none; border:none; font-size:1.8em;
+      cursor:pointer; color:#666; transition:color .2s;
+    }
+    .mega-close:hover { color:#333; }
+    .mega-content {
+      display:flex; flex-wrap:wrap; gap:20px;
+      padding:20px 30px; justify-content:space-between;
+    }
+    .mega-column { flex:1 1 22%; min-width:220px; }
+    .mega-column h3 {
+      margin:0 0 12px; font-size:1.2em; color:#005bb5;
+    }
+    .mega-column ul { list-style:none; margin:0; padding:0; }
+    .mega-column li { margin-bottom:10px; }
+    .mega-column a { color:#0073e6; text-decoration:none; }
+    .mega-column a:hover { text-decoration:underline; }
+
+    /* CONTENT PANEL */
+    .content-panel {
+      max-width:900px; margin:40px auto; padding:20px;
+      background:#fff; border-radius:4px; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+    }
+    .content-panel h1 {
+      font-size:1.8em; color:#012e5a; margin-bottom:1rem;
+    }
+    .content-panel h2 {
+      font-size:1.4em; color:#012e5a; margin:1.5rem 0 0.5rem;
+    }
+    .content-panel ul { margin-left:1.2rem; margin-bottom:1rem; }
+    .content-panel li { margin-bottom:0.5rem; }
+
+    /* FOOTER */
+    footer.footer {
+      margin-top:auto; background:#012e5a; color:#fff; padding:20px 0;
+    }
+    .footer-container {
+      max-width:1200px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      padding:0 20px;
+    }
+    .footer-logo img {
+      width:50px; border:2px solid #fff; padding:5px; border-radius:4px;
+    }
+    .footer-text {
+      flex:1; text-align:right; font-size:.9em; line-height:1.4;
+    }
+    .footer-text a { color:#ffc; text-decoration:none; }
+    .footer-text a:hover { text-decoration:underline; }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .top-bar, .nav-bar { flex-direction:column; align-items:flex-start; }
+      .main-menu { flex-wrap:wrap; }
+      .content-panel { margin:20px auto; }
+      .footer-text { text-align:center; margin-top:10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVY TOP BAR -->
+  <div class="top-bar">
+  <div class="top-left">
+    <a href="index.html" class="logo">
+      <img src="Images/Logo.png" alt="CPRB Logo">
+    </a>
+    <div class="board-text">
+      <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+      <hr class="brand-separator">
+      <div class="board-slogan">Serving those who serve West Virginia</div>
+    </div>
+  </div>
+  <div class="top-right">
+    <address>
+      601 57th Street SE, Suite 5<br>
+      Charleston, WV 25304<br>
+      <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> | <a href="tel:+18006544406">(800) 654-4406</a><br>
+      <strong>Fax:</strong> (304) 957-7522<br>
+      <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+      <em>Please do not send personal info via plain email.</em>
+    </address>
+  </div>
+</div>
+
+  <!-- WHITE NAV BAR -->
+  
+  <!-- WHITE NAV BAR -->
+  
+  <!-- WHITE NAV BAR -->
+  <nav class="nav-bar">
+  <ul class="main-menu">
+    <!-- Board of Trustees -->
+    <li>
+      <a href="#">Board of Trustees</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Active Members -->
+    <li>
+      <a href="#">Active Members</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">Trooper Plan A</a></li>
+          <li><a href="PlanB.html">Trooper Plan B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Retirees -->
+    <li>
+      <a href="#">Retirees</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+          <li><a href="Retirees.html">Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Participating Employers -->
+    <li>
+      <a href="#">Participating Employers</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <!--  -->
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Publications -->
+    <li>
+      <a href="#">Publications</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <!-- NAV BUTTONS -->
+  <div class="nav-buttons">
+    <!-- Find It Fast -->
+    <button id="findItFastBtn">
+      <span class="button-icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/>
+        </svg>
+      </span>
+      Find It Fast
+    </button>
+    <!-- Member/Retiree Self Service -->
+    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+       class="service-btn" target="_blank">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+          <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+          <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+          <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+        </svg>
+      </span>
+      Member/Retiree Self Service
+    </a>
+    <!-- Employer Login -->
+    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+       class="service-btn" target="_blank">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+        </svg>
+      </span>
+      Employer Login
+    </a>
+  </div>
+</nav>
+
+  <!-- MEGA MENU BACKDROP -->
+  <div id="mega-backdrop"></div>
+
+  <!-- MEGA MENU -->
+  <div id="mega-menu">
+    <div class="mega-header">
+      <h2>Find It Fast</h2>
+      <button id="mega-close" class="mega-close">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">Trooper Plan A</a></li>
+          <li><a href="PlanB.html">Trooper Plan B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+          <li><a href="Retirees.html">Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <!--  -->
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+ <main>
+ <!-- CONTENT PANEL -->
+  <div class="content-panel">
+    <h1>GASB 68 Schedules for MPFRS</h1>
+
+    <h2>2024</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2024-Amort.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2024-AuditSch.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2024</a></li>
+    </ul>
+
+    <h2>2023</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2023-Amort.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2023-AuditSch.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2023</a></li>
+    </ul>
+
+    <h2>2022</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2022-Amort.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2022-AuditSch.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2022</a></li>
+    </ul>
+
+    <h2>2021</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2021-GASB68-Amort.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2021-AuditSch.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2021</a></li>
+    </ul>
+
+    <h2>2020</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2020-GASB68-Amort.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2020-AuditSched.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2020</a></li>
+    </ul>
+
+    <h2>2019</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2019-GASB68-Amort.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2019-AuditSched.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2019</a></li>
+    </ul>
+
+    <h2>2018</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2018-AmortPension.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2018-AuditSch.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2018</a></li>
+    </ul>
+
+    <h2>2017</h2>
+    <ul>
+      <li><a href="Forms/MPFRS-2017-ACPSNPL.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/MPFRS-2017-GASB68.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2017</a></li>
+    </ul>
+
+    <h2>2016</h2>
+    <ul>
+      <li><a href="Forms/MPFRS2016-ACPSNPL.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/2016MPFRS-AllocationSchedules.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2016</a></li>
+    </ul>
+
+    <h2>2015</h2>
+    <ul>
+      <li><a href="Forms/MPFRS15EmployerChangeInProportionateShareSchedule.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/2015WVCPRB-MPFRSAllocation.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Year Ended June 30, 2015</a></li>
+    </ul>
+
+    <h2>2013 – 2014</h2>
+    <ul>
+      <li><a href="Forms/MPFRS14EmployerChangeInProportionateShareSchedule.pdf" target="_blank">Amortization of Change in Proportionate Share of Net Pension Liability</a></li>
+      <li><a href="Forms/2014-GASB68-MPFRS.pdf" target="_blank">MPFRS Audited Schedule of Employer Allocations &amp; Pension Amounts by Employer – Years Ended June 30, 2014 & 2013</a></li>
+    </ul>
+  </div>
+</main>
+  <!-- STICKY FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="Images/WV.png" alt="WV State Logo">
+      </div>
+      <div class="footer-text">
+        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail. | 
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mega-menu toggle
+    const btn      = document.getElementById('findItFastBtn'),
+          backdrop = document.getElementById('mega-backdrop'),
+          menu     = document.getElementById('mega-menu'),
+          closeBtn = document.getElementById('mega-close');
+
+    function openMega() {
+      backdrop.style.display = 'block';
+      menu.style.display     = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMega() {
+      backdrop.style.display = 'none';
+      menu.style.display     = 'none';
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', openMega);
+    closeBtn.addEventListener('click', closeMega);
+    backdrop.addEventListener('click', closeMega);
+  </script>
+</body>
+</html>
+ 

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Board Agenda – Annual Meeting Schedule &amp; Agendas | WV Consolidated Public Retirement Board</title>
+  <!-- Web Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+
+  <style>
+    /*=============================================
+      MAKE BODY A FLEX COLUMN SO FOOTER SITS AT BOTTOM
+    =============================================*/
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /*===============================
+      NAVY TOP BAR
+    ===============================*/
+    .top-bar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      background: #012e5a;
+      color: #fff;
+      padding: 8px 20px;
+      min-height: 70px;
+    }
+    .top-left {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    .logo img {
+      width: 70px;
+      margin-right: 10px;
+    }
+    .board-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .board-name {
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+    .brand-separator {
+      border: none;
+      border-top: 1px solid #ffc;
+      margin: 4px 0;
+    }
+    .board-slogan {
+      font-size: 0.95em;
+      font-style: italic;
+      opacity: 0.9;
+    }
+    .top-right {
+      margin-left: auto;
+      text-align: right;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      font-size: 0.85em;
+      line-height: 1.4;
+      max-width: 350px;
+    }
+    .top-right a {
+      color: #ffc;
+      text-decoration: none;
+    }
+    .top-right a:hover {
+      text-decoration: underline;
+    }
+
+    /*===============================
+      WHITE NAV BAR
+    ===============================*/
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 7px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .main-menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    .main-menu li {
+      position: relative;
+    }
+    .main-menu > li > a {
+      text-decoration: none;
+      color: #012e5a;
+      font-size: 1em;
+      font-weight: 600;
+      padding: 5px 0;
+      display: inline-block;
+    }
+    .main-menu > li > a:hover,
+    .main-menu > li > a.active {
+      color: #005bb5;
+    }
+    .submenu {
+      display: none;
+      position: absolute;
+      left: 0; top: 100%;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      min-width: 220px;
+      z-index: 2;
+    }
+    .submenu ul {
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .submenu li a {
+      display: block;
+      padding: 8px 15px;
+      color: #012e5a;
+      font-weight: 400;
+      font-size: 0.95em;
+      text-decoration: none;
+    }
+    .submenu li a:hover {
+      background: #f0f0f0;
+      color: #005bb5;
+    }
+    .main-menu li:hover .submenu {
+      display: block;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    /*===============================
+      BUTTON STYLES
+    ===============================*/
+    .service-btn,
+    .ess-login,
+    #findItFastBtn {
+      background: #0066cc;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1em;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s;
+    }
+    .service-btn:hover,
+    .ess-login:hover,
+    #findItFastBtn:hover {
+      background: #005bb5;
+    }
+    .button-icon {
+      display: inline-flex;
+      margin-right: 6px;
+      width: 16px; height: 16px;
+      vertical-align: middle;
+    }
+    .button-icon svg {
+      width: 16px; height: 16px;
+      fill: currentColor;
+    }
+
+    /*===============================
+      MAIN CONTENT WRAPPER (FLEX-1)
+    ===============================*/
+    main {
+      flex: 1;
+      background: #f9f9f9;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 20px 0;
+      position: relative;
+    }
+
+    /*===============================
+      CONTENT PANEL
+    ===============================*/
+    .content-panel {
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 1200px;
+      padding: 40px 30px;
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+    .content-panel h1 {
+      font-size: 2em;
+      color: #012e5a;
+      margin-bottom: 1.5rem;
+    }
+    .content-panel h2 {
+      font-size: 1.4em;
+      color: #012e5a;
+      margin: 1rem 0 0.5rem;
+    }
+    .content-panel ul {
+      list-style: none;
+      margin: 1rem 0;
+      padding-left: 0;
+    }
+    .content-panel li {
+      margin-bottom: 0.9rem;
+      font-size: 1.1em;
+    }
+    .content-panel a {
+      color: #0073e6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .content-panel a:hover {
+      text-decoration: underline;
+    }
+
+    /*===============================
+      MEGA MENU BACKDROP
+    ===============================*/
+    #mega-backdrop {
+      display: none;
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 9998;
+    }
+
+    /*===============================
+      MEGA MENU CONTAINER
+    ===============================*/
+    #mega-menu {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      background: #fff;
+      width: 95vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 9999;
+    }
+    .mega-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      border-bottom: 1px solid #ddd;
+      background: #f5f5f5;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+    .mega-header h2 {
+      margin: 0;
+      font-size: 1.6em;
+      color: #012e5a;
+    }
+    .mega-close {
+      background: none;
+      border: none;
+      font-size: 1.8em;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.2s;
+    }
+    .mega-close:hover {
+      color: #333;
+    }
+    .mega-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px 30px;
+      justify-content: space-between;
+    }
+    .mega-column {
+      flex: 1 1 22%;
+      min-width: 220px;
+      box-sizing: border-box;
+    }
+    .mega-column h3 {
+      margin-top: 0;
+      font-size: 1.2em;
+      color: #005bb5;
+      margin-bottom: 12px;
+    }
+    .mega-column ul {
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .mega-column li {
+      margin-bottom: 10px;
+    }
+    .mega-column a {
+      color: #0073e6;
+      text-decoration: none;
+      font-size: 1em;
+    }
+    .mega-column a:hover {
+      text-decoration: underline;
+    }
+
+    /*===============================
+      STICKY FOOTER
+    ===============================*/
+    footer.footer {
+      background: #012e5a;
+      color: #fff;
+      padding: 20px 0;
+    }
+    .footer-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0 20px;
+    }
+    .footer-logo img {
+      width: 50px;
+      height: auto;
+      border: 2px solid #fff;
+      padding: 5px;
+      border-radius: 4px;
+    }
+    .footer-text {
+      flex: 1;
+      text-align: right;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+    .footer-text a {
+      color: #ffc;
+      text-decoration: none;
+    }
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+
+    /*===============================
+      RESPONSIVE
+    ===============================*/
+    @media (max-width: 1024px) {
+      .mega-column { flex: 1 1 45%; }
+    }
+    @media (max-width: 768px) {
+      .top-bar, .nav-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .main-menu {
+        flex-wrap: wrap;
+      }
+      main {
+        padding: 10px 0;
+      }
+      .content-panel {
+        width: 95%;
+        padding: 30px 20px;
+      }
+      .mega-content {
+        flex-direction: column;
+      }
+      .mega-column {
+        flex: 1 1 100%;
+      }
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-text {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVY TOP BAR -->
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html" class="logo">
+        <img src="Images/Logo.png" alt="CPRB Logo">
+      </a>
+      <div class="board-text">
+        <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+        <hr class="brand-separator">
+        <div class="board-slogan">Serving those who serve West Virginia</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <address>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> |
+        <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+        <em>Please do not send personal info via plain email.</em>
+      </address>
+    </div>
+  </div>
+
+  <!-- WHITE NAV BAR -->
+  
+  <!-- WHITE NAV BAR -->
+  
+  <!-- WHITE NAV BAR -->
+  <nav class="nav-bar">
+    <ul class="main-menu">
+      <li>
+        <a href="#">Board of Trustees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Active Members</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="PERS.html">PERS</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">Trooper Plan A</a></li>
+            <li><a href="PlanB.html">Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html" class="active">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Retirees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+            <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+            <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Participating Employers</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employer Forms</a></li>
+            <!--  -->
+            <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+            <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+            <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+            <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+            <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+            <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="#">Publications</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Publications.html#GASB68" class="active">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+        </span>
+        Find It Fast
+      </button>
+
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+         class="service-btn" target="_blank">
+        <span class="button-icon">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="12" r="8"/><path d="M4 28c0-6.6 5.4-12 12-12s12 5.4 12 12"/></svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+         class="ess-login" target="_blank"><span class="button-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+  </svg>
+</span> Employer Login</a>
+    </div>
+  </nav>
+
+  <!-- MEGA MENU BACKDROP -->
+  <div id="mega-backdrop"></div>
+
+  <!-- MEGA MENU -->
+  <div id="mega-menu">
+    <div class="mega-header">
+      <h2>Find It Fast</h2>
+      <button id="mega-close" class="mega-close">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS: Teachers' Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Medical" target="_blank">Medical Advisor Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <!--  -->
+          <li><a href="Employers-FR-Walkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-ESS-POR.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-Review.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main>
+    <div class="content-panel">
+      <h1>Board of Trustees</h1>
+      <h2>2025 Annual Meeting Schedule &amp; Agendas</h2>
+      <p><strong>(All meetings start at 10:00 A.M. unless noted)</strong></p>
+      <ul>
+        <li><strike>Jan 29 2025</strike> – <a href="Forms/Agenda2025-1-29.pdf" target="_blank">Agenda</a></li>
+        <li><strike>Mar 19 2025</strike> – <a href="Forms/Agenda3-19-2025.pdf" target="_blank">Agenda</a></li>
+        <li><strike>May 14 2025</strike> – <a href="Forms/Agenda5-14-2025.pdf" target="_blank">Agenda</a></li>
+        <li>Jul 9 2025 – <a href="Forms/Agenda7-9-2025.pdf" target="_blank">Agenda</a></li>
+        <li>Aug 20 2025 – <a href="Forms/Agenda8-20-2025.pdf" target="_blank">Agenda</a></li>
+        <li>Oct 8 2025 – Fiduciary Training (Stonewall Resort)</li>
+        <li>Dec 3 2025 – <a href="Forms/Agenda12-3-2025.pdf" target="_blank">Agenda</a></li>
+      </ul>
+      <em>Note: Oct 8 includes morning committee sessions; Board convenes after lunch at Stonewall Resort.</em>
+      <h3><p>WV 2025 Legislative Session: Feb 12 &ndash; Mar 12</p></h3>
+    </div>
+  </main>
+
+  <!-- STICKY FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="Images/WV.png" alt="WV State Logo">
+      </div>
+      <div class="footer-text">
+        CPRB © 2025 &ndash; State of West Virginia &ndash; The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail. |
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mega-menu toggle
+    const btn = document.getElementById('findItFastBtn');
+    const menu = document.getElementById('mega-menu');
+    const backdrop = document.getElementById('mega-backdrop');
+    const close = document.getElementById('mega-close');
+    function openMenu() {
+      backdrop.style.display = 'block';
+      menu.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      backdrop.style.display = 'none';
+      menu.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    btn.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>

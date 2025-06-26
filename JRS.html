@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRS | WV Consolidated Public Retirement Board</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <style>
+    body {
+      display: flex; flex-direction: column; min-height: 100vh; margin: 0;
+      font-family: 'Open Sans', Arial, sans-serif; background: #f9f9f9; color: #333; line-height: 1.6;
+    }
+    .top-bar {
+      display: flex; align-items: center; flex-wrap: wrap;
+      background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
+    }
+    .top-left { display: flex; align-items: center; margin-right: 20px; }
+    .logo img { width: 70px; margin-right: 12px; }
+    .board-text { display: flex; flex-direction: column; gap: 3px; }
+    .board-name { font-size: 1.18em; font-weight: 600; }
+    .brand-separator { width: 100%; border: none; border-top: 1px solid #ffc; margin: 3px 0; }
+    .board-slogan { font-size: .97em; font-style: italic; opacity: .9; }
+    .top-right {
+      margin-left: auto; text-align: right; font-family: 'Roboto',sans-serif; font-weight: 700;
+      font-size: .87em; line-height: 1.4; max-width: 350px;
+    }
+    .top-right a { color: #ffc; text-decoration: none; }
+    .top-right a:hover { text-decoration: underline; }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 7px 20px; position: relative; z-index: 2;
+    }
+    .main-menu { list-style: none; display: flex; gap: 22px; align-items: center; margin: 0; padding: 0;}
+    .main-menu li { position: relative; }
+    .main-menu a {
+      text-decoration: none; color: #012e5a;
+      font-size: 1em; font-weight: 600; padding: 5px 0; display: inline-block; transition: color .18s;
+    }
+    .main-menu a:hover { color: #005bb5; }
+    .submenu {
+      display: none; position: absolute; left: 0; top: 100%;
+      background: #fff; border: 1px solid #e6e6e6; border-radius: 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09); min-width: 170px;
+      z-index: 1000; padding: 5px 0;
+    }
+    .submenu ul { list-style: none; margin: 0; padding: 0; }
+    .submenu li a {
+      display: block; padding: 7px 18px; color: #012e5a;
+      font-weight: 400; font-size: .98em; white-space: nowrap; border-radius: 3px;
+    }
+    .submenu li a:hover { background: #f0f6ff; color: #005bb5; }
+    .main-menu li:hover > .submenu { display: block; }
+    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+    .service-btn, .employer-login, #findItFastBtn {
+      background: #0066cc; color: #fff; padding: 8px 14px; border-radius: 4px;
+      text-decoration: none; font-weight: bold; font-size: 1em;
+      display: inline-flex; align-items: center; cursor: pointer; border: none;
+      transition: background 0.3s;
+    }
+    .service-btn:hover, .employer-login:hover, #findItFastBtn:hover { background: #005bb5; }
+    .button-icon { display: inline-flex; margin-right: 6px; width: 16px; height: 16px; vertical-align: middle; }
+    .button-icon svg { width: 16px; height: 16px; fill: currentColor; }
+    main { flex: 1; background: #f9f9f9; display: flex; align-items: stretch; justify-content: center; padding: 40px 0 20px 0; }
+    .content-panel {
+      background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
+      width: 95%; max-width: 1100px; padding: 38px 38px 32px 38px; box-sizing: border-box; margin: 0 auto;
+    }
+    .content-panel h1 {
+      font-size: 2.3em; color: #012e5a; margin-bottom: 0.2em; font-weight: 800;
+      letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
+    }
+    .content-panel h2, .content-panel h3 {
+      color: #005bb5;
+      margin-top: 2.5em;
+      font-size: 1.38em;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+    }
+    .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
+    .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
+    .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
+    .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
+    .content-panel a:hover { text-decoration: underline; }
+    .content-panel .pdf-btn {
+      float: right; background: #012e5a; color: #fff; padding: 7px 18px; border-radius: 4px;
+      font-weight: bold; text-decoration: none; font-size: 1em; margin-left: 1em; margin-bottom: 1.3em;
+      transition: background 0.2s;
+    }
+    .content-panel .pdf-btn:hover { background: #005bb5;}
+    .content-panel .subhead {
+      color: #0066cc; font-weight: bold; margin-top: 2.2em; font-size: 1.11em; margin-bottom: 1.1em;
+      letter-spacing: 0;
+    }
+    .formula {
+      background: #f4f9ff; border: 1px solid #e3ebf4; border-radius: 5px;
+      padding: 15px 20px; margin: 25px 0; text-align: center;
+      font-size: 1.12em; font-weight: bold; color: #012e5a;
+      letter-spacing: 0.3px;
+    }
+    .content-panel p { margin-bottom: 1.3em;}
+    #mega-backdrop {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 9998;
+    }
+    #mega-menu {
+      display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      background: #fff; width: 96vw; max-width: 1250px; max-height: 90vh;
+      overflow-y: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;
+    }
+    .mega-header {
+      display: flex; justify-content: space-between; align-items: center; padding: 20px 30px;
+      border-bottom: 1px solid #ddd; background: #f5f5f5; border-top-left-radius: 4px; border-top-right-radius: 4px;
+    }
+    .mega-header h2 { margin: 0; font-size: 1.6em; color: #012e5a; }
+    .mega-close { background: none; border: none; font-size: 1.8em; cursor: pointer; color: #666; transition: color .2s;}
+    .mega-close:hover { color: #333; }
+    .mega-content { display: flex; flex-wrap: wrap; gap: 22px; padding: 22px 30px; justify-content: space-between;}
+    .mega-column { flex: 1 1 220px; min-width: 220px; box-sizing: border-box;}
+    .mega-column h3 { margin-top: 0; font-size: 1.17em; color: #005bb5; margin-bottom: 12px;}
+    .mega-column ul { list-style: none; margin: 0; padding: 0;}
+    .mega-column li { margin-bottom: 10px;}
+    .mega-column a { color: #0073e6; text-decoration: none; font-size: 1em;}
+    .mega-column a:hover { text-decoration: underline;}
+    footer.footer { background: #012e5a; color: #fff; padding: 20px 0; }
+    .footer-container {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0 20px;
+    }
+    .footer-logo img { width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;}
+    .footer-text { flex: 1; text-align: right; font-size: 0.93em; line-height: 1.4;}
+    .footer-text a { color: #ffc; text-decoration: none;}
+    .footer-text a:hover { text-decoration: underline;}
+    @media (max-width: 1024px) {
+      .mega-column { flex: 1 1 45%; }
+      .content-panel { padding: 24px 8vw; }
+    }
+    @media (max-width: 768px) {
+      .top-bar, .nav-bar { flex-direction: column; align-items: flex-start;}
+      .main-menu { flex-wrap: wrap;}
+      main { padding: 18px 0; }
+      .content-panel { width: 98%; padding: 18px 2vw;}
+      .mega-content { flex-direction: column; gap: 16px;}
+      .mega-column { flex: 1 1 100%; min-width: 0;}
+      .footer-container { flex-direction: column; text-align: center;}
+      .footer-text { margin-top: 10px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
+      <div class="board-text">
+        <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+        <hr class="brand-separator">
+        <div class="board-slogan">Serving those who serve West Virginia</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <address>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> |
+        <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+        <em>Please do not send personal info via plain email.</em>
+      </address>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <ul class="main-menu">
+      <li><a href="#">Board of Trustees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Active Members</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">Trooper Plan A</a></li>
+            <li><a href="PlanB.html">Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Retirees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+            <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+            <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Participating Employers</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employer Forms</a></li>
+            <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+            <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+            <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+            <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+            <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+            <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Publications</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+        </span>
+        Find It Fast
+      </button>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+         class="service-btn" target="_blank">
+        <span class="button-icon">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="12" r="8"/><path d="M4 28c0-6.6 5.4-12 12-12s12 5.4 12 12"/></svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+         class="employer-login" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/></svg>
+        </span>
+        Employer Login
+      </a>
+    </div>
+  </nav>
+  <div id="mega-backdrop"></div>
+  <div id="mega-menu">
+    <div class="mega-header">
+      <h2>Find It Fast</h2>
+      <button id="mega-close" class="mega-close">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS: Teachers' Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<!-- PAGE CONTENT -->
+  <main>
+<div class="content-panel">
+  <h1>Judges' Retirement System (JRS)</h1>
+
+  <p>The Judges' Retirement System (JRS) was established on June 5, 1949 for judges and justices of the State of West Virginia who elect to participate in the retirement system. Changes were made for judges or justices elected or appointed to service after July 1, 2005, and these members are commonly referred to as Tier 2. JRS is a single employer defined benefit retirement system providing retirement, death and disability benefits. Members contribute at a rate no less than 7% and no more than 10.5% set by the Board based on the annual actuarial valuation. Currently, the rate is 7%. The Judiciary contributes annually the amount necessary to actuarially fund JRS based on annual actuarial valuations completed by the CPRB.</p>
+
+  <p><strong>Retirement benefits are not automatic.</strong><br>
+  You must apply to the Governor for your retirement benefits.<br>
+  Distributions must start by April 1 of the year following the later of:<br>
+  <B> a) the date you reach age 72 if you were born before January 1, 1951; <br>
+  b) the date you reach age 73 if you were born after December 31, 1950; or<br>
+  c) the date upon which you terminate employment.</p>
+
+  <!-- <div style="margin: 2.5em 0 2em 0; font-weight: bold;">
+    Contact Us<br>
+    Forms<br>
+    Online Self-Service
+  </div> -->
+  <h2>RETIREMENT BENEFITS:</h2>
+  <div style="margin-bottom:1.2em; font-size:1.06em;">
+    PDF print friendly version &nbsp;&nbsp; Print friendly version
+  </div>
+  <p>In order to qualify for regular retirement benefits, a member of JRS must meet one of the following requirements:</p>
+
+  <ul>
+    <li>Age 65 with at least 16 years of credited service, of which at least 12 years is as a sitting judge or justice; <br>
+      <em>Provided, That every individual who is appointed or elected for the first time as a judge or justice after July 1, 2005, must have served a minimum of 14 years as a sitting judge or justice.</em>
+    </li>
+    <li>Any age with 24 years of credited service, of which at least 12 years is as a sitting judge or justice;<br>
+      <em>Provided, That every individual who is appointed or elected for the first time as a judge or justice after July 1, 2005, must have served a minimum of 14 years as a sitting judge or justice.</em>
+    </li>
+    <li>Any judge or justice who serves at least 8 full years after attaining age 65;<br>
+      <em>Provided, That no individual who is appointed or elected for the first time as a judge or justice after July 1, 2005, is eligible for retirement benefits under this criteria.</em>
+    </li>
+  </ul>
+  <div class="subhead">Early Retirement:</div>
+  <p>A judge or justice who is age 62 with at least 16 years of credited service, of which at least 12 years is as a sitting judge or justice, may elect to receive an early retirement with an actuarially reduced benefit; <em>Provided, That every individual who is appointed or elected for the first time as a judge or justice after July 1, 2005, must have served a minimum of 14 years as a sitting judge or justice.</em></p>
+
+  <div class="subhead">Deferred Retirement:</div>
+  <p>A judge or justice who has 16 years of credited service, of which at least 12 years is as a sitting judge or justice, can defer his or her retirement until age 65 with no reduction in benefits; <em>Provided, That every individual who is appointed or elected for the first time as a judge or justice after July 1, 2005, must serve a minimum of 14 years as a sitting judge or justice.</em></p>
+
+  <p>A judge or justice who wishes to retire from his or her office must submit proof of eligibility for retirement and his or her resignation to the Governor. If the Governor determines that such person is entitled to retirement benefits under JRS, the Governor shall accept the resignation and certify retirement eligibility by a written order to be filed in the Office of the Secretary of State.</p>
+
+  <p><strong>A regular retirement benefit is an amount equal to 75% of the current salary of the office from which the member retires. Individuals who are appointed or elected for the first time as a judge or justice after July 1, 2005, shall receive retirement benefits in an amount equal to 75% of the individual's final average salary.</strong></p>
+
+  <p>"Final Average Salary" means the average of the highest 36 consecutive months' compensation received by the member as a judge or justice of any court of record of this state.</p>
+
+  <p>A judge or justice who retires and accepts the benefits payable under JRS is eligible to receive an increase in benefits should the salary of active sitting judges or justices be increased; <em>Provided, That every retiree who was appointed or elected for the first time as a judge or justice after July 1, 2005, is not entitled to an increase in benefits by virtue of any increase in the salaries of active sitting judges or justices.</em></p>
+
+  <p>Retirement benefits are credited by direct deposit to member accounts on the 25th of each month, except the month of December, when member accounts are credited on the 18th. If the 25th (or December 18) falls on a weekend or holiday, direct deposits are processed on the prior full business day.</p>
+
+  <h2>Disability Retirement:</h2>
+  <p>Any judge or justice who has served for 10 full years, or any judge or justice over the age 65 who has served for at least 6 full years, who becomes physically or mentally incapacitated to perform the duties of his or her office during the remainder of his or her term may be eligible for a disability retirement. The judge or justice shall make both written application and resignation to the Governor setting forth the nature and extent of his or her disability. If the Governor determines through recommendation of the Governor's Judicial Disability Review Board that such disability exists and that public service is suffering and will continue to suffer by reason of such disability, he or she shall submit an official written order awarding disability retirement benefits.</p>
+
+  <p>A judge or justice who retires because of disability and accepts the benefits payable under JRS because of such disability shall not, while receiving said benefits, be permitted to practice law. If a judge or justice receiving benefits for disability retirement enters the practice of law, his or her disability benefits shall be suspended for the time he or she shall be engaged in the practice of law.</p>
+
+  <p>The benefit payable to a judge or justice who became a member of JRS prior to April 1, 1987 and who is granted disability retirement shall be an annual retirement benefit equal to the salary he or she was receiving at the time of his or her disability retirement. This benefit is payable to the judge or justice for the remainder of his or her unexpired term. At the end of the term of office for which the judge or justice would have served, the benefit payable to the judge or justice for the remainder of his or her life is an amount equal to 75% of the current salary of the office from which the member retires.</p>
+
+  <p>The benefit payable to a judge or justice who became a new member of JRS on or after April 1, 1987 and who is granted disability retirement is an annual retirement benefit equal to 75% of his or her highest annual salary, with allowable salary increases, if permitted in WV Code § 51-9-6. This benefit is payable to the judge or justice for the remainder of his or her life.</p>
+
+  <h2>Surviving Spouse and Dependent child Benefits:</h2>
+  <p>The surviving spouse of a judge or justice who dies while in office after having served 5 or more years as a sitting judge or justice, or the surviving spouse of a judge or justice who has already retired, shall receive 40% of the annual salary of the office which said judge or justice held at his or her death or from which said judge or justice resigned or retired. This benefit is payable to the surviving spouse until his or her death or re-marriage. Should the active salary of sitting judges or justices be increased or decreased, the benefits paid to the surviving spouse shall amount to 40% of the new salary; <em>Provided, That the annuity paid to a surviving spouse of an individual who was appointed or elected for the first time as a judge or justice after July 1, 2005, shall be an amount equal to 40% of the judge or justice's final average salary. The surviving spouse of a judge or justice who was appointed or elected for the first time after July 1, 2005, is not entitled to an increase in benefits by virtue of any increase in the salaries of active sitting judges or justices.</em></p>
+
+  <p>If there is no surviving spouse of a judge or justice who dies after having served 5 years or more, or of a judge or justice who is retired, and such judge or justice leaves surviving him or her a dependent child or children, such dependents shall receive an amount equal to 20% of the annual salary of the office which said judge or justice held at the time of his or her death or retirement; <em>Provided, That the total of all such annuities payable to each dependent child shall not exceed in the aggregate an amount equal to 40% of such salary. This benefit is payable to each dependent child until he or she attains the age of 18 or until he or she attains the age of 23 as long as such dependent(s) remains a full-time student. Should the active salary of a sitting judge or justice be increased or decreased, the benefit payable to a dependent child or children shall amount to 20% of the new salary; Provided, That the benefit of a dependent child or children of a judge or justice who is appointed or elected for the first time after July 1, 2005, shall be calculated with respect to the judge or justice's final average salary. Dependent children of a judge or justice who is appointed or elected for the first time after July 1, 2005, are not entitled to an increase in benefits by virtue of any increase in the salaries of active judges or justices. If a judge or justice dies while in office before having served 5 full years as a sitting judge or justice, the surviving spouse or dependent children will receive a refund of employee contributions paid into the retirement system.</em></p>
+
+  <h2>Military Service Credit:</h2>
+  <p>Any judge or justice with 12 or more years of service as a sitting judge or justice may receive credited service up to a maximum of 5 years for active, full-time duty in the armed forces of the United States; <em>Provided, That any judge or justice who is appointed or elected for the first time after July 1, 2005, may receive credited service up to a maximum of 5 years for active, full-time duty in the armed forces of the United States after such judge or justice attains 14 or more years of service as a sitting judge or justice.</em></p>
+
+  <h2>Plan Transfers/Rollovers:</h2>
+  <p>In order to allow full flexibility of choice of option by a judge or justice, there may be transfers of service credit between the JRS and the Public Employees Retirement System (PERS) where such service credit constitutes qualified and eligible credit under the recipient system's statutes. In no case shall benefits be receivable from more than one state retirement system, nor shall any service credit be usable more than once and then only in the finally chosen state retirement system.</p>
+  <p>A judge or justice who elects to transfer eligible service under PERS to JRS will be required to pay into JRS all contributions he or she would have been required to pay into the fund, plus interest, had he or she previously elected to participate in JRS. Rollovers and plan transfers will be accepted on behalf of the member, but solely for the purpose of purchasing permissive service credit or for the repayment of previously withdrawn contributions.</p>
+
+  <h2>Termination of Employment:</h2>
+  <p>Any judge or justice of this State whose services have terminated, other than by retirement, shall, upon his or her written request, be refunded his or her employee contributions, without interest. Once a judge or justice withdraws contributions from the system, he or she forfeits all future retirement and disability benefits. The judge or justice may re-enter the system after a subsequent appointment or election to a qualified judgeship, but without credit for any prior years of service.</p>
+
+  <h2>Employment after Retirement:</h2>
+  <p>A judge or justice who retires and accepts the benefits payable under JRS shall, while receiving said benefits, be permitted to hold any public office or trust for which he or she receives compensation from the State of West Virginia. If, after retirement under JRS, a judge or justice is elected or appointed to any public office or trust for which he or she receives any salary or other compensation from the State of West Virginia, the retired judge or justice is not eligible to participate in any other pension plan maintained by the State of West Virginia, nor accrue additional years of credited service under JRS or any other state pension system.</p>
+
+  <p>A Senior judge or justice recalled to service may receive per diem compensation from the Supreme Court of Appeals; however, this per diem compensation when combined with his or her retirement annuity amount may not exceed the salary of a sitting circuit judge, unless an administrative order is entered by the Chief Justice of the Supreme Court of Appeals certifying extraordinary circumstances.</p>
+
+  <h2>PEIA Insurance:</h2>
+  <p>Public Employees Insurance Agency (PEIA) health insurance premiums are based upon the years of service a member has accrued at the time of his or her retirement. Please note that while a judge or justice with 24 years of credited service may retire at any age, a judge or justice with at least 25 years of credited service will qualify for a lower health insurance premium.</p>
+
+  <h2>Questions:</h2>
+  <p>Should you have any questions regarding the Judges' Retirement System, please feel free to contact us in writing or by phone at the Consolidated Public Retirement Board, Monday through Friday, 8:00 a.m. to 5:00 p.m.</p>
+
+  <h2>Note:</h2>
+  <p>Information contained in this document illustrates the CPRB's understanding of the current provisions of the Judges' Retirement System. These provisions are contained in the current plan statutes, and are subject to modification by the West Virginia Legislature each year. This document is for general guidance purposes only. In the event there is a discrepancy between information contained in this document and the WV State Code and Rules, the language in the Code and Rules shall prevail.</p>
+</div>
+
+</main>
+
+
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo"><img src="Images/WV.png" alt="WV State Logo"></div>
+      <div class="footer-text">
+        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail. |
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Mega-menu toggle logic
+    const btn = document.getElementById('findItFastBtn');
+    const menu = document.getElementById('mega-menu');
+    const backdrop = document.getElementById('mega-backdrop');
+    const close = document.getElementById('mega-close');
+    function openMenu() {
+      backdrop.style.display = 'block';
+      menu.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      backdrop.style.display = 'none';
+      menu.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    btn.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+  </script>
+</body>
+</html>

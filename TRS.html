@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRS | WV Consolidated Public Retirement Board</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <style>
+    body {
+      display: flex; flex-direction: column; min-height: 100vh; margin: 0;
+      font-family: 'Open Sans', Arial, sans-serif; background: #f9f9f9; color: #333; line-height: 1.6;
+    }
+    .top-bar {
+      display: flex; align-items: center; flex-wrap: wrap;
+      background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
+    }
+    .top-left { display: flex; align-items: center; margin-right: 20px; }
+    .logo img { width: 70px; margin-right: 12px; }
+    .board-text { display: flex; flex-direction: column; gap: 3px; }
+    .board-name { font-size: 1.18em; font-weight: 600; }
+    .brand-separator { width: 100%; border: none; border-top: 1px solid #ffc; margin: 3px 0; }
+    .board-slogan { font-size: .97em; font-style: italic; opacity: .9; }
+    .top-right {
+      margin-left: auto; text-align: right; font-family: 'Roboto',sans-serif; font-weight: 700;
+      font-size: .87em; line-height: 1.4; max-width: 350px;
+    }
+    .top-right a { color: #ffc; text-decoration: none; }
+    .top-right a:hover { text-decoration: underline; }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 7px 20px; position: relative; z-index: 2;
+    }
+    .main-menu { list-style: none; display: flex; gap: 22px; align-items: center; margin: 0; padding: 0;}
+    .main-menu li { position: relative; }
+    .main-menu a {
+      text-decoration: none; color: #012e5a;
+      font-size: 1em; font-weight: 600; padding: 5px 0; display: inline-block; transition: color .18s;
+    }
+    .main-menu a:hover { color: #005bb5; }
+    .submenu {
+      display: none; position: absolute; left: 0; top: 100%;
+      background: #fff; border: 1px solid #e6e6e6; border-radius: 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09); min-width: 170px;
+      z-index: 1000; padding: 5px 0;
+    }
+    .submenu ul { list-style: none; margin: 0; padding: 0; }
+    .submenu li a {
+      display: block; padding: 7px 18px; color: #012e5a;
+      font-weight: 400; font-size: .98em; white-space: nowrap; border-radius: 3px;
+    }
+    .submenu li a:hover { background: #f0f6ff; color: #005bb5; }
+    .main-menu li:hover > .submenu { display: block; }
+    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+    .service-btn, .employer-login, #findItFastBtn {
+      background: #0066cc; color: #fff; padding: 8px 14px; border-radius: 4px;
+      text-decoration: none; font-weight: bold; font-size: 1em;
+      display: inline-flex; align-items: center; cursor: pointer; border: none;
+      transition: background 0.3s;
+    }
+    .service-btn:hover, .employer-login:hover, #findItFastBtn:hover { background: #005bb5; }
+    .button-icon { display: inline-flex; margin-right: 6px; width: 16px; height: 16px; vertical-align: middle; }
+    .button-icon svg { width: 16px; height: 16px; fill: currentColor; }
+    main { flex: 1; background: #f9f9f9; display: flex; align-items: stretch; justify-content: center; padding: 40px 0 20px 0; }
+    .content-panel {
+      background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
+      width: 95%; max-width: 1100px; padding: 38px 38px 32px 38px; box-sizing: border-box; margin: 0 auto;
+    }
+    .content-panel h1 {
+      font-size: 2.3em; color: #012e5a; margin-bottom: 0.2em; font-weight: 800;
+      letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
+    }
+    .content-panel h2, .content-panel h3 {
+      color: #005bb5;
+      margin-top: 2.5em;
+      font-size: 1.38em;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+    }
+    .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
+    .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
+    .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
+    .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
+    .content-panel a:hover { text-decoration: underline; }
+    .content-panel .pdf-btn {
+      float: right; background: #012e5a; color: #fff; padding: 7px 18px; border-radius: 4px;
+      font-weight: bold; text-decoration: none; font-size: 1em; margin-left: 1em; margin-bottom: 1.3em;
+      transition: background 0.2s;
+    }
+    .content-panel .pdf-btn:hover { background: #005bb5;}
+    .content-panel .subhead {
+      color: #0066cc; font-weight: bold; margin-top: 2.2em; font-size: 1.11em; margin-bottom: 1.1em;
+      letter-spacing: 0;
+    }
+    .formula {
+      background: #f4f9ff; border: 1px solid #e3ebf4; border-radius: 5px;
+      padding: 15px 20px; margin: 25px 0; text-align: center;
+      font-size: 1.12em; font-weight: bold; color: #012e5a;
+      letter-spacing: 0.3px;
+    }
+    .content-panel p { margin-bottom: 1.3em;}
+    #mega-backdrop {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 9998;
+    }
+    #mega-menu {
+      display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      background: #fff; width: 96vw; max-width: 1250px; max-height: 90vh;
+      overflow-y: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;
+    }
+    .mega-header {
+      display: flex; justify-content: space-between; align-items: center; padding: 20px 30px;
+      border-bottom: 1px solid #ddd; background: #f5f5f5; border-top-left-radius: 4px; border-top-right-radius: 4px;
+    }
+    .mega-header h2 { margin: 0; font-size: 1.6em; color: #012e5a; }
+    .mega-close { background: none; border: none; font-size: 1.8em; cursor: pointer; color: #666; transition: color .2s;}
+    .mega-close:hover { color: #333; }
+    .mega-content { display: flex; flex-wrap: wrap; gap: 22px; padding: 22px 30px; justify-content: space-between;}
+    .mega-column { flex: 1 1 220px; min-width: 220px; box-sizing: border-box;}
+    .mega-column h3 { margin-top: 0; font-size: 1.17em; color: #005bb5; margin-bottom: 12px;}
+    .mega-column ul { list-style: none; margin: 0; padding: 0;}
+    .mega-column li { margin-bottom: 10px;}
+    .mega-column a { color: #0073e6; text-decoration: none; font-size: 1em;}
+    .mega-column a:hover { text-decoration: underline;}
+    footer.footer { background: #012e5a; color: #fff; padding: 20px 0; }
+    .footer-container {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0 20px;
+    }
+    .footer-logo img { width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;}
+    .footer-text { flex: 1; text-align: right; font-size: 0.93em; line-height: 1.4;}
+    .footer-text a { color: #ffc; text-decoration: none;}
+    .footer-text a:hover { text-decoration: underline;}
+    @media (max-width: 1024px) {
+      .mega-column { flex: 1 1 45%; }
+      .content-panel { padding: 24px 8vw; }
+    }
+    @media (max-width: 768px) {
+      .top-bar, .nav-bar { flex-direction: column; align-items: flex-start;}
+      .main-menu { flex-wrap: wrap;}
+      main { padding: 18px 0; }
+      .content-panel { width: 98%; padding: 18px 2vw;}
+      .mega-content { flex-direction: column; gap: 16px;}
+      .mega-column { flex: 1 1 100%; min-width: 0;}
+      .footer-container { flex-direction: column; text-align: center;}
+      .footer-text { margin-top: 10px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
+      <div class="board-text">
+        <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+        <hr class="brand-separator">
+        <div class="board-slogan">Serving those who serve West Virginia</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <address>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> |
+        <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+        <em>Please do not send personal info via plain email.</em>
+      </address>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <ul class="main-menu">
+      <li><a href="#">Board of Trustees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Active Members</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">Trooper Plan A</a></li>
+            <li><a href="PlanB.html">Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Retirees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+            <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+            <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Participating Employers</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employer Forms</a></li>
+            <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+            <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+            <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+            <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+            <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+            <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Publications</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+        </span>
+        Find It Fast
+      </button>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+         class="service-btn" target="_blank">
+        <span class="button-icon">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="12" r="8"/><path d="M4 28c0-6.6 5.4-12 12-12s12 5.4 12 12"/></svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+         class="employer-login" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/></svg>
+        </span>
+        Employer Login
+      </a>
+    </div>
+  </nav>
+  <div id="mega-backdrop"></div>
+  <div id="mega-menu">
+    <div class="mega-header">
+      <h2>Find It Fast</h2>
+      <button id="mega-close" class="mega-close">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS: Teachers' Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <main>
+    <div class="content-panel">
+      <!-- <a href="Forms/TRS-description.pdf" class="pdf-btn" target="_blank" title="Print-friendly PDF">Print-friendly PDF</a> -->
+      <h1>Teachers’ Retirement System (TRS)</h1>
+
+      <h2>Overview</h2>
+      <p>
+        The State Teachers' Retirement System (TRS) was established on July 1, 1941 for the purpose of providing retirement benefits for teachers and school service personnel.
+        TRS is a defined benefit plan that currently has more than 20,000 active members and 37,000 retirees receiving annuity benefits.
+      </p>
+      <ul>
+        <li>An active member contributes <b>6%</b> of their gross monthly salary into TRS.</li>
+        <li>
+          <b>If you were a member prior to July 1, 1991</b>, the employer contributes an additional <b>15%</b> of the member's gross monthly salary into TRS.
+        </li>
+        <li>
+          <b>For members hired for the first time on or after July 1, 2005</b> (or who transferred from the Teachers' Defined Contribution (TDC) System), the employer contributes an additional <b>7.5%</b> of the member's gross monthly salary.
+        </li>
+        <li>
+          <b>TRS members hired before July 1, 2015</b> are eligible for Tier I benefits. Those hired for the first time and become a member of TRS on or after July 1, 2015 are under Tier II benefits as described in the <a href="TRS-TierII.html">TRS Tier II brochure</a>.
+        </li>
+      </ul>
+
+      <h2>Retirement Benefits</h2>
+      <ul>
+        <li>Retire with full benefits at age 60 with 5 or more years of service.</li>
+        <li>Retire with full benefits at age 55 with 30 or more years of service.</li>
+        <li>Retire with full benefits at any age with 35 or more years of service.</li>
+        <li>Retire with reduced benefits before age 55 with at least 30 but less than 35 years of service.</li>
+      </ul>
+      <p>
+        A member with 5 or more years of service who terminates employment prior to retirement, but does not withdraw employee contributions, will be eligible for retirement benefits at age 62, or at age 60 with 20 years of service.
+      </p>
+      <div class="formula">
+        Final Average Salary × Years of Service × 2% =<br>
+        <b>Annual Retirement Benefit under Straight Life annuity</b>
+      </div>
+      <p>
+        A regular retirement benefit under the Straight Life annuity option is an amount equal to 2% of a member’s final average salary multiplied by the member’s years of service credit paid in equal monthly installments.
+        Final average salary refers to the average of the 5 highest fiscal year salaries out of the last 15 fiscal years of contributing service. Normally, this figure will come from the last 5 years of employment.
+      </p>
+      <p>
+        <strong>Retirement benefits are not automatic.</strong> You must apply to the Consolidated Public Retirement Board (CPRB) for your retirement benefits.
+        Distributions must start by April 1 of the year following the later of:
+        <br><b>a)</b> the date you reach age 72 if you were born before January 1, 1951;<br>
+        <b>b)</b> the date you reach age 73 if you were born after December 31, 1950; or<br>
+        <b>c)</b> the date upon which you terminate employment.
+      </p>
+      <p>
+        Retirement benefits are credited to retiree accounts by direct deposit on the 25th of each month. If the 25th falls on a weekend or holiday, checks are processed on the prior full business day.
+      </p>
+
+      <h2>Annuity Options Upon Retirement</h2>
+      <ul>
+        <li>
+          <b>Straight Life:</b> A lifetime annuity payable monthly to the retiree that is determined under the regular benefit formula without adjustment. There are no death benefits payable under this option.
+        </li>
+        <li>
+          <b>100% Joint &amp; Survivor:</b> A reduced annuity payable monthly to the retiree for his or her lifetime. Upon the death of the retiree, the named survivor will receive the same amount for his or her lifetime.
+        </li>
+        <li>
+          <b>50% Joint &amp; Survivor:</b> A reduced annuity payable monthly to the retiree for his or her lifetime. Upon the death of the retiree, the named survivor will receive one-half of the monthly payment for his or her lifetime.
+        </li>
+        <li>
+          <b>10 Year Certain – 120 Payments:</b> A reduced annuity payable monthly to the retiree for the retiree’s lifetime. If the retiree dies before receiving 120 monthly payments, the remainder of those 120 monthly payments shall be payable to the retiree’s named beneficiary or the retiree’s estate.
+        </li>
+      </ul>
+      <p>
+        <b>The benefit option you elect is extremely important.</b> Once you receive any benefits under the options you select, you will NOT be allowed to change your benefit option unless you qualify under the provisions of WV Code §18-7A-26 and 18-7A-28.
+      </p>
+      <p>
+        Any employee contributions, plus interest, remaining in the retiree’s account at the time of the retiree’s or survivor’s death will be refunded to the named beneficiary or the retiree’s estate.
+      </p>
+
+      <h2>Retirement Benefit Estimate</h2>
+      <p>
+        Prior to retirement and upon request, an estimate of potential benefits under all 4 retirement annuity options can be provided so that the member can make an informed decision regarding his or her retirement options.
+      </p>
+
+      <h2>Disability Retirement</h2>
+      <p>
+        A member may qualify for disability retirement benefits if he or she has at least 10 years of service credit, left employment because of disability, and has been unable to work because of the disability for at least 6 months.
+        Only 5 years of service credit is necessary if the disability is a direct and total result of an act of student violence directed toward the member. All disability retirement applications must be approved by the CPRB.
+        If a member who retires on the basis of disability returns to service, the Board shall discontinue payment of his or her disability.
+        Disability retirees are required to submit medical recertification for 5 years following receipt of disability benefits.
+      </p>
+
+      <h2>Death Prior to Retirement</h2>
+      <p>
+        If an active member 50 years of age or older with 25 years of credited service dies, the surviving spouse, if named as sole beneficiary, will receive a lifetime annuity based on 100% Joint &amp; Survivor annuity option.
+        If a member dies and does not meet these age and service requirements, all funds are paid to the designated beneficiary(ies).
+      </p>
+      <p>
+        <b>If a member wishes to change his or her beneficiary prior to retirement, he or she must complete a new beneficiary form in its entirety and submit it to the CPRB prior to the member's death in order for it to be effective.</b><br>
+        The member should keep a copy of his or her beneficiary form for their records. If a member’s family situation changes (birth, death, marriage, divorce, etc.), they should re-evaluate their beneficiary designation.
+      </p>
+
+      <h2>Military Service</h2>
+      <p>
+        Military service will be credited in accordance with WV Code §18-7A-17a.<br>
+        National Guard service may be purchased by a TRS member in accordance with WV Code §18-7A-17b.
+      </p>
+      <p>
+        <b>Military Service during the Draft:</b> Tier I members shall be given military service credit for service in any of the Armed Forces of the United States during any period of national emergency within which the Federal Selective Service Act (Draft) was in effect. A maximum of 10 years of non-contributory military service can be given; however, it cannot exceed 25% of the member's total TRS service. Military service during the Draft period will be credited to the member's account at the time of retirement.
+      </p>
+      <p>
+        <b>Military Service after the Draft:</b> Tier I members may be eligible to purchase up to sixty months of active duty military service for military service performed prior to employment with a TRS employer. To determine eligibility to purchase military service, the member must submit a Request to Purchase Military Service Credit form to the CPRB during the first complete fiscal year of contributory retirement service completed after July 1, 2015.
+      </p>
+      <p>
+        <b>Interruptive Military Service while employed:</b> Tier I members who are called to active duty in the Armed Forces of the United States during covered employment with a TRS employer and who return to covered employment within the time period required under the USERRA federal law may be eligible to purchase up to 5 years of military service credit for such service.
+      </p>
+
+      <h2>Loans</h2>
+      <p>
+        An active member who was a TRS member before July 1, 2005 may borrow up to 50% of his or her contributions, but the total existing loan may not exceed $8,000. Refinancing an existing loan is not permitted.<br>
+        <strong>Any outstanding loan balance must be paid in full prior to the member's effective retirement date or a member may elect to offset any outstanding loan balance by taking a lifetime actuarial reduction of his or her monthly retirement annuity.</strong>
+      </p>
+
+      <h2>Sick and Annual Leave At Retirement</h2>
+      <p>
+        A Tier I member who is currently participating as an employee in the Public Employees Insurance Agency (PEIA) plan may elect to use unused annual/vacation and/or sick leave toward an increase in retirement benefits, on the basis of two days of retirement service credit for each day of unused annual/vacation and/or sick leave over the average annual contract period.
+        (This provision does not apply to full time higher education faculty members employed on an annual contract basis other than 12 months.)
+        Such days will constitute additional service in the computation of the member's retirement annuity.  The additional credited service shall not be used in meeting initial eligibility for retirement criteria. Lump sum payments of annual/vacation leave shall not be used in the computation of retirement benefits under TRS.<br>
+        In the alternative to increasing retirement benefits, members who currently participate in a PEIA insurance plan may be permitted to use unused annual/vacation and sick leave days at the time of retirement to purchase health insurance under the PEIA.
+        Please contact PEIA for further information. Unused leave cannot be used for both options.
+      </p>
+
+      <h2>Termination of Employment</h2>
+      <p>
+        If a Tier I member terminates employment prior to the time he or she qualifies for retirement benefits and has accrued at least 5 years of contributing service, he or she may leave his or her accumulated contributions on deposit until they qualify for deferred retirement benefits.
+        The member may also choose to withdraw his or her accumulated contributions from the plan after termination of his or her employment so long as an annuity is not immediately payable.  However, he or she may not withdraw the employer's contributions. Employer contributions remain with the retirement system.
+        <strong>Once the member withdraws contributions from the system, he or she forfeits all future retirement and disability benefits.</strong>
+        A Tier I member who is terminating employment should consult with the CPRB before deciding whether or not to withdraw his or her accumulated contributions.
+      </p>
+
+      <h2>Working After Retirement</h2>
+      <p>
+        Any retiree who accepts public school employment, other than as a college teacher, for a period of no more than 140 days during the school year, and who is not considered in any way a permanent or regular employee, is considered to be temporary and shall continue to receive his or her normal monthly benefit.
+        The retiree will receive a reduction in their retirement annuity if the temporary employment exceeds 140 days.
+        A retiree may teach college level courses on a non-contract basis for less than 7 hours of college credits per semester without a loss of benefits.
+      </p>
+
+      <h2>Out of State Service</h2>
+      <p>
+        TRS members may purchase service credit for "public" school teaching service performed in another state or for service as a teacher for employment with the federal government of the United States.
+        Service credit purchased shall not exceed the lesser of 10 years or 50% of the member's total service at the time of his or her TRS retirement.
+        Purchased out-of-state service may not be used to establish eligibility for retirement benefits in TRS. Additionally, such service must be withdrawn from the other State or Federal retirement system.
+      </p>
+
+      <h2>Workers’ Compensation</h2>
+      <p>
+        TRS members receiving Workers' Compensation benefits may purchase credited service for time absent from work due to temporary disability if the member returns to work with a covered employer within 1 year following cessation of workers' compensation benefits.
+        A maximum of 2 years may be purchased by lump sum payment. Payment must be made within 2 years of the end of the disability period.
+      </p>
+
+      <h2>Questions</h2>
+      <p>
+        Should you have any questions regarding the Teachers’ Retirement System, please feel free to contact us in writing or by phone at the West Virginia Consolidated Public Retirement Board, Monday through Friday, 8:00 a.m. to 5:00 p.m.
+      </p>
+      <div style="margin-top: 2em; border-top: 1px solid #eaeaea; padding-top: 16px;">
+        <b>Note:</b>
+        <em>
+          Information contained in this document illustrates the CPRB’s understanding of the current provisions of the Teachers’ Retirement System. These provisions are contained in the current plan statutes, and are subject to modification by the West Virginia Legislature each year. This document is for general guidance purposes only. In the event there is a discrepancy between information contained in this document and the WV State Code and Rules or any applicable case law, the language in the Code and Rules or any applicable case law shall prevail.
+        </em>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo"><img src="Images/WV.png" alt="WV State Logo"></div>
+      <div class="footer-text">
+        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail. |
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Mega-menu toggle logic
+    const btn = document.getElementById('findItFastBtn');
+    const menu = document.getElementById('mega-menu');
+    const backdrop = document.getElementById('mega-backdrop');
+    const close = document.getElementById('mega-close');
+    function openMenu() {
+      backdrop.style.display = 'block';
+      menu.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      backdrop.style.display = 'none';
+      menu.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    btn.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+  </script>
+</body>
+</html>

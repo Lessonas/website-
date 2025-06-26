@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRS | WV Consolidated Public Retirement Board</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <style>
+    body {
+      display: flex; flex-direction: column; min-height: 100vh; margin: 0;
+      font-family: 'Open Sans', Arial, sans-serif; background: #f9f9f9; color: #333; line-height: 1.6;
+    }
+    .top-bar {
+      display: flex; align-items: center; flex-wrap: wrap;
+      background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
+    }
+    .top-left { display: flex; align-items: center; margin-right: 20px; }
+    .logo img { width: 70px; margin-right: 12px; }
+    .board-text { display: flex; flex-direction: column; gap: 3px; }
+    .board-name { font-size: 1.18em; font-weight: 600; }
+    .brand-separator { width: 100%; border: none; border-top: 1px solid #ffc; margin: 3px 0; }
+    .board-slogan { font-size: .97em; font-style: italic; opacity: .9; }
+    .top-right {
+      margin-left: auto; text-align: right; font-family: 'Roboto',sans-serif; font-weight: 700;
+      font-size: .87em; line-height: 1.4; max-width: 350px;
+    }
+    .top-right a { color: #ffc; text-decoration: none; }
+    .top-right a:hover { text-decoration: underline; }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 7px 20px; position: relative; z-index: 2;
+    }
+    .main-menu { list-style: none; display: flex; gap: 22px; align-items: center; margin: 0; padding: 0;}
+    .main-menu li { position: relative; }
+    .main-menu a {
+      text-decoration: none; color: #012e5a;
+      font-size: 1em; font-weight: 600; padding: 5px 0; display: inline-block; transition: color .18s;
+    }
+    .main-menu a:hover { color: #005bb5; }
+    .submenu {
+      display: none; position: absolute; left: 0; top: 100%;
+      background: #fff; border: 1px solid #e6e6e6; border-radius: 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09); min-width: 170px;
+      z-index: 1000; padding: 5px 0;
+    }
+    .submenu ul { list-style: none; margin: 0; padding: 0; }
+    .submenu li a {
+      display: block; padding: 7px 18px; color: #012e5a;
+      font-weight: 400; font-size: .98em; white-space: nowrap; border-radius: 3px;
+    }
+    .submenu li a:hover { background: #f0f6ff; color: #005bb5; }
+    .main-menu li:hover > .submenu { display: block; }
+    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+    .service-btn, .employer-login, #findItFastBtn {
+      background: #0066cc; color: #fff; padding: 8px 14px; border-radius: 4px;
+      text-decoration: none; font-weight: bold; font-size: 1em;
+      display: inline-flex; align-items: center; cursor: pointer; border: none;
+      transition: background 0.3s;
+    }
+    .service-btn:hover, .employer-login:hover, #findItFastBtn:hover { background: #005bb5; }
+    .button-icon { display: inline-flex; margin-right: 6px; width: 16px; height: 16px; vertical-align: middle; }
+    .button-icon svg { width: 16px; height: 16px; fill: currentColor; }
+    main { flex: 1; background: #f9f9f9; display: flex; align-items: stretch; justify-content: center; padding: 40px 0 20px 0; }
+    .content-panel {
+      background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
+      width: 95%; max-width: 1100px; padding: 38px 38px 32px 38px; box-sizing: border-box; margin: 0 auto;
+    }
+    .content-panel h1 {
+      font-size: 2.3em; color: #012e5a; margin-bottom: 0.2em; font-weight: 800;
+      letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
+    }
+    .content-panel h2, .content-panel h3 {
+      color: #005bb5;
+      margin-top: 2.5em;
+      font-size: 1.38em;
+      letter-spacing: -0.5px;
+      font-weight: 700;
+    }
+    .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
+    .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
+    .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
+    .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
+    .content-panel a:hover { text-decoration: underline; }
+    .content-panel .pdf-btn {
+      float: right; background: #012e5a; color: #fff; padding: 7px 18px; border-radius: 4px;
+      font-weight: bold; text-decoration: none; font-size: 1em; margin-left: 1em; margin-bottom: 1.3em;
+      transition: background 0.2s;
+    }
+    .content-panel .pdf-btn:hover { background: #005bb5;}
+    .content-panel .subhead {
+      color: #0066cc; font-weight: bold; margin-top: 2.2em; font-size: 1.11em; margin-bottom: 1.1em;
+      letter-spacing: 0;
+    }
+    .formula {
+      background: #f4f9ff; border: 1px solid #e3ebf4; border-radius: 5px;
+      padding: 15px 20px; margin: 25px 0; text-align: center;
+      font-size: 1.12em; font-weight: bold; color: #012e5a;
+      letter-spacing: 0.3px;
+    }
+    .content-panel p { margin-bottom: 1.3em;}
+    #mega-backdrop {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 9998;
+    }
+    #mega-menu {
+      display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      background: #fff; width: 96vw; max-width: 1250px; max-height: 90vh;
+      overflow-y: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;
+    }
+    .mega-header {
+      display: flex; justify-content: space-between; align-items: center; padding: 20px 30px;
+      border-bottom: 1px solid #ddd; background: #f5f5f5; border-top-left-radius: 4px; border-top-right-radius: 4px;
+    }
+    .mega-header h2 { margin: 0; font-size: 1.6em; color: #012e5a; }
+    .mega-close { background: none; border: none; font-size: 1.8em; cursor: pointer; color: #666; transition: color .2s;}
+    .mega-close:hover { color: #333; }
+    .mega-content { display: flex; flex-wrap: wrap; gap: 22px; padding: 22px 30px; justify-content: space-between;}
+    .mega-column { flex: 1 1 220px; min-width: 220px; box-sizing: border-box;}
+    .mega-column h3 { margin-top: 0; font-size: 1.17em; color: #005bb5; margin-bottom: 12px;}
+    .mega-column ul { list-style: none; margin: 0; padding: 0;}
+    .mega-column li { margin-bottom: 10px;}
+    .mega-column a { color: #0073e6; text-decoration: none; font-size: 1em;}
+    .mega-column a:hover { text-decoration: underline;}
+    footer.footer { background: #012e5a; color: #fff; padding: 20px 0; }
+    .footer-container {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0 20px;
+    }
+    .footer-logo img { width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;}
+    .footer-text { flex: 1; text-align: right; font-size: 0.93em; line-height: 1.4;}
+    .footer-text a { color: #ffc; text-decoration: none;}
+    .footer-text a:hover { text-decoration: underline;}
+    @media (max-width: 1024px) {
+      .mega-column { flex: 1 1 45%; }
+      .content-panel { padding: 24px 8vw; }
+    }
+    @media (max-width: 768px) {
+      .top-bar, .nav-bar { flex-direction: column; align-items: flex-start;}
+      .main-menu { flex-wrap: wrap;}
+      main { padding: 18px 0; }
+      .content-panel { width: 98%; padding: 18px 2vw;}
+      .mega-content { flex-direction: column; gap: 16px;}
+      .mega-column { flex: 1 1 100%; min-width: 0;}
+      .footer-container { flex-direction: column; text-align: center;}
+      .footer-text { margin-top: 10px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
+      <div class="board-text">
+        <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+        <hr class="brand-separator">
+        <div class="board-slogan">Serving those who serve West Virginia</div>
+      </div>
+    </div>
+    <div class="top-right">
+      <address>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> |
+        <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+        <em>Please do not send personal info via plain email.</em>
+      </address>
+    </div>
+  </div>
+  <nav class="nav-bar">
+    <ul class="main-menu">
+      <li><a href="#">Board of Trustees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Active Members</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">Trooper Plan A</a></li>
+            <li><a href="PlanB.html">Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Retirees</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+            <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+            <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Participating Employers</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employer Forms</a></li>
+            <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+            <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+            <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+            <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+            <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+            <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="#">Publications</a>
+        <div class="submenu">
+          <ul>
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+        </span>
+        Find It Fast
+      </button>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+         class="service-btn" target="_blank">
+        <span class="button-icon">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="12" r="8"/><path d="M4 28c0-6.6 5.4-12 12-12s12 5.4 12 12"/></svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+         class="employer-login" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/></svg>
+        </span>
+        Employer Login
+      </a>
+    </div>
+  </nav>
+  <div id="mega-backdrop"></div>
+  <div id="mega-menu">
+    <div class="mega-header">
+      <h2>Find It Fast</h2>
+      <button id="mega-close" class="mega-close">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS: Teachers' Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- MAIN CONTENT PANEL -->
+<main>
+  <div class="content-panel">
+  <h1>The West Virginia State Police Death, Disability and Retirement Fund (Plan A)</h1>
+  <p>
+    The West Virginia State Police Death, Disability and Retirement Fund, commonly referred to as Plan A, was established for all state troopers on July 1, 1935. Chapter 15, Article 2 of the West Virginia Code establishes the plan provisions for Plan A. During the 1994 Legislative Session, the West Virginia Legislature enacted Chapter 15, Article 2A of the West Virginia Code that established a new retirement plan for all state troopers hired on or after March 12, 1994. That plan was entitled the West Virginia State Police Retirement System, now commonly referred to as Plan B. State troopers hired on or after March 12, 1994 are not eligible for membership in Plan A. Civilian employees of the West Virginia State Police are members of the Public Employees Retirement System (PERS).
+  </p>
+  <p>
+    Active members of Plan A contribute 9% of their total gross salary into the retirement plan for the member Normal Cost. The employer contributes an additional amount sufficient to fund the Plan benefits on an actuarially determined basis including both the employer Normal Cost plus amortizing the unfunded actuarial accrued liability through Fiscal Year 2025 (the ARC). The State also contributes other monies to the system through arrest fees, accident report fees, criminal investigation reports, etc. Members of Plan A are not covered by Social Security or Workers’ Compensation.
+  </p>
+
+  <h2>Retirement Benefits:</h2>
+  <!-- <p>
+    <a href="#">PDF print friendly version</a> &nbsp; | &nbsp; <a href="#">Print friendly version</a>
+  </p> -->
+
+  <p>
+    In order to qualify for full retirement benefits, a member must be 50 years of age with 20 years of contributory service (excluding Military Service), OR any age with 25 years of credited service (including Military Service). A member who is less than 50 years of age with 20 years of credited service (excluding Military Service), qualifies for a deferred benefit at age 50. An employee of the agency who terminates employment after completing 10 years of service with the agency, but prior to eligibility for normal retirement, who leaves his or her contributions on deposit with the fund is eligible for deferred retirement benefits beginning at age 62.
+  </p>
+  <p>
+    There are no regular or deferred retirement benefits available for a member with less than 10 years of service.
+  </p>
+  <p>
+    The regular retirement benefit, payable in equal monthly installments, is equal to 5.5% of the employee’s aggregate salary paid during his or her whole period of service as an employee of the agency, but not less than $6,000 annually. This benefit is payable during the lifetime of the retiree.
+  </p>
+  <p>
+    The very first benefit payment due to a retiree or beneficiary will be mailed directly to the recipient’s home address. Following the first payment, benefit payments are credited by direct deposit to retiree accounts on the 25th of each month, except the month of December, when retiree accounts are credited on the 18th. If the 25th (or December 18th) falls on a weekend or holiday, direct deposits are processed on the prior full business day.
+  </p>
+  <p>
+    <strong>Retirement Benefits Are Not Automatic.</strong><br>
+    You must apply to the board for your retirement benefits.<br>
+    Distributions must start by April 1 of the year following the later of:<br>
+    (a) the date you reach age 72 if you were born before January 1, 1951;<br>
+    (b) the date you reach age 73 if you were born after December 31, 1950; or<br>
+    (c) the date upon which you terminate employment.
+  </p>
+
+  <h3>Cost of Living Adjustment (COLA)</h3>
+  <p>
+    Every retiree of the fund who is 55 years of age or older and who is retired under normal retirement criteria will receive an annual retirement annuity adjustment of 3.75% payable on July 1 of each year after the retiree attains 55 years of age.<br>
+    Every retiree of the fund who is retired under the disability retirement provisions and every surviving spouse or other beneficiary receiving a benefit under the provisions of this retirement system are eligible to receive the annual retirement annuity adjustment of 3.75% payable on July 1 of each year.<br>
+    If the retiree, surviving spouse or other beneficiary is retired or receiving an annuity for less than one year on that July 1, the first annuity adjustment will be a pro rata share of the full year’s annuity adjustment.<br>
+    Any retiree with less than 20 years of service choosing to receive a deferred annuity is not eligible to receive the annual annuity adjustment.
+  </p>
+
+  <h3>Disability Retirement Benefits</h3>
+  <p>
+    <strong>Total Duty Disability</strong> - A member of the fund who has not yet entered retirement status on the basis of age and service and who becomes permanently and totally disabled as the result of a physical or mental impairment resulting from any occupational risk or hazard inherent in or peculiar to the services required of employees of the agency or incurred pursuant to or while the member was engaged in the performance of his or her duties as an employee of the agency shall qualify for a total disability, if, in the opinion of the Board, he or she is probably permanently unable to engage in substantial gainful activity by reason of such medically determined physical or mental impairment that can be expected to result in death or that has lasted or can be expected to last for a continuous period of not less than 12 months. A total duty related disability benefit payable during the lifetime of the retiree, or until the disability eligibility sooner terminates, is an annual amount equal to 8.5% of the total salary which would have been earned by the employee during twenty-five years, or during actual service if more than twenty-five years of service in the fund, based on the average earnings of the retiree while employed as an employee of the agency, but not less than $15,000 annually.
+  </p>
+  <p>
+    <strong>Partial Duty Disability</strong> - A member of the fund who has not yet entered retirement status on the basis of age and service and who becomes partially disabled by injury, illness or disease resulting from any occupational risk or hazard inherent in or peculiar to the services required of employees of the agency or incurred pursuant to or while the employee was engaged in the performance of his or her duties as an employee of the agency shall qualify for a partial duty disability, if, in the opinion of the Board, he or she is by reason of that cause probably permanently unable to perform adequately the duties required of him or her as an employee of the agency, but is able to engage in any other gainful employment in a field other than law enforcement. A partial duty related disability retirement benefit payable during the lifetime of the retiree, or until the disability eligibility sooner terminates, is an annual amount equal to 5.5% of the total salary which would have been earned by the member during twenty-five years, or during actual service if more than twenty-five years of service in the fund, based on the average earnings of the retiree while employed as an employee of the agency, but not less than $6,000 annually.
+  </p>
+  <p>
+    <strong>Non-Duty Disability</strong> - Any employee while in active service of the agency may qualify for a non-duty disability if the employee has, in the opinion of the Board, become permanently partially or totally disabled and is unable to adequately perform the duties required of an employee of the agency from any cause other than those set forth in the duty related disability provisions, and not due to vicious habits, intemperance or willful misconduct on his or her part.<br>
+    a). If the employee at the time of such retirement has served less than 20 years, the benefit payable shall be paid in equal monthly installments during a period equal to ½ the time he or she has served as an employee of the agency or until the disability eligibility sooner terminates, a sum equal to 5.5% of the total salary which would have been earned during 25 years of service. At the end of the ½ time period of service, the benefit payable for the remainder of the retiree’s life is an annual sum paid in monthly installments equal to ½ the base salary received by the retiree from the agency in the preceding 12 month period immediately prior to the disability award.<br>
+    b). If the employee, at the time of such retirement has served twenty years or longer, the employee is entitled to receive annually paid in equal monthly installments a lifetime benefit, or until the disability eligibility sooner terminates, an amount equal to 5.5% of the aggregate of salary paid to the retiree through the day immediately preceding his or her disability award.
+  </p>
+  <p>
+    <strong>Continued Disability</strong> - The Board may require subsequent medical evaluations to determine if a disability retiree has fully or partially recovered from such disability. The Board may also require a disability benefit recipient to file an annual statement of earnings and any other information required in rules adopted by the Board.
+  </p>
+
+  <h3>Death Benefits</h3>
+  <p>
+    <strong>“Dependent Child”</strong> means any unmarried child or children born to or adopted by a member of the fund who is: (1) Under the age of 18; (2) After reaching 18 years of age, continues as a full-time student in an accredited high school, college, university, business or trade school until the child or children reaches the age of 23 years; or (3) Is financially dependent on the member by virtue of a permanent mental or physical disability upon evidence satisfactory to the Board.<br>
+    <strong>“Dependent Parent”</strong> means the member’s parent or stepparent claimed as a dependent by the member for federal income tax purposes at the time of the member’s death.
+  </p>
+  <p>
+    <strong>Duty Related</strong> - The surviving spouse of a member who dies from a duty related pre-retirement death, or the surviving spouse of a retiree who dies after having been retired with a duty related disability, is entitled to receive an annual benefit, in equal monthly installments, an amount equal to 5.5% of the total salary which was or would have been earned by the deceased member or duty disability retiree during 25 years of service based on the average earnings of the member or duty disability retiree while employed by the agency, but not less than $6,000. A surviving spouse will also receive $100 per month for each dependent child. If the surviving spouse dies or if there is no surviving spouse, each surviving dependent child will receive 25% of the surviving spouse’s entitlement. If there is no surviving spouse or dependent children, each surviving dependent parent will receive 50% of what would have been paid to a surviving spouse without children.
+  </p>
+  <p>
+    <strong>Dependent Scholarship</strong> - Any person who qualifies as a surviving dependent child of an employee who dies in the performance of duty or of a retiree who dies after having been retired with a duty related disability is entitled to receive a scholarship to be applied to the career development education of that dependent at a West Virginia institution.
+  </p>
+  <p>
+    <strong>Non-Duty Related</strong> - The surviving spouse of a retiree who dies after a normal or a non-duty related disability retirement, or the surviving spouse of an employee of the agency who has completed 20 years of service with the agency is entitled to receive an annual benefit, in equal monthly installments, an amount equal to 75% of the retirement benefit the deceased retiree was receiving while in retirement status, or would have been entitled to receive to the same effect as if such employee had been retired immediately prior to the time of his or her death, but not less than $5,000 annually. A surviving spouse will also receive $100 per month for each dependent child. If there is no surviving spouse, or the surviving spouse remarries, each surviving dependent child will receive 25% of the surviving spouse’s benefit. If there is no surviving spouse or dependent children, each surviving dependent parent will receive 50% of what would have been paid to the surviving spouse without children.<br>
+    The benefit payable to the surviving spouse of a member of a non-duty related death with less than 20 years of service is a monthly amount in which the annual benefit is equal to 2.75% of the total salary which would have been earned by said member during 25 years of service with the agency. If the surviving spouse dies or remarries or if there is no surviving spouse, each surviving dependent child will receive 25% of the surviving spouse’s entitlement. If there is no surviving spouse or dependent children, each surviving dependent parent will receive 50% of what would have been paid to a surviving spouse without children.
+  </p>
+
+  <h3>Military Service</h3>
+  <p>
+    Any member of the fund who completes 20 years of service with the agency is entitled to apply for up to 5 years of military service credit for active duty in the armed forces of the United States prior to employment with the agency. No contributions are required to receive credit for this service. Any member of the fund who is called to active duty in the armed forces of the United States during employment with the agency and returns to employment with the agency within the allowable time frame following discharge may be eligible to purchase up to 5 years of additional military service credit as provided by federal law. Military service credit under this plan may not be credited under any other retirement system administered by the Board.
+  </p>
+
+  <h3>Sick and Annual Leave at Retirement</h3>
+  <p>
+    Any member of the fund who participates in a Public Employees Insurance Agency (PEIA) insurance plan at the time of retirement may elect to use accrued annual and/or sick leave towards an increase in retirement benefits. This accrued leave may be applied on the basis of 2 days retirement service credit for each 1 day of accrued annual or sick leave. However, such credited service shall not be used in meeting initial eligibility for retirement. In the alternative to increasing retirement benefits, certain members who currently participate in a PEIA insurance plan may be eligible to elect to use unused annual and/or sick leave at the time of retirement to purchase health insurance under the PEIA. Please contact PEIA for further information.<br>
+    Accrued leave cannot be divided and used for both service credit and PEIA coverage.
+  </p>
+
+  <h3>Termination of Employment</h3>
+  <p>
+    An employee of the agency who terminates employment may receive a refund of all employee contributions he or she has contributed into the fund plus 4% interest compounded annually. Any member of the fund who withdraws his or her contributions forfeits all rights to any future retirement or disability benefits under this fund.
+  </p>
+
+  <h3>Employment After Retirement</h3>
+  <p>
+    Any retiree of Plan A who begins participation in the Public Employees Retirement System (PERS) on or after July 1, 2005 may not receive a combined retirement benefit in excess of 105% of the member’s highest annual salary earned while either a member of PERS or while a member of Plan A when adding the retirement benefit from PERS to the retirement benefit received by that member from Plan A.
+  </p>
+
+  <h3>Appointments</h3>
+  <p>
+    Most retirement related matters can be handled from the convenience of your home via mail and telephone. However, members who wish to visit CPRB to discuss related matters with a CPRB staff member are required to make an appointment.
+  </p>
+
+  <h3>Questions</h3>
+  <p>
+    Should you have questions regarding the West Virginia State Police Death, Disability and Retirement Fund, please feel free to contact us in writing or by phone at the Consolidated Public Retirement Board (CPRB), Monday through Friday, 8:00 a.m. to 5:00 p.m.
+  </p>
+
+  <h3>Note</h3>
+  <p>
+    Information contained in this document illustrates CPRB’s understanding of the current provisions of the West Virginia State Police Death, Disability and Retirement Fund. These provisions are contained in the current plan statutes and legislative rule, and are subject to modification by the West Virginia Legislature each year. This document is for general guidance purposes only. In the event there is a discrepancy between information contained in this document and WV Code and Rules, the language in the Code and Rules shall prevail.
+  </p>
+</div>
+
+</main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo"><img src="Images/WV.png" alt="WV State Logo"></div>
+      <div class="footer-text">
+        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail. |
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Mega-menu toggle logic
+    const btn = document.getElementById('findItFastBtn');
+    const menu = document.getElementById('mega-menu');
+    const backdrop = document.getElementById('mega-backdrop');
+    const close = document.getElementById('mega-close');
+    function openMenu() {
+      backdrop.style.display = 'block';
+      menu.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      backdrop.style.display = 'none';
+      menu.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    btn.addEventListener('click', openMenu);
+    close.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+  </script>
+</body>
+</html>

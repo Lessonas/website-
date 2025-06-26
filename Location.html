@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Location Directions| WV Consolidated Public Retirement Board</title>
+  <!-- Web Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <style>
+    :root {
+      --primary-color: #012e5a;
+      --accent-color: #0066cc;
+      --nav-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      display: flex; flex-direction: column; min-height: 100vh;
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: #f9f9f9; color: #333; line-height: 1.6;
+    }
+    .top-bar {
+      display: flex; align-items: center;
+      background: #012e5a; color: #fff; padding: 8px 20px;
+    }
+    .top-left { display: flex; align-items: center; }
+    .logo img { width: 70px; margin-right: 12px; }
+    .board-text { display: flex; flex-direction: column; gap: 3px; }
+    .board-name { font-size: 1.2em; font-weight: 600; }
+    .brand-separator { border: none; border-top: 1px solid #ffc; }
+    .board-slogan { font-size: .95em; font-style: italic; opacity: .9; }
+    .top-right {
+      margin-left: auto; text-align: right;
+      font-family: 'Roboto', sans-serif; font-size: .85em; line-height: 1.4;
+    }
+    .top-right a { color: #ffc; text-decoration: none; }
+    .top-right a:hover { text-decoration: underline; }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; box-shadow: var(--nav-shadow);
+      padding: 7px 20px; position: relative; z-index: 1;
+    }
+    .main-menu { list-style: none; display: flex; gap: 20px; }
+    .main-menu > li { position: relative; }
+    .main-menu a {
+      text-decoration: none; color: #012e5a; font-weight: 600; padding: 5px 0;
+      display: inline-block;
+    }
+    .main-menu a:hover, .main-menu a.active { color: #005bb5; }
+    .submenu {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #fff; border: 1px solid #ddd; border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,.1); min-width: 200px; z-index: 999;
+    }
+    .submenu li a {
+      display: block; padding: 8px 15px; color: #012e5a; font-weight: 400;
+    }
+    .submenu li a:hover { background: #f0f0f0; color: #005bb5; }
+    .main-menu li:hover .submenu { display: block; }
+    .nav-buttons {
+      display: flex; gap: 10px; align-items: center;
+    }
+        .submenu,
+.submenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.submenu a {
+  text-decoration: none;
+  color: #012e5a; 
+  font-weight: 400;
+}
+.submenu a:hover,
+.submenu a:focus {
+  background: #f0f0f0; 
+  color: #005bb5;
+  text-decoration: none; 
+}
+    .nav-buttons button,
+    .nav-buttons a {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #0066cc; color: #fff; border: none;
+      padding: 8px 14px; border-radius: 4px;
+      font-weight: bold; cursor: pointer; text-decoration: none;
+      transition: background .3s; font-size: 1em;
+    }
+    .nav-buttons button:hover,
+    .nav-buttons a:hover { background: #005bb5; }
+    .button-icon { width: 18px; height: 18px; }
+    .button-icon svg { width: 100%; height: 100%; fill: #fff; }
+    #mega-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(1,46,90,0.32); z-index: 9998;
+    }
+    #mega-menu {
+      display: none; position: fixed;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 95vw; max-width: 1100px; max-height: 90vh; overflow-y: auto;
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.18); z-index: 9999;
+    }
+    .mega-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 32px 10px 32px; border-bottom: 1px solid #eee; background: #f5f8fa;
+    }
+    .mega-header h2 { margin: 0; font-size: 1.5em; color: #012e5a; }
+    .mega-close {
+      background: none; border: none; font-size: 2em; cursor: pointer;
+      color: #333; transition: color .2s;
+      padding: 0 8px;
+    }
+    .mega-close:hover { color: #005bb5; }
+    .mega-content {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px;
+      padding: 22px 32px 28px 32px;
+    }
+    .mega-column h3 {
+      margin: 0 0 10px 0; font-size: 1.08em; color: #005bb5;
+    }
+    .mega-column ul { padding: 0; margin: 0; list-style: none; }
+    .mega-column li { margin-bottom: 8px; }
+    .mega-column a { color: #0073e6; text-decoration: none; }
+    .mega-column a:hover { text-decoration: underline; color: #012e5a; }
+    main { flex: 1; display: flex; justify-content: center; padding: 20px 0; background: #f9f9f9; }
+    .content-panel {
+      background: #fff; border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,.1);
+      width: 90%; max-width: 1000px; padding: 40px 30px;
+      display: flex; flex-direction: column;
+    }
+    .content-panel h1 { font-size: 2em; color: #012e5a; margin-bottom: .5em; }
+    .content-panel h2 { font-size: 1.4em; color: #012e5a; margin-top: 2rem; margin-bottom: 1rem; }
+    .content-panel p { margin-bottom: 1rem; }
+    .content-panel ul { margin-left: 1.2rem; margin-bottom: 1rem; }
+    .content-panel a { color: #0073e6; text-decoration: none; }
+    .content-panel a:hover { text-decoration: underline; }
+    footer.footer {
+      background: #012e5a; color: #fff; padding: 20px 0; width: 100%;
+    }
+    .footer-container {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; padding: 0 20px; font-size: .96em;
+    }
+    .footer-logo img {
+      width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;
+    }
+    .footer-text a { color: #ffc; text-decoration: none; }
+    .footer-text a:hover { text-decoration: underline; }
+    @media (max-width: 1000px) {
+      .mega-content { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    @media (max-width: 800px) {
+      .mega-content { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width:600px) {
+      .top-bar, .nav-bar, .footer-container { flex-direction: column; align-items: flex-start; }
+      .nav-buttons { margin-top: 10px;}
+      .footer-text { text-align: left; margin-top: 10px;}
+      .mega-content { grid-template-columns: 1fr;}
+      .content-panel { width: 98%; padding: 18px 5vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVY TOP BAR -->
+  <div class="top-bar">
+  <div class="top-left">
+    <a href="index.html" class="logo">
+      <img src="Images/Logo.png" alt="CPRB Logo">
+    </a>
+    <div class="board-text">
+      <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+      <hr class="brand-separator">
+      <div class="board-slogan">Serving those who serve West Virginia</div>
+    </div>
+  </div>
+  <div class="top-right">
+    <address>
+      601 57th Street SE, Suite 5<br>
+      Charleston, WV 25304<br>
+      <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> | <a href="tel:+18006544406">(800) 654-4406</a><br>
+      <strong>Fax:</strong> (304) 957-7522<br>
+      <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+      <em>Please do not send personal info via plain email.</em>
+    </address>
+  </div>
+</div>
+
+  <!-- WHITE NAV BAR -->
+  <nav class="nav-bar">
+  <ul class="main-menu">
+    <!-- Board of Trustees -->
+    <li>
+      <a href="#">Board of Trustees</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Active Members -->
+    <li>
+      <a href="#">Active Members</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">Trooper Plan A</a></li>
+          <li><a href="PlanB.html">Trooper Plan B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Retirees -->
+    <li>
+      <a href="#">Retirees</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+          <li><a href="Retirees.html">Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Participating Employers -->
+    <li>
+      <a href="#">Participating Employers</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <!--  -->
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Publications -->
+    <li>
+      <a href="#">Publications</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <!-- NAV BUTTONS -->
+  <div class="nav-buttons">
+    <!-- Find It Fast -->
+    <button id="findItFastBtn">
+      <span class="button-icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/>
+        </svg>
+      </span>
+      Find It Fast
+    </button>
+    <!-- Member/Retiree Self Service -->
+    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+       class="service-btn" target="_blank">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+          <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+          <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+          <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+        </svg>
+      </span>
+      Member/Retiree Self Service
+    </a>
+    <!-- Employer Login -->
+    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+       class="employer-login" target="_blank">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+        </svg>
+      </span>
+      Employer Login
+    </a>
+  </div>
+</nav>
+
+  <!-- MEGA MENU BACKDROP -->
+  <div id="mega-backdrop"></div>
+
+  <!-- MEGA MENU -->
+  <div id="mega-menu" role="dialog" aria-modal="true" aria-labelledby="findItFastTitle">
+    <div class="mega-header">
+      <h2 id="findItFastTitle">Find It Fast</h2>
+      <button id="mega-close" class="mega-close" aria-label="Close Find It Fast">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS: Teachers’ Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Medical" target="_blank">Medical Advisor Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">ESS Portal</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          <li><a href="Forms/WVTF0015.pdf" target="_blank">Critical Need Substitute Teacher Affidavit</a></li>
+          <li><a href="Forms/WVTF0016.pdf" target="_blank">Critical Need Substitute Bus Operator Affidavit</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+ <main>
+    <div class="content-panel">
+      <h1>Location & Directions</h1>
+      <address>
+        <strong>WV Consolidated Public Retirement Board</strong><br>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> &nbsp;|&nbsp; <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a>
+      </address>
+      <a class="directions-link" href="https://www.google.com/maps/place/601+57th+Street+SE,+Charleston,+WV+25304" target="_blank" rel="noopener">Get Directions</a>
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.486887025803!2d-81.59083588468155!3d38.32658977966161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x884f2b93435e6f2b%3A0x3c0a3c5c2a015a1a!2s601%2057th%20St%20SE%2C%20Charleston%2C%20WV%2025304!5e0!3m2!1sen!2sus!4v1718289220286!5m2!1sen!2sus"
+          width="100%"
+          height="150%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="WV CPRB Location"></iframe>
+      </div>
+      <br>
+      <br>  
+      <br>
+      <br>
+      <p>
+        <strong>Business Hours:</strong> Monday – Friday, 8:00 a.m. – 5:00 p.m.<br>
+        Free parking available in the visitor lot. For appointments, please call ahead.
+      </p>
+    </div>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <img src="Images/WV.png" alt="WV State Logo">
+      </div>
+      <div class="footer-text">
+        CPRB © 2025 – State of West Virginia – For general guidance only. In the event of any discrepancy, State Code and Rules prevail. |
+        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Find It Fast Mega Menu Logic
+    const findItFastBtn = document.getElementById('findItFastBtn');
+    const megaMenu = document.getElementById('mega-menu');
+    const megaBackdrop = document.getElementById('mega-backdrop');
+    const megaClose = document.getElementById('mega-close');
+    function openMegaMenu() {
+      megaMenu.style.display = 'block';
+      megaBackdrop.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      megaClose.focus();
+    }
+    function closeMegaMenu() {
+      megaMenu.style.display = 'none';
+      megaBackdrop.style.display = 'none';
+      document.body.style.overflow = '';
+      findItFastBtn.focus();
+    }
+    findItFastBtn.addEventListener('click', openMegaMenu);
+    megaClose.addEventListener('click', closeMegaMenu);
+    megaBackdrop.addEventListener('click', closeMegaMenu);
+    document.addEventListener('keydown', function(e) {
+      if (megaMenu.style.display === 'block' && (e.key === 'Escape' || e.key === 'Esc')) {
+        closeMegaMenu();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | WV Consolidated Public Retirement Board</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary-color: #012e5a;
+      --accent-color: #0066cc;
+      --nav-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      --panel-bg: #fff;
+      --footer-bg: #012e5a;
+      --footer-accent: #ffc;
+      --panel-radius: 8px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Open Sans',Arial,sans-serif;
+      background:#f9f9f9;
+      color:#333;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+    a { color:var(--primary-color); text-decoration:none;}
+    a:hover { color:var(--accent-color); text-decoration:underline;}
+    .top-bar {
+      display:flex; align-items:center; background:var(--primary-color); color:#fff;
+      padding:10px 20px; flex-wrap:wrap; justify-content:space-between;
+    }
+    .top-left { display:flex; align-items:center; }
+    .top-left img { width:70px; margin-right:15px; }
+    .board-info { font-size:1.1em; font-weight:600;}
+    .board-info small { display:block; font-size:0.93em; font-style:italic; color:#ffc; margin-top:2px;}
+    .contact-info { text-align:right; font-size:0.95em; line-height:1.5;}
+    .contact-info a { color:var(--footer-accent);}
+    .contact-info a:hover { color:#fff;}
+    .nav-bar {
+      background:#fff; box-shadow:var(--nav-shadow); display:flex; align-items:center; flex-wrap:wrap;
+      padding:8px 20px; position:relative; z-index:10;
+    }
+    .main-menu { list-style:none; display:flex; gap:20px;}
+    .main-menu li { position:relative;}
+    .main-menu > li > a {
+      text-decoration:none; color:var(--primary-color); font-weight:600; padding:5px 0; font-size:1em; display:inline-block;
+    }
+    .main-menu > li > a:hover,
+    .main-menu > li > a.active { color:var(--accent-color);}
+    .submenu {
+      display:none; position:absolute; top:100%; left:0;
+      background:#fff; border:1px solid #ddd; border-radius:4px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1); min-width:200px;
+      z-index:999; list-style:none;
+    }
+    .submenu ul { padding:0; margin:0;}
+    .submenu li a {
+      display:block; padding:8px 15px; color:var(--primary-color); text-decoration:none; font-weight:400; font-size:.96em;
+    }
+    .submenu,
+.submenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.submenu a {
+  text-decoration: none;
+  color: #012e5a; 
+  font-weight: 400;
+}
+.submenu a:hover,
+.submenu a:focus {
+  background: #f0f0f0; 
+  color: #005bb5;
+  text-decoration: none;
+}
+
+    .submenu li a:hover { background:#f0f0f0; color:var(--accent-color);}
+    .main-menu li:hover .submenu { display:block;}
+    .nav-buttons { margin-left:auto; display:flex; gap:10px;}
+    .find-it-fast, .service-btn, .ess-login, #findItFastBtn {
+      background:var(--accent-color); color:#fff; padding:8px 14px;
+      border-radius:4px; text-decoration:none; font-weight:bold; font-size:1em;
+      display:inline-flex; align-items:center; gap:6px; border:none; cursor:pointer; transition:background .3s;
+    }
+    .find-it-fast:hover, .service-btn:hover, .ess-login:hover, #findItFastBtn:hover { background:#005bb5;}
+    .button-icon svg { width:18px; height:18px; fill:#fff; vertical-align:middle;}
+    #mega-backdrop {
+      display:none; position:fixed; inset:0; background:rgba(1,46,90,0.32); z-index:800;
+    }
+    #mega-menu {
+      display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+      background:#fff; box-shadow:0 8px 32px rgba(0,0,0,0.18); border-radius:16px;
+      z-index:1001; max-width:1100px; width:95vw; padding:32px 24px 24px 24px;
+    }
+    .mega-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
+    .mega-header h2 { font-size:1.6em; color:var(--primary-color);}
+    .mega-close { background:none; border:none; font-size:2em; color:#333; cursor:pointer;}
+    .mega-content {
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:28px;
+    }
+    .mega-column h3 { color:var(--primary-color); font-size:1.09em; margin-bottom:6px;}
+    .mega-column ul { list-style:none; padding:0;}
+    .mega-column li { margin-bottom:4px;}
+    .mega-column a { color:var(--primary-color); text-decoration:none; font-size:.97em;}
+    .mega-column a:hover { color:var(--accent-color); text-decoration:underline;}
+    .content-flex {
+      display: flex; align-items: flex-start; gap:32px; max-width: 1100px; margin:0 auto 32px; width:100%;
+      padding: 0 10px;
+    }
+    .content-panel {
+      flex:1 1 0%; min-width:0;
+      background:var(--panel-bg); border-radius:var(--panel-radius); box-shadow:0 2px 6px rgba(0,0,0,0.10);
+      padding:28px 24px 24px 24px; font-size:1.07em; line-height:1.63;
+      margin:38px auto 48px auto;
+      overflow-x:auto;
+    }
+    .content-panel h1 { font-size:1.6em; color:var(--primary-color); font-family:'Roboto',sans-serif; margin-bottom:1rem;}
+    .content-panel h2 { margin-top:2rem; font-size:1.2em; color:var(--primary-color);}
+    .content-panel table { width:100%; border-collapse:collapse; margin-top:.5rem;}
+    .content-panel th, .content-panel td {
+      padding:.75rem; border:1px solid #ccc; text-align:left; vertical-align:top;
+    }
+    .content-panel thead { background:#003366; color:#fff }
+    .content-panel tbody tr:nth-child(odd) { background:#f7f7fc }
+    .content-panel a { color:#0073e6; text-decoration:none }
+    .content-panel a:hover { text-decoration:underline }
+    footer {
+      background:var(--footer-bg); color:#fff; padding:22px 0 10px 0; margin-top:auto;
+    }
+    .footer-container {
+      max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:15px;
+    }
+    .footer-container img { width:50px; border-radius:8px; border:2px solid #fff; padding:2px;}
+    .footer-text { font-size:0.98em; text-align:right;}
+    .footer-text a { color:var(--footer-accent); text-decoration:none;}
+    .footer-text a:hover { text-decoration:underline;}
+    @media (max-width: 1020px) {
+      .content-flex { flex-direction:column; gap:18px; }
+    }
+    @media (max-width: 600px) {
+      .top-bar, .nav-bar, .footer-container { flex-direction:column; align-items:flex-start; }
+      .nav-buttons { margin-top:10px;}
+      .contact-info, .footer-text { text-align:left; margin-top:10px;}
+      .mega-content { grid-template-columns:1fr;}
+      .content-panel { padding:14px 2vw;}
+      .content-panel table, .content-panel th, .content-panel td { font-size:0.94em;}
+    }
+  </style>
+</head>
+<body>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html"><img src="Images/Logo.png" alt="CPRB Logo"/></a>
+      <div class="board-info">
+        West Virginia Consolidated Public Retirement Board
+        <small>Serving Those Who Serve West Virginia</small>
+      </div>
+    </div>
+    <div class="contact-info">
+      601 57th Street SE, Suite 5<br/>
+      Charleston, WV 25304<br/>
+      Phone: <a href="tel:+13045583570">(304) 558-3570</a> |
+      <a href="tel:+18006544406">(800) 654-4406</a><br/>
+      Fax: (304) 957-7522<br/>
+      Email: <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a>
+    </div>
+  </div>
+  <!-- NAV BAR -->
+  <nav class="nav-bar">
+  <ul class="main-menu">
+    <!-- Board of Trustees -->
+    <li>
+      <a href="#">Board of Trustees</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Active Members -->
+    <li>
+      <a href="#">Active Members</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">Trooper Plan A</a></li>
+          <li><a href="PlanB.html">Trooper Plan B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Retirees -->
+    <li>
+      <a href="#">Retirees</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+          <li><a href="Retirees.html">Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Participating Employers -->
+    <li>
+      <a href="#">Participating Employers</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <!--  -->
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+    </li>
+    <!-- Publications -->
+    <li>
+      <a href="#">Publications</a>
+      <div class="submenu">
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <!-- NAV BUTTONS -->
+  <div class="nav-buttons">
+    <!-- Find It Fast -->
+    <button id="findItFastBtn">
+      <span class="button-icon">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/>
+        </svg>
+      </span>
+      Find It Fast
+    </button>
+    <!-- Member/Retiree Self Service -->
+    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
+       class="service-btn" target="_blank">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+          <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+          <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+          <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+        </svg>
+      </span>
+      Member/Retiree Self Service
+    </a>
+    <!-- Employer Login -->
+    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
+       class="service-btn" target="_blank">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+        </svg>
+      </span>
+      Employer Login
+    </a>
+  </div>
+</nav>
+  <!-- MEGA MENU BACKDROP & MENU -->
+  <div id="mega-backdrop"></div>
+  <div id="mega-menu" role="dialog" aria-modal="true" aria-labelledby="findItFastTitle">
+    <div class="mega-header">
+      <h2 id="findItFastTitle">Find It Fast</h2>
+      <button id="mega-close" class="mega-close" aria-label="Close Find It Fast">&times;</button>
+    </div>
+    <div class="mega-content">
+      <div class="mega-column">
+        <h3>Board of Trustees</h3>
+        <ul>
+          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+          <li><a href="Board-Minutes.html">Board Minutes</a></li>
+          <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Active Members</h3>
+        <ul>
+          <li><a href="PERS.html">PERS</a></li>
+          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+          <li><a href="TRS.html">TRS</a></li>
+          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+          <li><a href="TDC.html">TDC Plan</a></li>
+          <li><a href="PlanA.html">Trooper Plan A</a></li>
+          <li><a href="PlanB.html">Trooper Plan B</a></li>
+          <li><a href="DSRS.html">DSRS</a></li>
+          <li><a href="JRS.html">JRS</a></li>
+          <li><a href="EMSRS.html">EMSRS</a></li>
+          <li><a href="MPFRS.html">MPFRS</a></li>
+          <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Retirees</h3>
+        <ul>
+          <li><a href="Retirees.html">Forms</a></li>
+          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
+          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Participating Employers</h3>
+        <ul>
+          <li><a href="Employers.html">General Resources</a></li>
+          <li><a href="Employers-Forms.html">Employer Forms</a></li>
+          <!--  -->
+          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
+          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
+          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
+          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
+          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
+          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </div>
+      <div class="mega-column">
+        <h3>Publications &amp; Policies</h3>
+        <ul>
+          <li><a href="Publications.html#GASB68">GASB 68</a></li>
+          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+          <li><a href="Publications.html#Financials">Financial Statement</a></li>
+          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+          <li><a href="Publications.html#Brochures">Brochures</a></li>
+          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+          <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<main>
+<div class="content-panel">
+  <h1>Contact Us</h1>
+
+  <h2>Administration</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Fleck, Jeffrey</td><td>Executive Director</td><td>(304) 558-3570</td><td><a href="mailto:Jeffrey.E.Fleck@wv.gov">Jeffrey.E.Fleck@wv.gov</a></td></tr>
+      <tr><td>Miller, Terasa</td><td>Chief Operating Officer / Deputy Director</td><td>(304) 558-3570</td><td><a href="mailto:Terasa.L.Miller@wv.gov">Terasa.L.Miller@wv.gov</a></td></tr>
+      <tr><td>Legato, Jeaneen</td><td>Contract Board Legal Counsel</td><td>(304) 558-3570</td><td><a href="mailto:Jeaneen.J.Legato@wv.gov">Jeaneen.J.Legato@wv.gov</a></td></tr>
+      <tr><td>Cooper, Elizabeth</td><td>Chief Financial Officer</td><td>(304) 558-3570</td><td><a href="mailto:Elizabeth.J.Cooper@wv.gov">Elizabeth.J.Cooper@wv.gov</a></td></tr>
+      <tr><td>Woodson, Ken</td><td>Board Actuary</td><td>(304) 558-3570</td><td><a href="mailto:Kenneth.M.Woodson@wv.gov">Kenneth.M.Woodson@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Administration Support Staff</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Vacant</td><td>Paralegal</td><td></td><td></td></tr>
+      <tr><td>Pauley, Kimberly</td><td>Executive Assistant</td><td>(304) 352-6905</td><td><a href="mailto:kimberly.k.pauley@wv.gov">kimberly.k.pauley@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Administrative Services</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Adkins, Cindy</td><td>Office Manager</td><td>(304) 957-3528</td><td><a href="mailto:Cindy.L.Adkins@wv.gov">Cindy.L.Adkins@wv.gov</a></td></tr>
+      <tr><td>Dills, Jennifer</td><td>Customer Service - Reception - Appointment Scheduler</td><td>(304) 352-6825</td><td><a href="mailto:jennifer.l.dills@wv.gov">jennifer.l.dills@wv.gov</a></td></tr>
+      <tr><td>Eddy, Tina</td><td>Administrative Assistant - HR - Travel</td><td>(304) 352-6822</td><td><a href="mailto:Tina.L.Eddy@wv.gov">Tina.L.Eddy@wv.gov</a></td></tr>
+      <tr><td>Hawkins, Amber</td><td>Administrative Assistant - Purchasing - Fleet - Fixed Assets - Pcard invoice payment</td><td>(304) 352-6771</td><td><a href="mailto:Amber.R.Hawkins@wv.gov">Amber.R.Hawkins@wv.gov</a></td></tr>
+      <tr><td>Radford, Larra</td><td>Customer Service - Reception - Appointment Scheduler</td><td>(304) 352-6826</td><td><a href="mailto:Larra.a.radford@wv.gov">Larra.a.radford@wv.gov</a></td></tr>
+      <tr><td>Saunders, Genna</td><td>Administrative Assistant - Purchasing</td><td>(304) 352-6823</td><td><a href="mailto:genna.l.saunders@wv.gov">genna.l.saunders@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Call Center</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Knapp, Bonita</td><td>Lead - Customer Service Representative</td><td>(304) 352-6829</td><td><a href="mailto:Bonita.e.knapp@wv.gov">Bonita.e.knapp@wv.gov</a></td></tr>
+      <tr><td>Blankenship, Adam</td><td>Customer Service Representative</td><td>(304) 352-6824</td><td><a href="mailto:adam.r.blankenship@wv.gov">adam.r.blankenship@wv.gov</a></td></tr>
+      <tr><td>Myatezh, Gary</td><td>Customer Service Representative</td><td>(304) 352-6828</td><td><a href="mailto:gary.a.myatezh@wv.gov">gary.a.myatezh@wv.gov</a></td></tr>
+      <tr><td>Pickens, Cheryl</td><td>Customer Service Representative</td><td>(304) 352-6827</td><td><a href="mailto:cheryl.l.pickens@wv.gov">cheryl.l.pickens@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Outreach</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Atkins, Lindsey</td><td>Outreach Officer</td><td>(304) 352-6852</td><td><a href="mailto:Lindsey.n.atkins@wv.gov">Lindsey.n.atkins@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Compliance</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Baker, Tina</td><td>Chief Compliance Officer</td><td>(304) 957-3520</td><td><a href="mailto:Tina.L.Baker@wv.gov">Tina.L.Baker@wv.gov</a></td></tr>
+      <tr><td>Miller, Alysia</td><td>Internal Auditor</td><td>(304) 352-6812</td><td><a href="mailto:Alysia.M.Miller@wv.gov">Alysia.M.Miller@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Deaths – Refunds</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Whittaker, Sharon</td><td>Death Claims &amp; Refunds Manager</td><td>(304) 957-3537</td><td><a href="mailto:Sharon.l.whittaker@wv.gov">Sharon.l.whittaker@wv.gov</a></td></tr>
+      <tr><td>Hudnall, Joshua</td><td>Death Claims &amp; Refunds Assistant Manager</td><td>(304) 352-6855</td><td><a href="mailto:Joshua.C.Hudnall@wv.gov">Joshua.C.Hudnall@wv.gov</a></td></tr>
+      <tr><td>Cunningham, Shawn</td><td>Member Refunds</td><td>(304) 352-6801</td><td><a href="mailto:shawn.d.cunningham@wv.gov">shawn.d.cunningham@wv.gov</a></td></tr>
+      <tr><td>Davis, Rachelle</td><td>Member/Retiree Death Claims</td><td>(304) 352-6795</td><td><a href="mailto:Rachelle.E.Davis@wv.gov">Rachelle.E.Davis@wv.gov</a></td></tr>
+      <tr><td>Knapp, Ashley</td><td>Member Refunds</td><td>(304) 352-6797</td><td><a href="mailto:Ashley.B.Knapp@wv.gov">Ashley.B.Knapp@wv.gov</a></td></tr>
+      <tr><td>May, Jenny</td><td>Member / Retiree Death Claims / RMD</td><td>(304) 352-6798</td><td><a href="mailto:Virginia.F.May@wv.gov">Virginia.F.May@wv.gov</a></td></tr>
+      <tr><td>McCormick, Kimberly</td><td>Member / Retiree Death Claims / RMD</td><td>(304) 352-6800</td><td><a href="mailto:Kimberly.A.McCormick@wv.gov">Kimberly.A.McCormick@wv.gov</a></td></tr>
+      <tr><td>Smith, Marquis</td><td>Member Refunds</td><td>(304) 352-6796</td><td><a href="mailto:marquis.j.smith@wv.gov">marquis.j.smith@wv.gov</a></td></tr>
+      <tr><td>Strickland, Paige</td><td>Death Claims &amp; Refunds Administrative Services Assistant</td><td>(304) 352-6802</td><td><a href="mailto:Paige.D.Strickland@wv.gov">Paige.D.Strickland@wv.gov</a></td></tr>
+      <tr><td>Wolfe, Steve</td><td>Member Refunds / Rollover Distributions</td><td>(304) 352-6803</td><td><a href="mailto:Steven.C.Wolfe@wv.gov">Steven.C.Wolfe@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Employer Reporting Services</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Brady, Caroline</td><td>Employer Reporting Services Manager</td><td>(304) 957-3533</td><td><a href="mailto:Caroline.R.Brady@wv.gov">Caroline.R.Brady@wv.gov</a></td></tr>
+      <tr><td>Fox, Kinsey</td><td>Employer Reporting Services Assistant Manager</td><td>(304) 352-6786</td><td><a href="mailto:Kinsey.I.Fox@wv.gov">Kinsey.I.Fox@wv.gov</a></td></tr>
+      <tr><td>Asbury, Debra</td><td>Employer Services Specialist (Employer Support, Error/Edit Correction)</td><td>(304) 352-6849</td><td><a href="mailto:debra.s.asbury@wv.gov">debra.s.asbury@wv.gov</a></td></tr>
+      <tr><td>Goff, Ginger</td><td>Employer Services Specialist (Report Submittal, Error/Edit Correction)</td><td>(304) 352-6787</td><td><a href="mailto:Ginger.M.Goff@wv.gov">Ginger.M.Goff@wv.gov</a></td></tr>
+      <tr><td>Scarberry, Lisa</td><td>Employer Services Specialist (Employer Support, Report Submittal)</td><td>(304) 352-6790</td><td><a href="mailto:Lisa.A.Scarberry@wv.gov">Lisa.A.Scarberry@wv.gov</a></td></tr>
+      <tr><td>Young, Cody</td><td>Employer Services Coordinator (Report Submittal/Employer Support)</td><td>(304) 352-6788</td><td><a href="mailto:cody.w.young@wv.gov">cody.w.young@wv.gov</a></td></tr>
+      <tr><td>Young, Debra</td><td>Employer Services Coordinator (Employer Support, Error/Edit Correction)</td><td>(304) 352-6850</td><td><a href="mailto:Debra.S.Young@wv.gov">Debra.S.Young@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Financial Services – Accounting, Deposits and Invoicing</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Cottrill, Lori</td><td>Accounting Manager</td><td>(304) 957-3531</td><td><a href="mailto:Lori.A.Cottrill@wv.gov">Lori.A.Cottrill@wv.gov</a></td></tr>
+      <tr><td>Batman, Tracy</td><td>Accountant / Auditor</td><td>(304) 352-6772</td><td><a href="mailto:Tracy.L.Batman@wv.gov">Tracy.L.Batman@wv.gov</a></td></tr>
+      <tr><td>Ciarochi, Michael</td><td>Financial Reporting Specialist III</td><td>(304) 352-6773</td><td><a href="mailto:Michael.D.Ciarochi@wv.gov">Michael.D.Ciarochi@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Membership - DSRS - EMSRS - JRS - MPFRS - PERS - STATE POLICE - TRS - NRPORS</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Sutton, Vicki</td><td>Membership Manager</td><td>(304) 957-3535</td><td><a href="mailto:Vicki.L.Sutton@wv.gov">Vicki.L.Sutton@wv.gov</a></td></tr>
+      <tr><td>Youngblood, Stefanie</td><td>Membership Assistant Manager</td><td>(304) 957-3536</td><td><a href="mailto:Stefanie.Y.Youngblood@wv.gov">Stefanie.Y.Youngblood@wv.gov</a></td></tr>
+      <tr><td>Cain, Jessica</td><td>PERS and Uniformed Services Statements of Contributions and Interest</td><td>(304) 352-6775</td><td><a href="mailto:Jessica.I.Cain@wv.gov">Jessica.I.Cain@wv.gov</a></td></tr>
+      <tr><td>Champe, Chris</td><td>Pre-Retirement Beneficiary Designations</td><td>(304) 352-6776</td><td><a href="mailto:Christopher.S.Champe@wv.gov">Christopher.S.Champe@wv.gov</a></td></tr>
+      <tr><td>Howard, Marcia</td><td>Pre-Retirement Beneficiary Designations (all plans), TRS Service Verifications</td><td>(304) 352-6778</td><td><a href="mailto:Marcia.J.Howard@wv.gov">Marcia.J.Howard@wv.gov</a></td></tr>
+      <tr><td>Huffman, Brittani</td><td>TRS Contribution and Service Verifications, DSRS and TRS Loans</td><td>(304) 352-6779</td><td><a href="mailto:Brittani.M.Huffman@wv.gov">Brittani.M.Huffman@wv.gov</a></td></tr>
+      <tr><td>Jarrell, Judy</td><td>TRS Contributions and Service Verifications / Member Name & Address account updates</td><td>(304) 352-6780</td><td><a href="mailto:Judith.A.Jarrell@wv.gov">Judith.A.Jarrell@wv.gov</a></td></tr>
+      <tr><td>Jones, Alyssa</td><td>Pre-Retirement Beneficiary Designations (all plans) /Member Information Changes</td><td>(304) 352-6774</td><td><a href="mailto:Alyssa.D.Jones@wv.gov">Alyssa.D.Jones@wv.gov</a></td></tr>
+      <tr><td>Poe, Sara</td><td>Service Purchases / Out-of-state, Reciprocal, Workers Comp. and Military Service</td><td>(304) 352-6781</td><td><a href="mailto:Sara.L.Poe@wv.gov">Sara.L.Poe@wv.gov</a></td></tr>
+      <tr><td>Sayre, Lori</td><td>TRS Statements of Contributions and Interest</td><td>(304) 352-6782</td><td><a href="mailto:Lori.A.Sayre@wv.gov">Lori.A.Sayre@wv.gov</a></td></tr>
+      <tr><td>Shanklin, Nora</td><td>Pre-Retirement Beneficiary Designations (all plans), DSRS and TRS Loans</td><td>(304) 352-6783</td><td><a href="mailto:Nora.M.Shanklin@wv.gov">Nora.M.Shanklin@wv.gov</a></td></tr>
+      <tr><td>Smith, Brittany</td><td>TRS Service Purchases, Out of State, Reciprocal, Worker's Comp. and Military Service</td><td>(304) 352-6784</td><td><a href="mailto:Brittany.R.Smith@wv.gov">Brittany.R.Smith@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Retirement</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Trump, Lisa</td><td>Retiree Services and Annuity Payroll Manager</td><td>(304) 957-3532</td><td><a href="mailto:Lisa.M.Trump@wv.gov">Lisa.M.Trump@wv.gov</a></td></tr>
+      <tr><td>White, Tammy</td><td>Retiree Services and Annuity Payroll Assistant Manager</td><td>(304) 352-6853</td><td><a href="mailto:Tammy.M.White@wv.gov">Tammy.M.White@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Annuity Disbursement</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Boggess, Chris</td><td>Annuity Payroll Supervisor (Account Changes/1099/Income Verif. /Stop Payments)</td><td>(304) 352-6831</td><td><a href="mailto:Christopher.I.Boggess@wv.gov">Christopher.I.Boggess@wv.gov</a></td></tr>
+      <tr><td>Derrick, Amber</td><td>Annuity Payroll, Payment related issues</td><td>(304) 352-6834</td><td><a href="mailto:Amber.L.Derrick@wv.gov">Amber.L.Derrick@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Retirement Advisors</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Young, Leslie</td><td>Senior PERS Retirement Advisor</td><td>(304) 352-6851</td><td><a href="mailto:Leslie.L.Young@wv.gov">Leslie.L.Young@wv.gov</a></td></tr>
+      <tr><td>Crowder, Elizabeth</td><td>PERS Retirement Advisor</td><td>(304) 352-6833</td><td><a href="mailto:Elizabeth.A.Crowder@wv.gov">Elizabeth.A.Crowder@wv.gov</a></td></tr>
+      <tr><td>Borchers, Rebekah</td><td>PERS Retirement Advisor</td><td>(304) 352-6794</td><td><a href="mailto:rebekah.d.borchers@wv.gov">rebekah.d.borchers@wv.gov</a></td></tr>
+      <tr><td>Conley, Brittney</td><td>PERS Retirement Advisor</td><td>(304) 352-6846</td><td><a href="mailto:brittney.a.conley@wv.gov">brittney.a.conley@wv.gov</a></td></tr>
+      <tr><td>Pocrnich, Tony</td><td>PERS Retirement Advisor</td><td>(304) 352-6830</td><td><a href="mailto:Tony.S.Pocrnich@wv.gov">Tony.S.Pocrnich@wv.gov</a></td></tr>
+      <tr><td>Sparks, Ashley</td><td>PERS Retirement Advisor</td><td>(304) 352-6848</td><td><a href="mailto:ashley.m.sparks@wv.gov">ashley.m.sparks@wv.gov</a></td></tr>
+      <tr><td>Potter, Hannah</td><td>Senior TRS Retirement Advisor</td><td>(304) 352-6843</td><td><a href="mailto:Hannah.L.Potter@wv.gov">Hannah.L.Potter@wv.gov</a></td></tr>
+      <tr><td>Cooper, Alyssa</td><td>TRS Retirement Advisor</td><td>(304) 352-6832</td><td><a href="mailto:Alyssa.B.Cooper@wv.gov">Alyssa.B.Cooper@wv.gov</a></td></tr>
+      <tr><td>Huff, Jamie</td><td>TRS Retirement Advisor</td><td>(304) 352-6838</td><td><a href="mailto:Jamie.N.Huff@wv.gov">Jamie.N.Huff@wv.gov</a></td></tr>
+      <tr><td>Kerns, Kevin</td><td>TRS Retirement Advisor</td><td>(304) 352-6840</td><td><a href="mailto:Kevin.R.Kerns@wv.gov">Kevin.R.Kerns@wv.gov</a></td></tr>
+      <tr><td>Morris, Dan</td><td>TRS Retirement Advisor (Qualified Domestic Relations Orders - All Plans)</td><td>(304) 352-6841</td><td><a href="mailto:Dan.G.Morris@wv.gov">Dan.G.Morris@wv.gov</a></td></tr>
+      <tr><td>Williams, Missy</td><td>TRS Retirement Advisor (Regular and Disability Retirement)</td><td>(304) 352-6847</td><td><a href="mailto:Melissa.A.Williams@wv.gov">Melissa.A.Williams@wv.gov</a></td></tr>
+      <tr><td>Booher, Jonathan</td><td>Uniformed Services Retirement Advisor</td><td>(304) 352-6837</td><td><a href="mailto:Jonathan.M.Booher@wv.gov">Jonathan.M.Booher@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Retiree Services Support</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Harvey, Laura</td><td>TRS Retirement Triage</td><td>(304) 352-6836</td><td><a href="mailto:Laura.M.Harvey@wv.gov">Laura.M.Harvey@wv.gov</a></td></tr>
+      <tr><td>Hunt, Tamera</td><td>PERS Retirement Triage</td><td>(304) 352-6839</td><td><a href="mailto:Tamera.K.Hunt@wv.gov">Tamera.K.Hunt@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Teachers' Defined Contribution Retirement System (TDC)</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
+    <tbody>
+      <tr><td>Van Horn, Paula</td><td>TDC Plan Manager</td><td>(304) 957-3534</td><td><a href="mailto:Paula.M.VanHorn@wv.gov">Paula.M.VanHorn@wv.gov</a></td></tr>
+      <tr><td>Burdette, Rodney</td><td>TDC Plan Employer Reporting Coordinator</td><td>(304) 352-6845</td><td><a href="mailto:rodney.l.burdette@wv.gov">rodney.l.burdette@wv.gov</a></td></tr>
+      <tr><td>Sheff, Robert</td><td>TDC Plan Retirement Advisor</td><td>(304) 352-6805</td><td><a href="mailto:Robert.B.Sheff@wv.gov">Robert.B.Sheff@wv.gov</a></td></tr>
+    </tbody>
+  </table>
+</div>
+
+</main>
+  </div>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <img src="Images/WV.png" alt="WV State Logo"/>
+      <div class="footer-text">
+        CPRB &copy; 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail.
+        | <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+      </div>
+    </div>
+  </footer>
+  <!-- MEGA MENU SCRIPT -->
+  <script>
+    const megaBtn = document.getElementById('findItFastBtn');
+    const megaMenu = document.getElementById('mega-menu');
+    const megaBackdrop = document.getElementById('mega-backdrop');
+    const megaClose = document.getElementById('mega-close');
+    function openMegaMenu() {
+      megaMenu.style.display = 'block';
+      megaBackdrop.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      megaClose.focus();
+    }
+    function closeMegaMenu() {
+      megaMenu.style.display = 'none';
+      megaBackdrop.style.display = 'none';
+      document.body.style.overflow = '';
+      megaBtn.focus();
+    }
+    megaBtn.addEventListener('click', openMegaMenu);
+    megaClose.addEventListener('click', closeMegaMenu);
+    megaBackdrop.addEventListener('click', closeMegaMenu);
+    document.addEventListener('keydown', function(e) {
+      if (megaMenu.style.display === 'block' && (e.key === 'Escape' || e.key === 'Esc')) {
+        closeMegaMenu();
+      }
+    });
+  </script>
+</body>
+</html>
