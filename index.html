@@ -35,7 +35,7 @@
     }
     a { text-decoration: none; color: inherit; }
     a:hover { color: var(--accent-color); }
-    .top-bar {
+    /* .top-bar {
       background: var(--primary-color);
       color: #fff;
       display: flex;
@@ -43,7 +43,27 @@
       padding: 10px 20px;
       flex-shrink: 0;
       width: 100%;
-    }
+    } */
+     .top-bar {
+  display: flex; align-items: center; flex-wrap: wrap;
+  background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
+}
+.top-left { display: flex; align-items: center; margin-right: 20px; }
+.logo img { width: 70px; margin-right: 12px; }
+.board-text { display: flex; flex-direction: column; gap: 3px; }
+.board-name { font-size: 1.18em; font-weight: 600; }
+.brand-separator { width: 100%; border: none; border-top: 1px solid #ffc; margin: 3px 0; }
+.board-slogan { font-size: .97em; font-style: italic; opacity: .9; }
+.top-right {
+  margin-left: auto; text-align: right; font-family: 'Roboto',sans-serif; font-weight: 700;
+  font-size: .87em; line-height: 1.4; max-width: 350px;
+}
+.top-right a { color: #ffc; text-decoration: none; }
+.top-right a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+  .top-bar, .nav-bar { flex-direction: column; align-items: flex-start;}
+}
+
     .logo img { width: 70px; max-width: 50vw; margin-right: 15px; }
     .board-text { display: flex; flex-direction: column; }
     .board-name { font-size: 1.25em; font-weight: 600; }
@@ -69,27 +89,51 @@
       .top-right { text-align: left; font-size: 1em; max-width: none; }
     }
     .nav-bar {
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0px;
-      flex-shrink: 0;
-      position: relative;
-      width: 100%;
-      z-index: 99;
-    }
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 2em;
-      color: #012e5a;
-      margin-right: 10px;
-      z-index: 1002;
-      cursor: pointer;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 7px 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 99;
+    gap: 0;
+  
+}
+
+/* Nav toggle (hamburger/menu) button – only visible mobile/tablet */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 14px;
+  background: #e9f3fe;
+  border: 2px solid #0164cb;
+  border-radius: 12px;
+  color: #012e5a;
+  font-weight: 700;
+  font-size: 1.15em;
+  padding: 8px 16px;
+  box-shadow: 0 2px 6px rgba(1,46,90,0.07);
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+  margin-left: 0; /* REMOVE margin-left for desktop */
+}
+
+/* Only show nav-toggle on small screens */
+@media (max-width: 900px) {
+  .nav-bar { flex-direction: column; align-items: flex-start; }
+  .nav-toggle { display: flex; margin: 10px 0 10px 14px; }
+}
+
+/* Desktop menu */
+@media (min-width: 901px) {
+  .nav-bar { flex-direction: row; align-items: center; }
+  .nav-toggle { display: none; }
+  .main-menu { display: flex; margin-left: 16px; }
+  .nav-buttons { margin-left: auto; }
+}
+
     .main-menu {
       list-style: none;
       display: flex;
@@ -508,36 +552,27 @@
 </head>
 <body>
   <div class="top-bar">
-    <div class="logo">
-      <a href="index.html">
-        <img src="Images/Logo.png" alt="CPRB Logo" />
-      </a>
-    </div>
+  <div class="top-left">
+    <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
     <div class="board-text">
-      <div class="board-name">
-        West Virginia Consolidated Public Retirement Board
-      </div>
-      <hr class="brand-separator" />
-      <div class="board-slogan">
-        Serving those who serve West Virginia
-      </div>
+      <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+      <hr class="brand-separator">
+      <div class="board-slogan">Serving those who serve West Virginia</div>
     </div>
-    <div class="top-right">
-      <span class="contact-label">Address:</span>
-      <span class="contact-value">601 57th Street SE, Suite 5, Charleston, WV 25304</span><br>
-      <span class="contact-label">Phone:</span>
-      <span class="contact-value">
-        <a href="tel:+13045583570">(304) 558-3570</a> | 
-        <a href="tel:+18006544406">(800) 654-4406</a>
-      </span><br>
-      <span class="contact-label">Fax:</span>
-      <span class="contact-value">(304) 957-7522</span><br>
-      <span class="contact-label">Email:</span>
-      <span class="contact-value">
-        <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a>
-      </span><br>
-      <span class="contact-note">Don’t send personal info via plain email; contact CPRB securely.</span>
-    </div>
+  </div>
+  <div class="top-right">
+    <address>
+      601 57th Street SE, Suite 5<br>
+      Charleston, WV 25304<br>
+      <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> |
+      <a href="tel:+18006544406">(800) 654-4406</a><br>
+      <strong>Fax:</strong> (304) 957-7522<br>
+      <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+      <em>Please do not send personal info via plain email.</em>
+    </address>
+  </div>
+</div>
+
   </div>
   <nav class="nav-bar">
     <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
