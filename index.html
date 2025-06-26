@@ -58,7 +58,7 @@
     .top-right .contact-value a {
       color: #ffe066;
       font-weight: 600;
-      text-decoration: underline dotted;
+      text-decoration:none;
     }
     .top-right .contact-value a:hover {
       color: #fff;
@@ -116,9 +116,10 @@
       top: 105%;
       left: 0;
       min-width: 180px;
-      z-index: 5;
-      list-style: none;
-    }
+      z-index: 9999;
+      list-style: none !important;
+}
+
     .submenu li a {
       display: block;
       padding: 8px 16px;
@@ -155,6 +156,7 @@
       font-size: 1.5em; z-index: 6;
       cursor: pointer;
       align-items: center; justify-content: center;
+      text-decoration: none;
     }
     @media (max-width: 900px) {
       .nav-bar { flex-direction: column; align-items: flex-start; }
@@ -264,7 +266,7 @@
     .carousel-left {
       position: absolute;
       top: 0; left: 0; width: 70%; height: 100%;
-      z-index: 100;
+      z-index: 10;
       background: transparent;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
@@ -344,7 +346,7 @@
     }
     .panel.open .panel-content { display: block; }
     .panel-content a { color: #0066cc; font-weight: bold; }
-    .panel-content a:hover { text-decoration: underline; }
+    .panel-content a:hover { text-decoration: none; }
     .director-photo { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; margin-right: 12px; flex-shrink: 0; }
     .carousel-left .slide[data-index="1"] .news-container {
       width: 75%; max-height: 65%; overflow-y: auto; padding: 24px 28px;
@@ -375,7 +377,7 @@
     .news-item:last-child { border-bottom: none;}
     .news-title { position: relative; font-size: 1.05em; font-weight: 600; margin: 0 0 8px 0; padding-left: 26px; line-height: 1.4;}
     .news-title a { color: #8ecae6; text-decoration: none; transition: color 0.2s;}
-    .news-title a:hover { color: #ffffff; text-decoration: underline;}
+    .news-title a:hover { color: #ffffff; text-decoration: none;}
     .news-desc { font-size: 0.95em; font-style: italic; color: #fff; margin: 0; line-height: 1.6;}
     .mobile-hero-card { display: none; }
     @media (max-width: 900px) {
