@@ -931,6 +931,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const offcanvasClose = document.querySelector('.offcanvas-close');
   const offcanvasListItems = document.querySelectorAll('.offcanvas-list > li');
 
+  // Offcanvas menu controls
   navToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     offcanvasMenu.classList.add('open');
@@ -980,6 +981,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Carousel logic
   const leftSlides = document.querySelectorAll('.carousel-left .slide');
   const leftDots   = document.querySelectorAll('.carousel-left-dots .dot');
   let leftIndex = 0;
@@ -1008,6 +1010,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   scheduleNext();
 
+  // Collapsible panels
   const panels = document.querySelectorAll('.panel');
   panels.forEach(panel => {
     panel.querySelector('h2').addEventListener('click', e => {
@@ -1020,19 +1023,27 @@ document.addEventListener('DOMContentLoaded', function() {
     panels.forEach(p => p.classList.remove('open'));
   });
 
-  document.getElementById('showActiveMembersMenu').addEventListener('click', function(e) {
+  // --- FIXED: Active Members mobile menu ---
+  const showMenuBtn = document.getElementById('showActiveMembersMenu');
+  const submenuLinks = document.getElementById('activeMembersLinks');
+  let submenuOpen = false;
+  showMenuBtn.addEventListener('click', function(e) {
     e.preventDefault();
-    const submenuLinks = document.getElementById('activeMembersLinks');
-    submenuLinks.classList.toggle('show');
-    if(submenuLinks.classList.contains('show')) {
-      const cardRect = submenuLinks.getBoundingClientRect();
-      const winH = window.innerHeight;
-      if(cardRect.bottom > winH - 20) {
-        submenuLinks.scrollIntoView({block: "end", behavior: "smooth"});
-      }
+    submenuOpen = !submenuOpen;
+    submenuLinks.classList.toggle('show', submenuOpen);
+  });
+  submenuLinks.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+  document.addEventListener('click', function(event) {
+    // Only close if clicked outside the menu/button
+    if (!showMenuBtn.contains(event.target) && !submenuLinks.contains(event.target)) {
+      submenuLinks.classList.remove('show');
+      submenuOpen = false;
     }
   });
 
+  // Set mobile hero min height to keep above the footer
   function setMobileHeroMinHeight() {
     if (window.innerWidth <= 900) {
       var body = document.body;
@@ -1049,6 +1060,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', setMobileHeroMinHeight);
 
 });
-  </script>
+</script>
+
 </body>
 </html>
