@@ -379,7 +379,7 @@
         position: relative;
         display: flex;
         align-items: flex-end;
-        border-radius: 0 0 30px 30px;
+        border-radius: 0 !important;
         margin-bottom: 0 !important;
         z-index: 1;
         background: linear-gradient(90deg,rgba(1,46,90,0.20) 0%,rgba(1,46,90,0.12) 100%), url("Images/recreatedretiree.png") center/cover no-repeat;
@@ -391,7 +391,7 @@
         margin: 36px 4vw 0 4vw;
         top: 0;
         z-index: 10;
-        background: rgba(1,46,90,0.97);
+        background: rgba(1,46,90,0.70);
         color: #fff;
         border-radius: 14px;
         box-shadow: 0 6px 24px rgba(1,46,90,0.19);
@@ -1024,7 +1024,6 @@ document.addEventListener('DOMContentLoaded', function() {
     e.preventDefault();
     const submenuLinks = document.getElementById('activeMembersLinks');
     submenuLinks.classList.toggle('show');
-    // Scroll if dropdown would be clipped by bottom
     if(submenuLinks.classList.contains('show')) {
       const cardRect = submenuLinks.getBoundingClientRect();
       const winH = window.innerHeight;
@@ -1034,7 +1033,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // On mobile always ensure the hero background covers the mobile hero section 
   function setMobileHeroMinHeight() {
     if (window.innerWidth <= 900) {
       var body = document.body;
