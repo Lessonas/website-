@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TRS | WV Consolidated Public Retirement Board</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <title>PERS | WV Consolidated Public Retirement Board</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto:400,700">
   <style>
+    :root {
+      --primary-color: #012e5a;
+      --accent-color: #0066cc;
+    }
     body {
       display: flex; flex-direction: column; min-height: 100vh; margin: 0;
       font-family: 'Open Sans', Arial, sans-serif; background: #f9f9f9; color: #333; line-height: 1.6;
     }
+    a { text-decoration: none; color: inherit; }
     .top-bar {
       display: flex; align-items: center; flex-wrap: wrap;
       background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
@@ -30,38 +34,129 @@
     .nav-bar {
       display: flex; align-items: center; justify-content: space-between;
       background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 7px 20px; position: relative; z-index: 2;
+      padding: 7px 20px; position: relative; z-index: 99;
     }
-    .main-menu { list-style: none; display: flex; gap: 22px; align-items: center; margin: 0; padding: 0;}
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      gap: 7px;
+      background: #e9f3fe;
+      border: 2px solid #0164cb;
+      border-radius: 12px;
+      color: #012e5a;
+      font-weight: 700;
+      font-size: 1.15em;
+      padding: 8px 14px 8px 13px;
+      box-shadow: 0 2px 6px rgba(1,46,90,0.07);
+      cursor: pointer;
+      transition: border 0.2s, background 0.2s;
+      margin-left: 0;
+      z-index: 1101;
+      user-select: none;
+    }
+    .nav-toggle span { font-size: 1.3em; margin-right: 6px;}
+    .nav-toggle .menu-text { font-size: 1em; font-weight: 700; margin-left: 6px; letter-spacing: .03em;}
+    @media (max-width: 900px) {
+      .top-bar { flex-direction: column; align-items: flex-start;}
+      .nav-toggle { display: flex; }
+      .nav-bar .main-menu,
+      .nav-bar .nav-buttons { display: none !important; }
+    }
+    @media (min-width: 901px) {
+      .nav-toggle { display: none; }
+      .main-menu { display: flex !important; }
+      .nav-buttons { display: flex !important; margin-left: auto; }
+    }
+    .main-menu { list-style: none; display: flex; gap: 16px; align-items: center; margin: 0; padding: 0; flex-wrap: wrap;}
     .main-menu li { position: relative; }
-    .main-menu a {
-      text-decoration: none; color: #012e5a;
-      font-size: 1em; font-weight: 600; padding: 5px 0; display: inline-block; transition: color .18s;
+    .main-menu > li > a {
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 10px 18px;
+      display: inline-block;
+      border-radius: 6px;
+      transition: background 0.18s;
     }
-    .main-menu a:hover { color: #005bb5; }
+    .main-menu > li > a:hover { background: #e9f3fe; color: var(--accent-color); }
     .submenu {
-      display: none; position: absolute; left: 0; top: 100%;
       background: #fff; border: 1px solid #e6e6e6; border-radius: 7px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.09); min-width: 170px;
-      z-index: 1000; padding: 5px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      display: none; position: absolute; top: 105%; left: 0;
+      min-width: 190px; z-index: 1000; list-style: none !important; padding: 5px 0;
     }
-    .submenu ul { list-style: none; margin: 0; padding: 0; }
+    .main-menu li:hover > .submenu,
+    .main-menu li:focus-within > .submenu { display: block; }
     .submenu li a {
-      display: block; padding: 7px 18px; color: #012e5a;
-      font-weight: 400; font-size: .98em; white-space: nowrap; border-radius: 3px;
+      display: block; padding: 8px 20px; white-space: nowrap; font-weight: 400; font-size: .98em;
     }
     .submenu li a:hover { background: #f0f6ff; color: #005bb5; }
-    .main-menu li:hover > .submenu { display: block; }
     .nav-buttons { display: flex; gap: 10px; align-items: center; }
     .service-btn, .employer-login, #findItFastBtn {
-      background: #0066cc; color: #fff; padding: 8px 14px; border-radius: 4px;
+      background: #0066cc; color: #fff; padding: 8px 15px; border-radius: 4px;
       text-decoration: none; font-weight: bold; font-size: 1em;
       display: inline-flex; align-items: center; cursor: pointer; border: none;
       transition: background 0.3s;
     }
     .service-btn:hover, .employer-login:hover, #findItFastBtn:hover { background: #005bb5; }
-    .button-icon { display: inline-flex; margin-right: 6px; width: 16px; height: 16px; vertical-align: middle; }
-    .button-icon svg { width: 16px; height: 16px; fill: currentColor; }
+    .button-icon { display: inline-flex; margin-right: 8px; }
+    .button-icon svg { width: 18px; height: 18px; fill: #fff; }
+
+    @media (max-width:900px) {
+      .offcanvas-backdrop {
+        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(1,46,90,0.32); z-index: 1100;
+      }
+      .offcanvas-backdrop.show { display: block; }
+      .offcanvas-menu {
+        display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
+        width: 80vw; max-width: 340px; height: 100vh; background: #fff;
+        z-index: 1200; box-shadow: 3px 0 22px 0 rgba(1,46,90,0.11);
+        transition: left 0.26s cubic-bezier(.6,0,.26,1);
+        padding-bottom: 25px; overflow-y: auto;
+      }
+      .offcanvas-menu.open { left: 0; }
+      .offcanvas-header {
+        display: flex; align-items: center; justify-content: space-between;
+        background: #012e5a; color: #fff; font-size: 1.14em;
+        font-family: 'Roboto',sans-serif; font-weight: 700;
+        padding: 15px 20px 13px 20px;
+      }
+      .offcanvas-close {
+        background: none; border: none; color: #fff; font-size: 2em; cursor: pointer; line-height: 1;
+      }
+      .offcanvas-buttons {
+        display: flex; flex-direction: column; gap: 12px; padding: 22px 18px 8px 18px;
+      }
+      .offcanvas-buttons a, .offcanvas-buttons button {
+        width: 100%; box-sizing: border-box; text-align: center;
+        font-size: 1em; border-radius: 7px; box-shadow: 0 2px 8px 0 rgba(1,46,90,0.06);
+        justify-content: center;
+      }
+      .offcanvas-list { list-style: none; margin: 0; padding: 0; font-size: 1.11em; }
+      .offcanvas-list > li { border-bottom: 1px solid #e6e6e6; }
+      .offcanvas-list > li > a {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 15px 24px; color: #012e5a; font-weight: 600;
+        width: 100%; background: none; cursor: pointer;
+      }
+      .offcanvas-list > li > a:active, .offcanvas-list > li > a:hover { background: #e9f3fe; color: #0066cc;}
+      .offcanvas-list > li.active > a { background: #e9f3fe; color: #0066cc; }
+      .offcanvas-submenu-toggle {
+        background: none; border: none; color: #012e5a; font-size: 1.1em; margin-left: 8px; cursor: pointer;
+        pointer-events: none;
+      }
+      .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-bottom: 1px solid #e6e6e6; }
+      .offcanvas-submenu.show { display: block; }
+      .offcanvas-submenu li a {
+        display: block; padding: 11px 36px 11px 44px; color: #24477c;
+        font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6;
+      }
+      .offcanvas-submenu li:last-child a { border-bottom: none; }
+    }
+    @media (min-width:901px) {
+      .offcanvas-menu,
+      .offcanvas-backdrop { display:none!important; }
+    }
     main { flex: 1; background: #f9f9f9; display: flex; align-items: stretch; justify-content: center; padding: 40px 0 20px 0; }
     .content-panel {
       background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
@@ -72,34 +167,13 @@
       letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
     }
     .content-panel h2, .content-panel h3 {
-      color: #005bb5;
-      margin-top: 2.5em;
-      font-size: 1.38em;
-      letter-spacing: -0.5px;
-      font-weight: 700;
+      color: #005bb5; margin-top: 2.5em; font-size: 1.38em; letter-spacing: -0.5px; font-weight: 700;
     }
     .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
     .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
     .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
     .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
     .content-panel a:hover { text-decoration: underline; }
-    .content-panel .pdf-btn {
-      float: right; background: #012e5a; color: #fff; padding: 7px 18px; border-radius: 4px;
-      font-weight: bold; text-decoration: none; font-size: 1em; margin-left: 1em; margin-bottom: 1.3em;
-      transition: background 0.2s;
-    }
-    .content-panel .pdf-btn:hover { background: #005bb5;}
-    .content-panel .subhead {
-      color: #0066cc; font-weight: bold; margin-top: 2.2em; font-size: 1.11em; margin-bottom: 1.1em;
-      letter-spacing: 0;
-    }
-    .formula {
-      background: #f4f9ff; border: 1px solid #e3ebf4; border-radius: 5px;
-      padding: 15px 20px; margin: 25px 0; text-align: center;
-      font-size: 1.12em; font-weight: bold; color: #012e5a;
-      letter-spacing: 0.3px;
-    }
-    .content-panel p { margin-bottom: 1.3em;}
     #mega-backdrop {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.5); z-index: 9998;
@@ -136,8 +210,6 @@
       .content-panel { padding: 24px 8vw; }
     }
     @media (max-width: 768px) {
-      .top-bar, .nav-bar { flex-direction: column; align-items: flex-start;}
-      .main-menu { flex-wrap: wrap;}
       main { padding: 18px 0; }
       .content-panel { width: 98%; padding: 18px 2vw;}
       .mega-content { flex-direction: column; gap: 16px;}
@@ -170,65 +242,171 @@
     </div>
   </div>
   <nav class="nav-bar">
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span>☰</span>
+      <span class="menu-text">Menu</span>
+    </button>
     <ul class="main-menu">
-      <li><a href="#">Board of Trustees</a>
-        <div class="submenu">
-          <ul>
+      <li>
+        <a href="Board-Agenda.html">Board of Trustees</a>
+        <ul class="submenu">
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="PERS.html">Active Members</a>
+        <ul class="submenu">
+            <li><a href="PERS.html">PERS</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">State Trooper Plan A</a></li>
+            <li><a href="PlanB.html">State Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Retirees.html">Retirees</a>
+        <ul class="submenu">
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Employers.html">Participating Employers</a>
+        <ul class="submenu">
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employers Forms</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Publications.html">Publications</a>
+        <ul class="submenu">
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24" fill="#fff"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+        </span>
+        Find It Fast
+      </button>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" class="service-btn" target="_blank">
+        <span class="button-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+              <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+              <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+            </svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" class="employer-login" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+            </svg>
+        </span>
+        Employer Login
+      </a>
+    </div>
+    <div class="offcanvas-backdrop"></div>
+    <nav class="offcanvas-menu" aria-label="Mobile Menu">
+      <div class="offcanvas-header">
+        Menu
+        <button class="offcanvas-close" aria-label="Close menu">×</button>
+      </div>
+      <div class="offcanvas-buttons">
+        <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" class="service-btn" target="_blank">
+          <span class="button-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+              <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+              <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+            </svg>
+          </span>
+          Member/Retiree Self Service
+        </a>
+        <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" class="employer-login" target="_blank">
+          <span class="button-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+            </svg>
+          </span> Employer Login
+        </a>
+        <button id="offcanvasFindItFastBtn" class="service-btn">
+          <span class="button-icon">
+            <svg viewBox="0 0 24 24" fill="#fff"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+          </span>
+          Find It Fast
+        </button>
+      </div>
+      <ul class="offcanvas-list">
+        <li>
+          <a href="Board-Agenda.html">Board of Trustees<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <ul class="offcanvas-submenu">
             <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
             <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
             <li><a href="Board-Minutes.html">Board Minutes</a></li>
             <li><a href="Committees.html">Committee Minutes</a></li>
           </ul>
-        </div>
-      </li>
-      <li><a href="#">Active Members</a>
-        <div class="submenu">
-          <ul>
-            <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
+        </li>
+        <li>
+          <a href="PERS.html">Active Members<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <ul class="offcanvas-submenu">
+            <li><a href="PERS.html">PERS</a></li>
             <li><a href="PERS-TierII.html">PERS Tier II</a></li>
-            <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
+            <li><a href="TRS.html">TRS</a></li>
             <li><a href="TRS-TierII.html">TRS Tier II</a></li>
             <li><a href="TDC.html">TDC Plan</a></li>
-            <li><a href="PlanA.html">Trooper Plan A</a></li>
-            <li><a href="PlanB.html">Trooper Plan B</a></li>
+            <li><a href="PlanA.html">State Trooper Plan A</a></li>
+            <li><a href="PlanB.html">State Trooper Plan B</a></li>
             <li><a href="DSRS.html">DSRS</a></li>
             <li><a href="JRS.html">JRS</a></li>
             <li><a href="EMSRS.html">EMSRS</a></li>
             <li><a href="MPFRS.html">MPFRS</a></li>
             <li><a href="NRPORS.html">NRPORS</a></li>
           </ul>
-        </div>
-      </li>
-      <li><a href="#">Retirees</a>
-        <div class="submenu">
-          <ul>
-            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
+        </li>
+        <li>
+          <a href="Retirees.html">Retirees<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <ul class="offcanvas-submenu">
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service</a></li>
             <li><a href="Retirees.html">Forms</a></li>
             <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
-            <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
-            <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
           </ul>
-        </div>
-      </li>
-      <li><a href="#">Participating Employers</a>
-        <div class="submenu">
-          <ul>
+        </li>
+        <li>
+          <a href="Employers.html">Participating Employers<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <ul class="offcanvas-submenu">
             <li><a href="Employers.html">General Resources</a></li>
-            <li><a href="Employers-Forms.html">Employer Forms</a></li>
-            <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
-            <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
-            <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
-            <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
-            <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
-            <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
+            <li><a href="Employers-Forms.html">Employers Forms</a></li>
             <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
             <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
           </ul>
-        </div>
-      </li>
-      <li><a href="#">Publications</a>
-        <div class="submenu">
-          <ul>
+        </li>
+        <li>
+          <a href="Publications.html">Publications<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <ul class="offcanvas-submenu">
             <li><a href="Publications.html#GASB68">GASB 68</a></li>
             <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
             <li><a href="Publications.html#Financials">Financial Statement</a></li>
@@ -237,37 +415,15 @@
             <li><a href="Publications.html#Newsletters">Newsletters</a></li>
             <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
           </ul>
-        </div>
-      </li>
-    </ul>
-    <div class="nav-buttons">
-      <button id="findItFastBtn">
-        <span class="button-icon">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
-        </span>
-        Find It Fast
-      </button>
-      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
-         class="service-btn" target="_blank">
-        <span class="button-icon">
-          <svg viewBox="0 0 32 32"><circle cx="16" cy="12" r="8"/><path d="M4 28c0-6.6 5.4-12 12-12s12 5.4 12 12"/></svg>
-        </span>
-        Member/Retiree Self Service
-      </a>
-      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
-         class="employer-login" target="_blank">
-        <span class="button-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/></svg>
-        </span>
-        Employer Login
-      </a>
-    </div>
+        </li>
+      </ul>
+    </nav>
   </nav>
   <div id="mega-backdrop"></div>
   <div id="mega-menu">
     <div class="mega-header">
       <h2>Find It Fast</h2>
-      <button id="mega-close" class="mega-close">&times;</button>
+      <button id="mega-close" class="mega-close">×</button>
     </div>
     <div class="mega-content">
       <div class="mega-column">
@@ -311,17 +467,12 @@
         <ul>
           <li><a href="Employers.html">General Resources</a></li>
           <li><a href="Employers-Forms.html">Employer Forms</a></li>
-          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
-          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
-          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
-          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
-          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
           <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
           <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
         </ul>
       </div>
       <div class="mega-column">
-        <h3>Publications &amp; Policies</h3>
+        <h3>Publications & Policies</h3>
         <ul>
           <li><a href="Publications.html#GASB68">GASB 68</a></li>
           <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
@@ -334,208 +485,15 @@
       </div>
     </div>
   </div>
-    <!-- MAIN CONTENT PANEL -->
+
 <main>
 <div class="content-panel">
   <h1>PUBLIC EMPLOYEES RETIREMENT SYSTEM (PERS)</h1>
-  <p>
-    The Public Employees Retirement System (PERS) was established on July 1, 1961 for the purpose of providing retirement benefits for employees of the State and other political subdivisions. PERS has more than 20,000 active members and 34,000 retirees receiving annuity benefits. PERS is funded by employee and employer contributions. An active member hired for the first time prior to July 1, 2015 contributes 4.5% of his or her gross monthly salary to the plan. Effective July 1, 2022, the employer will contribute 9.0% of the member's gross monthly salary for a total combined contribution equal to 13.5%. All employee contributions currently remitted are tax deferred. Contributions for members, as a percentage of payroll, are established by statute, and are subject to legislative limitations. The employee and employer contributions are annually reviewed to assure that they result in actuarially sound funding for the plan.
-  </p>
-
-  <p>
-    "Board", when used in the following sections refers to the West Virginia Consolidated Public Retirement Board.
-  </p>
-
-  <nav class="page-nav">
-    <ul>
-      <!-- <li><a href="#contact">Contact Us</a></li>
-      <li><a href="#forms">Forms</a></li>
-      <li><a href="#self-service">Online Self-Service</a></li> -->
-    </ul>
-  </nav>
-  <div style="margin:1em 0; font-size:90%;">
-    <!-- <a href="#">PDF print friendly version</a> | <a href="#">Print friendly version</a> -->
-  </div>
-
-  <h2 id="retirement-benefits">RETIREMENT BENEFITS:</h2>
-  <p>In order to qualify for retirement benefits, a member of PERS must meet eligibility requirements.</p>
-
-  <ul>
-    <li>
-      <b>A member hired for the first time prior to July 1, 2015 who has not separated from employment with a participating PERS agency may:</b>
-      <ul>
-        <li>Retire with full benefits at age 55 if age plus contributing service equals 80 or more. (Known as the Rule of 80).</li>
-        <li>Retire with full benefits at age 60 if he or she has 5 or more years of contributing service.</li>
-        <li>Retire at age 55 with reduced benefits if he or she has 10 or more years of service.</li>
-        <li>Retire with reduced benefits if less than 55 years of age and he or she has 30 or more years of service.</li>
-      </ul>
-    </li>
-    <li>
-      <b>A member hired for the first time prior to July 1, 2015 who has separated from employment with a participating PERS agency and has not withdrawn his or her contributions may:</b>
-      <ul>
-        <li>Retire at age 62 with full benefits if he or she has 5 or more years of contributory service.</li>
-        <li>Retire with full benefits at age 55 if age plus contributing service equals 80 or more. (Known as the Rule of 80).</li>
-        <li>Retire with reduced benefits if he or she has 10 or more years of service, and attained age 55 at the time of separation of employment.</li>
-        <li>Retire with reduced benefits at age 55 if he or she has between 20 and 25 years of service.</li>
-        <li>Retire with reduced benefits if less than 55 years of age and he or she has 30 or more years of credited service.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>Effective Date of Retirement</h3>
-  <p>
-    Effective date of retirement is dependent upon termination of employment, meeting retirement eligibility and the Board's receipt of the retirement application. Date of the Board's receipt of the retirement application can impact the effective date of retirement. If the member is less than age 60 upon termination of employment, and all retirement criteria are met, the effective date of retirement will be the first day of the month following receipt of the retirement application.<br>
-    <b>Retirement benefits are not automatic. You must apply to the Board for your retirement benefits.</b>
-  </p>
-
-  <h3>Retirement Benefit Formula</h3>
-  <p>
-    Regular retirement benefits are paid in equal monthly installments in an amount equal to 2% multiplied by the member's years of credited service multiplied by the member's Final Average Salary (FAS).
-  </p>
-  <p>
-    <b>Final Average Salary</b> means the average annual salary from the highest 36 consecutive months within the last 15 years of employment. Any lump sum payment that is not guaranteed to be paid annually is not considered compensation and is, therefore, not used in FAS. Annual increment pay received by State employees is considered compensation and is, therefore, used in FAS.
-  </p>
-  <div style="margin:12px 0; font-family:monospace;">
-    2% x Years of Service x FAS = Annual Straight Life Retirement Benefit
-  </div>
-
-  <h3>3 Annuity Options Upon Retirement</h3>
-  <ul>
-    <li><b>Straight Life:</b> A lifetime annuity payable monthly to the retiree determined under the full benefit formula without adjustment. There are no beneficiary benefits payable under this option.</li>
-    <li><b>100% Joint and Survivor:</b> A reduced annuity payable monthly to the retiree for his or her lifetime. Upon the death of the retiree, the named beneficiary will receive the same amount for his or her lifetime.</li>
-    <li><b>50% Joint and Survivor:</b> A reduced annuity payable monthly to the retiree for his or her lifetime. Upon the death of the retiree, the named beneficiary will receive one-half of the monthly payment for his or her lifetime.</li>
-  </ul>
-  <p>
-    The benefit option you elect is extremely important. Once you receive any benefits under the options you select, you will NOT be allowed to change your benefit option unless you qualify under the provisions of WV Code §5-10-24. The named beneficiary in both Joint and Survivor 100% and 50% must have an insurable interest in the life of the retiree such as a spouse, child, parent, or other dependent. Under all options, any unpaid employee contributions, plus 4% interest, remaining at the retiree's or beneficiary's death, will be paid to the named beneficiary or the estate.
-  </p>
-
-  <h3>Benefit Payments</h3>
-  <p>
-    The first benefit payment due to a retiree or beneficiary will be mailed directly to the recipient's home address. Following the first payment, barring any unforeseen circumstances, benefit payments are credited by direct deposit to retiree accounts on the 25th of each month, except in the month of December when retiree accounts are credited on the 18th. If the 25th (or December 18th) falls on a weekend or holiday, direct deposits are processed on the prior full business day.
-  </p>
-  <p>
-    Social Security income, private sector income, or private sector retirement benefits do not affect PERS regular retirement benefits. (Some stipulations apply to disability retirees.)
-  </p>
-  <p>
-    <b>Distributions (whether eligible for lump sum refund or monthly annuity) must start by April 1 of the year following the later of:</b>
-    <br>
-    a) the date you reach age 72 if you were born before January 1, 1951; <br>
-    b) the date you reach age 73 if you were born after December 31, 1950; or <br>
-    c) the date upon which you terminate employment.
-  </p>
-
-  <h3>Retirement Benefit Estimate</h3>
-  <p>
-    Approximately 6 to 12 months prior to retirement eligibility, members should contact the Board to request an estimate of benefits for all three retirement annuity options. An estimate is required prior to receiving a retirement packet.
-  </p>
-
-  <h3>Use of Unused Sick and Annual Leave at Retirement</h3>
-  <p>
-    PERS members who have accrued, unused sick and/or annual leave days may be eligible to acquire additional credited service to be applied on the basis of 1 month of service credit granted for each 10 days of unused, accrued sick and/or annual leave. Such days will constitute additional service in the computation of retirement benefits. The additional credited service shall not be used in meeting initial eligibility for retirement criteria. In the alternative to increasing retirement benefits, members who participate in the Public Employee Insurance Agency (PEIA) may be eligible to apply accrued, unused sick and/or annual leave days at retirement toward the purchase of retiree health insurance under PEIA. Members should contact PEIA to determine if they are eligible for this option prior to retirement. Unused leave CANNOT be divided and used for both retirement service credit and PEIA coverage. Members who retire from a city, county, or any other non-direct employer of the State should contact their employer or PEIA regarding eligibility for PEIA insurance coverage. If the member separates from employment prior to eligibility for a retirement annuity, unused leave is not eligible to be used for additional retirement service or PEIA at a later date.
-  </p>
-
-  <h3>Disability Retirement</h3>
-  <ul>
-    <li>
-      <b>Less than 10 years of service -</b> A member who has less than 10 years of credited service may apply for disability retirement benefits if the member became incapacitated within 12 months of last being employed with a participating public employer and if the incapacitation occurred as a result of a work related injury. The member must be receiving (or have received) Workers' Compensation benefits on account of such disability.
-    </li>
-    <li>
-      <b>10 or more years of service -</b> A member who has 10 or more years of credited service may apply for disability retirement benefits if the member became incapacitated within 12 months of last being employed with a participating public employer. Disability benefits shall not be less than 50% of a member's FAS. At age 65 the benefit is calculated on actual years of service and may be reduced, but the straight life benefit or equivalent may not be less than 20% of the FAS. Disability retirees are required to submit medical recertifications and copies of his or her annual statement of earnings for specified periods of time following receipt of disability benefits.
-    </li>
-  </ul>
-
-  <h3>Changing a Beneficiary Prior to Retirement</h3>
-  <p>
-    If a member wishes to change a beneficiary(ies), he or she must complete a new beneficiary form and return it to the Board. The member should keep a copy of this form for his or her records. If a member's family situation changes (birth, death, divorce, marriage.), his or her beneficiary designation should be reevaluated.
-  </p>
-
-  <h3>Death Prior to Retirement - Beneficiary Options</h3>
-  <p>
-    PERS members may select beneficiary options based only upon the specific category that describes his or her particular circumstance at the time a beneficiary form is completed (i.e., date of hire, years of service and marital status).
-  </p>
-  <ul>
-    <li>
-      <b>CATEGORY 1:</b> Less than 10 years of credited service regardless of original date of hire or marital status: A member who falls under this category may elect to name a beneficiary(ies) to receive a lump sum payment of his or her employee contributions plus 4% interest.
-    </li>
-    <li>
-      <b>CATEGORY 2:</b> Hired for the first time before or on June 9, 2006, has 10 or more years of credited service, and is married at the time of death: Upon the death of a member who falls under this category, a 100% Joint and Survivor annuity will be paid to the deceased member's surviving spouse, calculated as if the member had retired the day preceding the date of his or her death, unless the "Spouse's Waiver of Survivorship Annuity" section on the beneficiary form is completed. If the "Spouse's Waiver of Survivorship Annuity" section is completed, the member may elect to name an alternative beneficiary, who has an "insurable interest" in the life of the member, to receive the 100% Joint and Survivor Annuity. Should the surviving spouse or alternative beneficiary, if applicable, pre-decease the member, the member may also elect one of the following options:
-      <ul>
-        <li>(A) The member may name another beneficiary, who has an "insurable interest" in the life of the member, to receive the 100% Joint and Survivor annuity; or</li>
-        <li>(B) The member may name a beneficiary to receive a lump sum payment of his or her employee contributions, plus 4% interest.</li>
-      </ul>
-    </li>
-    <li>
-      <b>CATEGORY 3:</b> Hired for the first time before or on June 9, 2006, has 10 or more years of credited service and is not married at the time of death: A member who falls under this category may elect one of the following options:
-      <ul>
-        <li>(A) The member may elect to name a beneficiary(ies) to receive a lump sum payment of his or her employee contributions plus 4% interest.</li>
-        <li>(B) The member may elect to have a 100% Joint and Survivor annuity, calculated as if the member had retired the day preceding the date of his or her death, paid to a named beneficiary who has an "insurable interest" in the life of the member.</li>
-        <li>(C) The member may elect not to name a beneficiary and have his or her pre-retirement death benefit paid as a monthly annuity, calculated as though the member had retired as of the date of his or her death and elected a Straight Life annuity, to a minor child or children until the minor child or children attains age 21 or sooner marries or becomes emancipated. In no event shall any child or children receive more than $250.00 per month under this option.</li>
-      </ul>
-    </li>
-    <li>
-      <b>CATEGORY 4:</b> Hired for the first time after June 9, 2006, has 10 or more years of credited service and is married at the time of death: Upon the death of a member who falls under this category, a 100% Joint and Survivor annuity will be paid to the deceased member's surviving spouse, calculated as if the member had retired the day preceding the date of his or her death, unless the "Spouse's Waiver of Survivorship Annuity" section on the beneficiary form is completed. If the "Spouse's Waiver of Survivorship Annuity" section is completed, the member may:
-      <ul>
-        <li>(A) Elect to name a beneficiary (ies) to receive a lump sum payment of his or her employee contributions, plus 4% interest; or</li>
-        <li>(B) Elect to name a child who is financially dependent by virtue of a permanent mental or physical disability to receive the 100% Joint and Survivor Annuity. <i>*Evidence of the dependent child's disability must be provided and the disabled child must be named sole beneficiary.</i></li>
-      </ul>
-    </li>
-    <li>
-      <b>CATEGORY 5:</b> Hired for the first time after June 9, 2006, has 10 or more years of credited service and is not married at the time of death: A member who falls under this category may elect one of the following options:
-      <ul>
-        <li>(A) The member may elect to name a beneficiary(ies) to receive a lump sum payment of his or her employee contributions plus 4% interest.</li>
-        <li>(B) The member may elect to have a 100% Joint and Survivor annuity, calculated as if the member had retired the day preceding the date of his or her death, paid to a child who is financially dependent upon the member by virtue of a permanent mental or physical disability. <i>*Evidence of the dependant child's disability must be provided and the disabled child must be named sole beneficiary.</i></li>
-        <li>(C) The member may elect not to name a beneficiary and have his or her pre-retirement death benefit paid as a monthly annuity, calculated as though the member had retired as of the date of his or her death and elected a Straight Life annuity, to a minor child or children until the minor child or children attains age 21 or sooner marries or becomes emancipated. In no event shall any child or children receive more than $250.00 per month under this option.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <h3>Dependent Scholarship</h3>
-  <p>
-    Any person who qualifies as a surviving dependent child of a law enforcement officer who dies in the performance of duty is entitled to receive a scholarship to be applied to the career development education of that dependent.
-  </p>
-
-  <h3>Employment After Retirement</h3>
-  <p>
-    If a retiree becomes regularly employed by a participating employer, payment of his or her annuity shall be suspended during his or her reemployment, and he or she shall again become a contributing member of the retirement system.  A retiree may accept temporary employment from a participating employer so long as he or she does not receive compensation in excess of $25,000 during any calendar year. It is the retiree's responsibility to contact the Board to report re-employment and to determine future retirement options. Disability retirees may not earn more than the Social Security substantial gainful activity amount.
-  </p>
-
-  <h3>Termination of Employment</h3>
-  <p>
-    If a member terminates employment prior to the time he or she qualifies for retirement benefits and has accrued at least five years of contributing service, contributions may be left on deposit until he or she qualifies for retirement benefits, or the member may choose to withdraw his or her employee contributions (plus 4% interest if he or she has two or more years of contributing service) from the plan after termination of employment. Employer contributions are not eligible to be withdrawn. Once the member withdraws contributions from the system, all future retirement and disability benefits are forfeited.
-  </p>
-
-  <h3>Reinstatement of Previously Withdrawn Service</h3>
-  <p>
-    Any member who has been re-employed for one full year by a participating public employer may purchase previously withdrawn service, provided that he or she redeposits the withdrawn funds plus interest. Members must be re-employed for one year and the first reinstatement payment must be made between the first and second year of re-employment. If the first reinstatement payment is not made before the end of the member's second year of re-employment, the member is not eligible to reinstate previously withdrawn service. The full reinstatement amount must be repaid (in a lump sum or payments) before the end of the fifth year of the member's return to employment. Members should contact the Board at the end of his or her first year of return to employment to obtain the cost to reinstate withdrawn PERS service.
-  </p>
-
-  <h3>Military Service</h3>
-  <p>
-    Military service up to 5 years may be credited to PERS members in accordance with the WV Code §5-10-15. Members who have a break in employment as a result of being called to active military service may be eligible to purchase additional military service credit as provided by federal law.
-  </p>
-
-  <h3>Out of State Service</h3>
-  <p>
-    A member of PERS may purchase up to five years of service credit for public employment performed in another State. However, the member cannot be vested in the other State's retirement system or be in receipt of an annuity from such plan. Purchased out-of-state service may not be used to establish eligibility for a retirement benefit.
-  </p>
-
-  <h3>Appointments</h3>
-  <p>
-    Most retirement related matters can be handled from the convenience of your home via mail and telephone. However, members who wish to visit the Board to discuss retirement related matters with a PERS staff member are required to make an appointment.
-  </p>
-
-  <h3>Questions</h3>
-  <p>
-    Should you have any questions regarding PERS, please feel free to contact us in writing, by phone, or email, Monday through Friday, 8:00 a.m. to 5:00 p.m. For additional information, you may also want to visit our website.
-  </p>
-
+  <p>The Public Employees Retirement System (PERS) was established on July 1, 1961 for the purpose of providing retirement benefits for employees of the State and other political subdivisions. PERS has more than 20,000 active members and 34,000 retirees receiving annuity benefits. PERS is funded by employee and employer contributions. An active member hired for the first time prior to July 1, 2015 contributes 4.5% of his or her gross monthly salary to the plan. Effective July 1, 2022, the employer will contribute 9.0% of the member's gross monthly salary for a total combined contribution equal to 13.5%. All employee contributions currently remitted are tax deferred. Contributions for members, as a percentage of payroll, are established by statute, and are subject to legislative limitations. The employee and employer contributions are annually reviewed to assure that they result in actuarially sound funding for the plan.</p>
+  <p>"Board", when used in the following sections refers to the West Virginia Consolidated Public Retirement Board.</p>
   <h3>Note</h3>
-  <p>
-    Information contained in this page illustrates the CPRB's understanding of the current provisions of the PERS. These provisions are contained in the current plan statutes, and are subject to modification by the West Virginia Legislature each year. This page is for general guidance purposes only. In the event there is a discrepancy between information contained in this page and the WV State Code and Rules, the language in the Code and Rules shall prevail.
-  </p>
+  <p>Information contained in this page illustrates the CPRB's understanding of the current provisions of the PERS. These provisions are contained in the current plan statutes, and are subject to modification by the West Virginia Legislature each year. This page is for general guidance purposes only. In the event there is a discrepancy between information contained in this page and the WV State Code and Rules, the language in the Code and Rules shall prevail.</p>
 </div>
-
-
 </main>
   <footer class="footer">
     <div class="footer-container">
@@ -547,24 +505,91 @@
     </div>
   </footer>
   <script>
-    // Mega-menu toggle logic
-    const btn = document.getElementById('findItFastBtn');
-    const menu = document.getElementById('mega-menu');
-    const backdrop = document.getElementById('mega-backdrop');
-    const close = document.getElementById('mega-close');
-    function openMenu() {
-      backdrop.style.display = 'block';
-      menu.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMenu() {
-      backdrop.style.display = 'none';
-      menu.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-    btn.addEventListener('click', openMenu);
-    close.addEventListener('click', closeMenu);
-    backdrop.addEventListener('click', closeMenu);
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const offcanvasMenu = document.querySelector('.offcanvas-menu');
+      const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
+      const offcanvasClose = document.querySelector('.offcanvas-close');
+      const offcanvasListItems = document.querySelectorAll('.offcanvas-list > li');
+      const offcanvasFindItFastBtn = document.getElementById('offcanvasFindItFastBtn');
+
+      const findItFastBtn = document.getElementById('findItFastBtn');
+      const megaMenu = document.getElementById('mega-menu');
+      const megaBackdrop = document.getElementById('mega-backdrop');
+      const megaClose = document.getElementById('mega-close');
+
+      function openOffcanvasMenu() {
+        if (offcanvasMenu && offcanvasBackdrop) {
+          offcanvasMenu.classList.add('open');
+          offcanvasBackdrop.classList.add('show');
+        }
+      }
+
+      function closeOffcanvasMenu() {
+        if (offcanvasMenu && offcanvasBackdrop) {
+          offcanvasMenu.classList.remove('open');
+          offcanvasBackdrop.classList.remove('show');
+          offcanvasMenu.querySelectorAll('.offcanvas-submenu').forEach(menu => menu.classList.remove('show'));
+          offcanvasListItems.forEach(li => li.classList.remove('active'));
+        }
+      }
+
+      function openMegaMenu(e) {
+        e.preventDefault();
+        closeOffcanvasMenu(); 
+        if(megaBackdrop && megaMenu) {
+            megaBackdrop.style.display = 'block';
+            megaMenu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeMegaMenu() {
+        if(megaBackdrop && megaMenu) {
+            megaBackdrop.style.display = 'none';
+            megaMenu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+      }
+
+      if (navToggle) {
+        navToggle.addEventListener('click', openOffcanvasMenu);
+      }
+
+      if (offcanvasClose) {
+        offcanvasClose.addEventListener('click', closeOffcanvasMenu);
+      }
+
+      if (offcanvasBackdrop) {
+        offcanvasBackdrop.addEventListener('click', closeOffcanvasMenu);
+      }
+
+      offcanvasListItems.forEach(function(li) {
+        const a = li.querySelector('a');
+        const submenu = li.querySelector('.offcanvas-submenu');
+        if (submenu) {
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const parentLi = e.currentTarget.parentElement;
+            parentLi.classList.toggle('active');
+            submenu.classList.toggle('show');
+            offcanvasListItems.forEach(otherLi => {
+              if (otherLi !== parentLi) {
+                otherLi.classList.remove('active');
+                otherLi.querySelector('.offcanvas-submenu')?.classList.remove('show');
+              }
+            });
+          });
+        }
+      });
+      
+      if (findItFastBtn) findItFastBtn.addEventListener('click', openMegaMenu);
+      if (offcanvasFindItFastBtn) offcanvasFindItFastBtn.addEventListener('click', openMegaMenu);
+      
+      if (megaClose) megaClose.addEventListener('click', closeMegaMenu);
+      if (megaBackdrop) megaBackdrop.addEventListener('click', closeMegaMenu);
+    });
   </script>
 </body>
 </html>

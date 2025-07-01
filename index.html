@@ -1023,7 +1023,7 @@ document.addEventListener('DOMContentLoaded', function() {
     panels.forEach(p => p.classList.remove('open'));
   });
 
-  // --- FIXED: Active Members mobile menu ---
+  // --- Active Members mobile menu ---
   const showMenuBtn = document.getElementById('showActiveMembersMenu');
   const submenuLinks = document.getElementById('activeMembersLinks');
   let submenuOpen = false;
@@ -1043,7 +1043,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Set mobile hero min height to keep above the footer
+  // Set mobile hero min height 
   function setMobileHeroMinHeight() {
     if (window.innerWidth <= 900) {
       var body = document.body;
