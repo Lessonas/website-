@@ -15,215 +15,9 @@
       --light-gray-bg: #f7f7fc;
       --medium-gray-bg: #e5e5e5;
       --border-color: #ddd;
+      --footer-bg: #012e5a;
     }
-  
-    body {
-      display: flex; flex-direction: column; min-height: 100vh; margin: 0;
-      font-family: 'Open Sans', Arial, sans-serif; background: #f9f9f9; color: #333; line-height: 1.6;
-    }
-    a { text-decoration: none; color: inherit; }
-    .top-bar {
-      display: flex; align-items: center; flex-wrap: wrap;
-      background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
-    }
-    .top-left { display: flex; align-items: center; margin-right: 20px; }
-    .logo img { width: 70px; margin-right: 12px; }
-    .board-text { display: flex; flex-direction: column; gap: 3px; }
-    .board-name { font-size: 1.18em; font-weight: 600; }
-    .brand-separator { width: 100%; border: none; border-top: 1px solid #ffc; margin: 3px 0; }
-    .board-slogan { font-size: .97em; font-style: italic; opacity: .9; }
-    .top-right {
-      margin-left: auto; text-align: right; font-family: 'Roboto',sans-serif; font-weight: 700;
-      font-size: .87em; line-height: 1.4; max-width: 350px;
-    }
-    .top-right a { color: #ffc; text-decoration: none; }
-    .top-right a:hover { text-decoration: underline; }
-    .nav-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 7px 20px; position: relative; z-index: 99;
-    }
-    .nav-toggle {
-      display: none;
-      align-items: center;
-      gap: 7px;
-      background: #e9f3fe;
-      border: 2px solid #0164cb;
-      border-radius: 12px;
-      color: #012e5a;
-      font-weight: 700;
-      font-size: 1.15em;
-      padding: 8px 14px 8px 13px;
-      box-shadow: 0 2px 6px rgba(1,46,90,0.07);
-      cursor: pointer;
-      transition: border 0.2s, background 0.2s;
-      margin-left: 0;
-      z-index: 1101;
-      user-select: none;
-    }
-    .nav-toggle span { font-size: 1.3em; margin-right: 6px;}
-    .nav-toggle .menu-text { font-size: 1em; font-weight: 700; margin-left: 6px; letter-spacing: .03em;}
-    @media (max-width: 900px) {
-      .top-bar { flex-direction: column; align-items: flex-start;}
-      .nav-toggle { display: flex; }
-      .nav-bar .main-menu,
-      .nav-bar .nav-buttons { display: none !important; }
-    }
-    @media (min-width: 901px) {
-      .nav-toggle { display: none; }
-      .main-menu { display: flex !important; }
-      .nav-buttons { display: flex !important; margin-left: auto; }
-    }
-    .main-menu { list-style: none; display: flex; gap: 16px; align-items: center; margin: 0; padding: 0; flex-wrap: wrap;}
-    .main-menu li { position: relative; }
-    .main-menu > li > a {
-      color: var(--primary-color);
-      font-weight: 600;
-      padding: 10px 18px;
-      display: inline-block;
-      border-radius: 6px;
-      transition: background 0.18s;
-    }
-    .main-menu > li > a:hover { background: #e9f3fe; color: var(--accent-color); }
-    .submenu {
-      background: #fff; border: 1px solid #e6e6e6; border-radius: 7px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-      display: none; position: absolute; top: 105%; left: 0;
-      min-width: 190px; z-index: 1000; list-style: none !important; padding: 5px 0;
-    }
-    .main-menu li:hover > .submenu,
-    .main-menu li:focus-within > .submenu { display: block; }
-    .submenu li a {
-      display: block; padding: 8px 20px; white-space: nowrap; font-weight: 400; font-size: .98em;
-    }
-    .submenu li a:hover { background: #f0f6ff; color: #005bb5; }
-    .nav-buttons { display: flex; gap: 10px; align-items: center; }
-    .service-btn, .employer-login, #findItFastBtn {
-      background: #0066cc; color: #fff; padding: 8px 15px; border-radius: 4px;
-      text-decoration: none; font-weight: bold; font-size: 1em;
-      display: inline-flex; align-items: center; cursor: pointer; border: none;
-      transition: background 0.3s;
-    }
-    .service-btn:hover, .employer-login:hover, #findItFastBtn:hover { background: #005bb5; }
-    .button-icon { display: inline-flex; margin-right: 8px; }
-    .button-icon svg { width: 18px; height: 18px; fill: #fff; }
-
-    @media (max-width:900px) {
-      .offcanvas-backdrop {
-        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        background: rgba(1,46,90,0.32); z-index: 1100;
-      }
-      .offcanvas-backdrop.show { display: block; }
-      .offcanvas-menu {
-        display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
-        width: 80vw; max-width: 340px; height: 100vh; background: #fff;
-        z-index: 1200; box-shadow: 3px 0 22px 0 rgba(1,46,90,0.11);
-        transition: left 0.26s cubic-bezier(.6,0,.26,1);
-        padding-bottom: 25px; overflow-y: auto;
-      }
-      .offcanvas-menu.open { left: 0; }
-      .offcanvas-header {
-        display: flex; align-items: center; justify-content: space-between;
-        background: #012e5a; color: #fff; font-size: 1.14em;
-        font-family: 'Roboto',sans-serif; font-weight: 700;
-        padding: 15px 20px 13px 20px;
-      }
-      .offcanvas-close {
-        background: none; border: none; color: #fff; font-size: 2em; cursor: pointer; line-height: 1;
-      }
-      .offcanvas-buttons {
-        display: flex; flex-direction: column; gap: 12px; padding: 22px 18px 8px 18px;
-      }
-      .offcanvas-buttons a, .offcanvas-buttons button {
-        width: 100%; box-sizing: border-box; text-align: center;
-        font-size: 1em; border-radius: 7px; box-shadow: 0 2px 8px 0 rgba(1,46,90,0.06);
-        justify-content: center;
-      }
-      .offcanvas-list { list-style: none; margin: 0; padding: 0; font-size: 1.11em; }
-      .offcanvas-list > li { border-bottom: 1px solid #e6e6e6; }
-      .offcanvas-list > li > a {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 15px 24px; color: #012e5a; font-weight: 600;
-        width: 100%; background: none; cursor: pointer;
-      }
-      .offcanvas-list > li > a:active, .offcanvas-list > li > a:hover { background: #e9f3fe; color: #0066cc;}
-      .offcanvas-list > li.active > a { background: #e9f3fe; color: #0066cc; }
-      .offcanvas-submenu-toggle {
-        background: none; border: none; color: #012e5a; font-size: 1.1em; margin-left: 8px; cursor: pointer;
-        pointer-events: none;
-      }
-      .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-bottom: 1px solid #e6e6e6; }
-      .offcanvas-submenu.show { display: block; }
-      .offcanvas-submenu li a {
-        display: block; padding: 11px 36px 11px 44px; color: #24477c;
-        font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6;
-      }
-      .offcanvas-submenu li:last-child a { border-bottom: none; }
-    }
-    @media (min-width:901px) {
-      .offcanvas-menu,
-      .offcanvas-backdrop { display:none!important; }
-    }
-    main { flex: 1; background: #f9f9f9; display: flex; align-items: stretch; justify-content: center; padding: 40px 0 20px 0; }
-    .content-panel {
-      background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
-      width: 95%; max-width: 1100px; padding: 38px 38px 32px 38px; box-sizing: border-box; margin: 0 auto;
-    }
-    .content-panel h1 {
-      font-size: 2.3em; color: #012e5a; margin-bottom: 0.2em; font-weight: 800;
-      letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
-    }
-    .content-panel h2, .content-panel h3 {
-      color: #005bb5; margin-top: 2.5em; font-size: 1.38em; letter-spacing: -0.5px; font-weight: 700;
-    }
-    .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
-    .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
-    .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
-    .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
-    .content-panel a:hover { text-decoration: underline; }
-    #mega-backdrop {
-      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5); z-index: 9998;
-    }
-    #mega-menu {
-      display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      background: #fff; width: 96vw; max-width: 1250px; max-height: 90vh;
-      overflow-y: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 9999;
-    }
-    .mega-header {
-      display: flex; justify-content: space-between; align-items: center; padding: 20px 30px;
-      border-bottom: 1px solid #ddd; background: #f5f5f5; border-top-left-radius: 4px; border-top-right-radius: 4px;
-    }
-    .mega-header h2 { margin: 0; font-size: 1.6em; color: #012e5a; }
-    .mega-close { background: none; border: none; font-size: 1.8em; cursor: pointer; color: #666; transition: color .2s;}
-    .mega-close:hover { color: #333; }
-    .mega-content { display: flex; flex-wrap: wrap; gap: 22px; padding: 22px 30px; justify-content: space-between;}
-    .mega-column { flex: 1 1 220px; min-width: 220px; box-sizing: border-box;}
-    .mega-column h3 { margin-top: 0; font-size: 1.17em; color: #005bb5; margin-bottom: 12px;}
-    .mega-column ul { list-style: none; margin: 0; padding: 0;}
-    .mega-column li { margin-bottom: 10px;}
-    .mega-column a { color: #0073e6; text-decoration: none; font-size: 1em;}
-    .mega-column a:hover { text-decoration: underline;}
-    footer.footer { background: #012e5a; color: #fff; padding: 20px 0; }
-    .footer-container {
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0 20px;
-    }
-    .footer-logo img { width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;}
-    .footer-text { flex: 1; text-align: right; font-size: 0.93em; line-height: 1.4;}
-    .footer-text a { color: #ffc; text-decoration: none;}
-    .footer-text a:hover { text-decoration: underline;}
-    @media (max-width: 1024px) {
-      .mega-column { flex: 1 1 45%; }
-      .content-panel { padding: 24px 8vw; }
-    }
-    @media (max-width: 768px) {
-      main { padding: 18px 0; }
-      .content-panel { width: 98%; padding: 18px 2vw;}
-      .mega-content { flex-direction: column; gap: 16px;}
-      .mega-column { flex: 1 1 100%; min-width: 0;}
-      .footer-container { flex-direction: column; text-align: center;}
-      .footer-text { margin-top: 10px;}
-    }
+    /* --- Base & Header/Footer Styles --- */
     * { 
       margin: 0; 
       padding: 0; 
@@ -238,6 +32,7 @@
       display: flex; align-items: center; flex-wrap: wrap;
       background: var(--primary-color); color: #fff; padding: 10px 20px; min-height: 70px;
     }
+    
     .top-left { display: flex; align-items: center; margin-right: 20px; }
     .logo img { width: 70px; margin-right: 12px; }
     .board-text { display: flex; flex-direction: column; gap: 3px; }
@@ -401,7 +196,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
-    /* --- Mobile & Off-Canvas Menu (Mostly Unchanged) --- */
+    /* --- Mobile & Off-Canvas Menu --- */
     .nav-toggle {
       display: none; align-items: center; gap: 7px; background: #e9f3fe; border: 2px solid #0164cb; border-radius: 12px;
       color: #012e5a; font-weight: 700; font-size: 1.15em; padding: 8px 14px 8px 13px;
@@ -471,7 +266,7 @@
       .nav-buttons { display: flex !important; margin-left: auto; }
     }
 
-    /* --- Mega Menu (Unchanged) --- */
+    /* --- Mega Menu --- */
     #mega-backdrop {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.5); z-index: 9998;
@@ -530,7 +325,7 @@
   </style>
 </head>
 <body>
-  <!-- HEADER & NAVIGATION (Unchanged) -->
+  <!-- HEADER & NAVIGATION (Same as before) -->
   <div class="top-bar">
     <div class="top-left">
       <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
@@ -952,17 +747,16 @@
 </main>
 
 
-  <!-- FOOTER -->
-  <footer>
+   <footer>
     <div class="footer-container">
-      <img src="images/WV.png" alt="WV State Logo">
+      <img src="Images/WV.png" alt="WV State Logo"/>
       <div class="footer-text">
-        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event there is a discrepancy between information contained here and the WV State Code and Rules, the language in the Code and Rules shall prevail. | <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
+        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail.
+        | <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
       </div>
     </div>
   </footer>
-
-
+  <!-- SCRIPT -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const navToggle = document.querySelector('.nav-toggle');
@@ -1027,25 +821,18 @@
         const a = li.querySelector('a');
         const submenu = li.querySelector('.offcanvas-submenu');
         if (submenu) {
-          // Make parent items clickable to toggle submenu
           a.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             const parentLi = e.currentTarget.parentElement;
-            
-            const wasActive = parentLi.classList.contains('active');
-            
-            // Close all other items
+            parentLi.classList.toggle('active');
+            submenu.classList.toggle('show');
             offcanvasListItems.forEach(otherLi => {
-              otherLi.classList.remove('active');
-              otherLi.querySelector('.offcanvas-submenu')?.classList.remove('show');
+              if (otherLi !== parentLi) {
+                otherLi.classList.remove('active');
+                otherLi.querySelector('.offcanvas-submenu')?.classList.remove('show');
+              }
             });
-
-            // If it wasn't active, open it
-            if (!wasActive) {
-                parentLi.classList.add('active');
-                submenu.classList.add('show');
-            }
           });
         }
       });
@@ -1057,6 +844,5 @@
       if (megaBackdrop) megaBackdrop.addEventListener('click', closeMegaMenu);
     });
   </script>
-
 </body>
 </html>
