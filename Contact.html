@@ -16,284 +16,817 @@
       --footer-accent: #ffc;
       --panel-radius: 8px;
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
     body {
-      font-family:'Open Sans',Arial,sans-serif;
-      background:#f9f9f9;
-      color:#333;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+      font-family: 'Open Sans', Arial, sans-serif; 
+      background: #f9f9f9; 
+      color: #333; 
+      line-height: 1.6;
     }
-    a { color:var(--primary-color); text-decoration:none;}
-    a:hover { color:var(--accent-color); text-decoration:underline;}
+    a { 
+      text-decoration: none; 
+      color: var(--primary-color);
+    }
+    a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
     .top-bar {
-      display:flex; align-items:center; background:var(--primary-color); color:#fff;
-      padding:10px 20px; flex-wrap:wrap; justify-content:space-between;
+      display: flex; 
+      align-items: center; 
+      flex-wrap: wrap;
+      background: var(--primary-color); 
+      color: #fff; 
+      padding: 10px 20px; 
+      min-height: 70px;
     }
-    .top-left { display:flex; align-items:center; }
-    .top-left img { width:70px; margin-right:15px; }
-    .board-info { font-size:1.1em; font-weight:600;}
-    .board-info small { display:block; font-size:0.93em; font-style:italic; color:#ffc; margin-top:2px;}
-    .contact-info { text-align:right; font-size:0.95em; line-height:1.5;}
-    .contact-info a { color:var(--footer-accent);}
-    .contact-info a:hover { color:#fff;}
+    .top-left { 
+      display: flex; 
+      align-items: center; 
+      margin-right: 20px; 
+    }
+    .logo img { 
+      width: 70px; 
+      margin-right: 12px; 
+    }
+    .board-text { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 3px; 
+    }
+    .board-name { 
+      font-size: 1.18em; 
+      font-weight: 600; 
+    }
+    .brand-separator { 
+      width: 100%; 
+      border: none; 
+      border-top: 1px solid var(--footer-accent); 
+      margin: 3px 0; 
+    }
+    .board-slogan { 
+      font-size: .97em; 
+      font-style: italic; 
+      opacity: .9; 
+    }
+    .top-right {
+      margin-left: auto; 
+      text-align: right; 
+      font-family: 'Roboto', sans-serif; 
+      font-weight: 700;
+      font-size: .87em; 
+      line-height: 1.4; 
+      max-width: 350px;
+    }
+    .top-right a { 
+      color: var(--footer-accent); 
+      text-decoration: none; 
+    }
+    .top-right a:hover { 
+      text-decoration: underline;
+      color: #fff;
+    }
     .nav-bar {
-      background:#fff; box-shadow:var(--nav-shadow); display:flex; align-items:center; flex-wrap:wrap;
-      padding:8px 20px; position:relative; z-index:10;
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      background: #fff; 
+      box-shadow: var(--nav-shadow);
+      padding: 7px 20px; 
+      position: relative; 
+      z-index: 99;
     }
-    .main-menu { list-style:none; display:flex; gap:20px;}
-    .main-menu li { position:relative;}
+    .main-menu { 
+      list-style: none; 
+      display: flex; 
+      gap: 16px; 
+      align-items: center; 
+      margin: 0; 
+      padding: 0; 
+      flex-wrap: wrap;
+    }
+    .main-menu li { 
+      position: relative; 
+    }
     .main-menu > li > a {
-      text-decoration:none; color:var(--primary-color); font-weight:600; padding:5px 0; font-size:1em; display:inline-block;
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 10px 18px;
+      display: inline-block;
+      border-radius: 6px;
+      transition: background 0.18s;
+      text-decoration: none;
     }
     .main-menu > li > a:hover,
-    .main-menu > li > a.active { color:var(--accent-color);}
+    .main-menu > li > a.active { 
+      background: #e9f3fe; 
+      color: var(--accent-color); 
+      text-decoration: none;
+    }
     .submenu {
-      display:none; position:absolute; top:100%; left:0;
-      background:#fff; border:1px solid #ddd; border-radius:4px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1); min-width:200px;
-      z-index:999; list-style:none;
+      background: var(--panel-bg); 
+      border: 1px solid #e6e6e6; 
+      border-radius: 7px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      display: none; 
+      position: absolute; 
+      top: 105%; 
+      left: 0;
+      min-width: 190px; 
+      z-index: 1000; 
+      list-style: none !important; 
+      padding: 5px 0;
     }
-    .submenu ul { padding:0; margin:0;}
+    .main-menu li:hover > .submenu,
+    .main-menu li:focus-within > .submenu { 
+      display: block; 
+    }
     .submenu li a {
-      display:block; padding:8px 15px; color:var(--primary-color); text-decoration:none; font-weight:400; font-size:.96em;
+      display: block; 
+      padding: 8px 20px; 
+      white-space: nowrap; 
+      font-weight: 400; 
+      font-size: .98em;
+      color: var(--primary-color);
     }
-    .submenu,
-.submenu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.submenu a {
-  text-decoration: none;
-  color: #012e5a; 
-  font-weight: 400;
-}
-.submenu a:hover,
-.submenu a:focus {
-  background: #f0f0f0; 
-  color: #005bb5;
-  text-decoration: none;
-}
+    .submenu li a:hover { 
+      background: #f0f6ff; 
+      color: var(--accent-color);
+      text-decoration: none; 
+    }
+    .nav-buttons { 
+      display: flex; 
+      gap: 10px; 
+      align-items: center; 
+    }
+    #findItFastBtn, .service-btn, .employer-login {
+      background: var(--accent-color); 
+      color: #fff; 
+      padding: 8px 15px; 
+      border-radius: 4px;
+      text-decoration: none; 
+      font-weight: bold; 
+      font-size: 1em;
+      display: inline-flex; 
+      align-items: center; 
+      cursor: pointer; 
+      border: none;
+      transition: background 0.3s;
+      gap: 6px;
+    }
+    #findItFastBtn:hover, .service-btn:hover, .employer-login:hover { 
+      background: #005bb5; 
+    }
+    .button-icon { 
+      display: inline-flex; 
+    }
+    .button-icon svg { 
+      width: 18px; 
+      height: 18px; 
+      fill: #fff; 
+    }
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      gap: 7px;
+      background: #e9f3fe;
+      border: 2px solid #0164cb;
+      border-radius: 12px;
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.15em;
+      padding: 8px 14px 8px 13px;
+      box-shadow: 0 2px 6px rgba(1,46,90,0.07);
+      cursor: pointer;
+      transition: border 0.2s, background 0.2s;
+      margin-left: 0;
+      z-index: 1101;
+      user-select: none;
+    }
+    .nav-toggle span { 
+      font-size: 1.3em; 
+      margin-right: 6px;
+    }
+    .nav-toggle .menu-text { 
+      font-size: 1em; 
+      font-weight: 700; 
+      margin-left: 6px; 
+      letter-spacing: .03em;
+    }
 
-    .submenu li a:hover { background:#f0f0f0; color:var(--accent-color);}
-    .main-menu li:hover .submenu { display:block;}
-    .nav-buttons { margin-left:auto; display:flex; gap:10px;}
-    .find-it-fast, .service-btn, .ess-login, #findItFastBtn {
-      background:var(--accent-color); color:#fff; padding:8px 14px;
-      border-radius:4px; text-decoration:none; font-weight:bold; font-size:1em;
-      display:inline-flex; align-items:center; gap:6px; border:none; cursor:pointer; transition:background .3s;
-    }
-    .find-it-fast:hover, .service-btn:hover, .ess-login:hover, #findItFastBtn:hover { background:#005bb5;}
-    .button-icon svg { width:18px; height:18px; fill:#fff; vertical-align:middle;}
+    /* Mega Menu & Backdrop */
     #mega-backdrop {
-      display:none; position:fixed; inset:0; background:rgba(1,46,90,0.32); z-index:800;
+      display: none; 
+      position: fixed; 
+      inset: 0;
+      background: rgba(1,46,90,0.32); 
+      z-index: 1000;
     }
     #mega-menu {
-      display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
-      background:#fff; box-shadow:0 8px 32px rgba(0,0,0,0.18); border-radius:16px;
-      z-index:1001; max-width:1100px; width:95vw; padding:32px 24px 24px 24px;
+      display: none; 
+      position: fixed; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%,-50%);
+      background: var(--panel-bg); 
+      width: 96vw; 
+      max-width: 1250px; 
+      max-height: 90vh;
+      overflow-y: auto; 
+      border-radius: 4px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+      z-index: 1001;
     }
-    .mega-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;}
-    .mega-header h2 { font-size:1.6em; color:var(--primary-color);}
-    .mega-close { background:none; border:none; font-size:2em; color:#333; cursor:pointer;}
-    .mega-content {
-      display:grid; grid-template-columns:repeat(5, 1fr); gap:28px;
+    .mega-header {
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 20px 30px;
+      border-bottom: 1px solid #ddd; 
+      background: #f5f5f5;
     }
-    .mega-column h3 { color:var(--primary-color); font-size:1.09em; margin-bottom:6px;}
-    .mega-column ul { list-style:none; padding:0;}
-    .mega-column li { margin-bottom:4px;}
-    .mega-column a { color:var(--primary-color); text-decoration:none; font-size:.97em;}
-    .mega-column a:hover { color:var(--accent-color); text-decoration:underline;}
-    .content-flex {
-      display: flex; align-items: flex-start; gap:32px; max-width: 1100px; margin:0 auto 32px; width:100%;
-      padding: 0 10px;
+    .mega-header h2 { 
+      margin: 0; 
+      font-size: 1.6em; 
+      color: var(--primary-color); 
+    }
+    .mega-close { 
+      background: none; 
+      border: none; 
+      font-size: 1.8em; 
+      cursor: pointer; 
+      color: #666; 
+      transition: color .2s;
+    }
+    .mega-close:hover { 
+      color: #333; 
+    }
+    .mega-content { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 22px; 
+      padding: 22px 30px; 
+      justify-content: space-between;
+    }
+    .mega-column { 
+      flex: 1 1 220px; 
+      min-width: 220px; 
+      box-sizing: border-box;
+    }
+    .mega-column h3 { 
+      margin-top: 0; 
+      font-size: 1.17em; 
+      color: var(--accent-color); 
+      margin-bottom: 12px;
+    }
+    .mega-column ul { 
+      list-style: none; 
+      margin: 0; 
+      padding: 0;
+    }
+    .mega-column li { 
+      margin-bottom: 10px;
+    }
+    .mega-column a { 
+      color: var(--primary-color);
+      text-decoration: none; 
+      font-size: 1em;
+    }
+    .mega-column a:hover { 
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+    
+    /* Main Content Area */
+    main { 
+      flex: 1; 
+      padding: 40px 10px 20px 10px; 
     }
     .content-panel {
-      flex:1 1 0%; min-width:0;
-      background:var(--panel-bg); border-radius:var(--panel-radius); box-shadow:0 2px 6px rgba(0,0,0,0.10);
-      padding:28px 24px 24px 24px; font-size:1.07em; line-height:1.63;
-      margin:38px auto 48px auto;
-      overflow-x:auto;
+      background: var(--panel-bg); 
+      border-radius: var(--panel-radius); 
+      box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+      width: 100%; 
+      max-width: 1100px; 
+      padding: 38px 38px 32px 38px; 
+      margin: 0 auto;
+      overflow-x: auto;
     }
-    .content-panel h1 { font-size:1.6em; color:var(--primary-color); font-family:'Roboto',sans-serif; margin-bottom:1rem;}
-    .content-panel h2 { margin-top:2rem; font-size:1.2em; color:var(--primary-color);}
-    .content-panel table { width:100%; border-collapse:collapse; margin-top:.5rem;}
+    .content-panel h1 {
+      font-size: 2.3em; 
+      color: var(--primary-color); 
+      margin-bottom: 1rem; 
+      font-weight: 800;
+      font-family:'Roboto',sans-serif;
+      letter-spacing: -1.2px; 
+      border-bottom: 2px solid #e5e7eb; 
+      padding-bottom: 8px;
+    }
+    .content-panel h2 {
+      color: #005bb5; 
+      margin-top: 2.5em; 
+      font-size: 1.38em; 
+      letter-spacing: -0.5px; 
+      font-weight: 700;
+    }
+    .content-panel h3 { 
+      margin-top: 2em; 
+      font-size: 1.15em;
+      color: #005bb5; 
+      font-weight: 700;
+    }
+    .content-panel ul { 
+      list-style: disc inside; 
+      margin: 1.1em 0 1.8em 1.3em; 
+      padding: 0;
+    }
+    .content-panel li { 
+      margin-bottom: 0.7em; 
+      font-size: 1.07em; 
+    }
+    .content-panel a { 
+      color: #0073e6; 
+      text-decoration: none; 
+      font-weight: 500; 
+    }
+    .content-panel a:hover { 
+      text-decoration: underline; 
+    }
+    /* Table Styles */
+    .content-panel table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin-top: .5rem;
+    }
     .content-panel th, .content-panel td {
-      padding:.75rem; border:1px solid #ccc; text-align:left; vertical-align:top;
+      padding: .75rem; 
+      border: 1px solid #ccc; 
+      text-align: left; 
+      vertical-align: top;
     }
-    .content-panel thead { background:#003366; color:#fff }
-    .content-panel tbody tr:nth-child(odd) { background:#f7f7fc }
-    .content-panel a { color:#0073e6; text-decoration:none }
-    .content-panel a:hover { text-decoration:underline }
-    footer {
-      background:var(--footer-bg); color:#fff; padding:22px 0 10px 0; margin-top:auto;
+    .content-panel thead { 
+      background: #003366; 
+      color: #fff; 
+    }
+    .content-panel tbody tr:nth-child(odd) { 
+      background: #f7f7fc; 
+    }
+
+    /* Footer */
+    footer { 
+      background: var(--footer-bg); 
+      color: #fff; 
+      padding: 22px 0 10px 0; 
+      margin-top: auto;
     }
     .footer-container {
-      max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:15px;
+      max-width: 1200px; 
+      margin: 0 auto; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      flex-wrap: wrap; 
+      gap: 15px;
+      padding: 0 20px;
     }
-    .footer-container img { width:50px; border-radius:8px; border:2px solid #fff; padding:2px;}
-    .footer-text { font-size:0.98em; text-align:right;}
-    .footer-text a { color:var(--footer-accent); text-decoration:none;}
-    .footer-text a:hover { text-decoration:underline;}
-    @media (max-width: 1020px) {
-      .content-flex { flex-direction:column; gap:18px; }
+    .footer-container img { 
+      width: 50px; 
+      border-radius: 8px; 
+      border: 2px solid #fff; 
+      padding: 2px;
     }
-    @media (max-width: 600px) {
-      .top-bar, .nav-bar, .footer-container { flex-direction:column; align-items:flex-start; }
-      .nav-buttons { margin-top:10px;}
-      .contact-info, .footer-text { text-align:left; margin-top:10px;}
-      .mega-content { grid-template-columns:1fr;}
-      .content-panel { padding:14px 2vw;}
-      .content-panel table, .content-panel th, .content-panel td { font-size:0.94em;}
+    .footer-text { 
+      flex: 1;
+      font-size: 0.98em; 
+      text-align: right;
+    }
+    .footer-text a { 
+      color: var(--footer-accent); 
+      text-decoration: none;
+    }
+    .footer-text a:hover { 
+      text-decoration: underline;
+    }
+
+    /* --- Responsive & Mobile Styles --- */
+
+    @media (max-width: 900px) {
+      .top-bar { 
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 15px;
+      }
+      .top-right {
+        margin-left: 0;
+        text-align: left;
+      }
+      .nav-toggle { 
+        display: flex; 
+      }
+      .nav-bar .main-menu,
+      .nav-bar .nav-buttons { 
+        display: none !important; 
+      }
+      .offcanvas-backdrop {
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100vw; 
+        height: 100vh;
+        background: rgba(1,46,90,0.32); 
+        z-index: 1100;
+      }
+      .offcanvas-backdrop.show { 
+        display: block; 
+      }
+      .offcanvas-menu {
+        display: flex; 
+        flex-direction: column; 
+        position: fixed; 
+        top: 0; 
+        left: -80vw;
+        width: 80vw; 
+        max-width: 340px; 
+        height: 100vh; 
+        background: #fff;
+        z-index: 1200; 
+        box-shadow: 3px 0 22px 0 rgba(1,46,90,0.11);
+        transition: left 0.26s cubic-bezier(.6,0,.26,1);
+        padding-bottom: 25px; 
+        overflow-y: auto;
+      }
+      .offcanvas-menu.open { 
+        left: 0; 
+      }
+      .offcanvas-header {
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        background: var(--primary-color); 
+        color: #fff; 
+        font-size: 1.14em;
+        font-family: 'Roboto', sans-serif; 
+        font-weight: 700;
+        padding: 15px 20px 13px 20px;
+      }
+      .offcanvas-close {
+        background: none; 
+        border: none; 
+        color: #fff; 
+        font-size: 2em; 
+        cursor: pointer; 
+        line-height: 1;
+      }
+      .offcanvas-buttons {
+        display: flex; 
+        flex-direction: column; 
+        gap: 12px; 
+        padding: 22px 18px 8px 18px;
+      }
+      .offcanvas-buttons a, .offcanvas-buttons button {
+        width: 100%; 
+        box-sizing: border-box; 
+        text-align: center;
+        font-size: 1em; 
+        border-radius: 7px; 
+        box-shadow: 0 2px 8px 0 rgba(1,46,90,0.06);
+        justify-content: center;
+        gap: 8px;
+      }
+      .offcanvas-list { 
+        list-style: none; 
+        margin: 0; 
+        padding: 0; 
+        font-size: 1.11em; 
+      }
+      .offcanvas-list > li { 
+        border-bottom: 1px solid #e6e6e6; 
+      }
+      .offcanvas-list > li > a {
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        padding: 15px 24px; 
+        color: var(--primary-color); 
+        font-weight: 600;
+        width: 100%; 
+        background: none; 
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .offcanvas-list > li > a:active, 
+      .offcanvas-list > li > a:hover { 
+        background: #e9f3fe; 
+        color: var(--accent-color);
+      }
+      .offcanvas-list > li.active > a { 
+        background: #e9f3fe; 
+        color: var(--accent-color); 
+      }
+      .offcanvas-submenu { 
+        display: none; 
+        background: #f7fafd; 
+        padding: 0; 
+        border-top: 1px solid #e6e6e6;
+      }
+      .offcanvas-submenu.show { 
+        display: block; 
+      }
+      .offcanvas-submenu li a {
+        display: block; 
+        padding: 11px 36px 11px 44px; 
+        color: #24477c;
+        font-weight: 500; 
+        font-size: .98em; 
+        border-bottom: 1px solid #e6e6e6;
+        text-decoration: none;
+      }
+      .offcanvas-submenu li:last-child a { 
+        border-bottom: none; 
+      }
+    }
+    
+    @media (min-width: 901px) {
+      .nav-toggle,
+      .offcanvas-menu,
+      .offcanvas-backdrop { 
+        display: none !important; 
+      }
+      .main-menu { 
+        display: flex !important; 
+      }
+      .nav-buttons { 
+        display: flex !important; 
+        margin-left: auto; 
+      }
+    }
+    
+    @media (max-width: 1024px) {
+      .mega-column { 
+        flex: 1 1 45%; 
+      }
+      .content-panel { 
+        padding: 24px 4vw; 
+      }
+    }
+    
+    @media (max-width: 768px) {
+      main { 
+        padding: 18px 0; 
+      }
+      .content-panel { 
+        width: 98%; 
+        padding: 18px 2vw; /* Adjusted padding */
+        font-size: 0.96em;
+      }
+      .content-panel h1 { font-size: 1.8em; }
+      .content-panel h2 { font-size: 1.25em; }
+      
+      /* --- TABLE FIX STARTS HERE --- */
+      .content-panel th, .content-panel td { 
+        font-size: 0.94em;
+        padding: 0.5rem; /* Reduced padding to create more space */
+      }
+      .content-panel td {
+        /* These properties allow long strings (like emails) to break and wrap */
+        overflow-wrap: break-word;
+        word-break: break-word; 
+      }
+      /* --- TABLE FIX ENDS HERE --- */
+
+      .mega-content { 
+        flex-direction: column; 
+        gap: 16px;
+      }
+      .mega-column { 
+        flex: 1 1 100%; 
+        min-width: 0;
+      }
+      .footer-container { 
+        flex-direction: column; 
+        text-align: center;
+        gap: 10px;
+      }
+      .footer-text { 
+        margin-top: 10px;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- TOP BAR -->
   <div class="top-bar">
     <div class="top-left">
-      <a href="index.html"><img src="Images/Logo.png" alt="CPRB Logo"/></a>
-      <div class="board-info">
-        West Virginia Consolidated Public Retirement Board
-        <small>Serving Those Who Serve West Virginia</small>
+      <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
+      <div class="board-text">
+        <div class="board-name">West Virginia Consolidated Public Retirement Board</div>
+        <hr class="brand-separator">
+        <div class="board-slogan">Serving those who serve West Virginia</div>
       </div>
     </div>
-    <div class="contact-info">
-      601 57th Street SE, Suite 5<br/>
-      Charleston, WV 25304<br/>
-      Phone: <a href="tel:+13045583570">(304) 558-3570</a> |
-      <a href="tel:+18006544406">(800) 654-4406</a><br/>
-      Fax: (304) 957-7522<br/>
-      Email: <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a>
+    <div class="top-right">
+      <address>
+        601 57th Street SE, Suite 5<br>
+        Charleston, WV 25304<br>
+        <strong>Phone:</strong> <a href="tel:+13045583570">(304) 558-3570</a> |
+        <a href="tel:+18006544406">(800) 654-4406</a><br>
+        <strong>Fax:</strong> (304) 957-7522<br>
+        <strong>Email:</strong> <a href="mailto:CPRB@wv.gov">CPRB@wv.gov</a><br>
+        <em>Please do not send personal info via plain email.</em>
+      </address>
     </div>
   </div>
-  <!-- NAV BAR -->
   <nav class="nav-bar">
-  <ul class="main-menu">
-    <!-- Board of Trustees -->
-    <li>
-      <a href="#">Board of Trustees</a>
-      <div class="submenu">
-        <ul>
-          <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
-          <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
-          <li><a href="Board-Minutes.html">Board Minutes</a></li>
-          <li><a href="Committees.html">Committee Minutes</a></li>
-        </ul>
-      </div>
-    </li>
-    <!-- Active Members -->
-    <li>
-      <a href="#">Active Members</a>
-      <div class="submenu">
-        <ul>
-          <li><a href="PERS.html">PERS – Public Employees Retirement System</a></li>
-          <li><a href="PERS-TierII.html">PERS Tier II</a></li>
-          <li><a href="TRS.html">TRS – Teachers’ Retirement System</a></li>
-          <li><a href="TRS-TierII.html">TRS Tier II</a></li>
-          <li><a href="TDC.html">TDC Plan</a></li>
-          <li><a href="PlanA.html">Trooper Plan A</a></li>
-          <li><a href="PlanB.html">Trooper Plan B</a></li>
-          <li><a href="DSRS.html">DSRS</a></li>
-          <li><a href="JRS.html">JRS</a></li>
-          <li><a href="EMSRS.html">EMSRS</a></li>
-          <li><a href="MPFRS.html">MPFRS</a></li>
-          <li><a href="NRPORS.html">NRPORS</a></li>
-        </ul>
-      </div>
-    </li>
-    <!-- Retirees -->
-    <li>
-      <a href="#">Retirees</a>
-      <div class="submenu">
-        <ul>
-          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx" target="_blank">Member/Retiree Self Service</a></li>
-          <li><a href="Retirees.html">Forms</a></li>
-          <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
-          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
-          <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
-        </ul>
-      </div>
-    </li>
-    <!-- Participating Employers -->
-    <li>
-      <a href="#">Participating Employers</a>
-      <div class="submenu">
-        <ul>
-          <li><a href="Employers.html">General Resources</a></li>
-          <li><a href="Employers-Forms.html">Employer Forms</a></li>
-          <!--  -->
-          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
-          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
-          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
-          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
-          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
-          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
-          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
-          <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
-        </ul>
-      </div>
-    </li>
-    <!-- Publications -->
-    <li>
-      <a href="#">Publications</a>
-      <div class="submenu">
-        <ul>
-          <li><a href="Publications.html#GASB68">GASB 68</a></li>
-          <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
-          <li><a href="Publications.html#Financials">Financial Statement</a></li>
-          <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
-          <li><a href="Publications.html#Brochures">Brochures</a></li>
-          <li><a href="Publications.html#Newsletters">Newsletters</a></li>
-          <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
-        </ul>
-      </div>
-    </li>
-  </ul>
-  <!-- NAV BUTTONS -->
-  <div class="nav-buttons">
-    <!-- Find It Fast -->
-    <button id="findItFastBtn">
-      <span class="button-icon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="7"/>
-          <path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/>
-        </svg>
-      </span>
-      Find It Fast
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span>☰</span>
+      <span class="menu-text">Menu</span>
     </button>
-    <!-- Member/Retiree Self Service -->
-    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true"
-       class="service-btn" target="_blank">
-      <span class="button-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-          <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
-          <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
-          <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
-        </svg>
-      </span>
-      Member/Retiree Self Service
-    </a>
-    <!-- Employer Login -->
-    <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer"
-       class="service-btn" target="_blank">
-      <span class="button-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
-        </svg>
-      </span>
-      Employer Login
-    </a>
-  </div>
-</nav>
-  <!-- MEGA MENU BACKDROP & MENU -->
+    <ul class="main-menu">
+      <li>
+        <a href="Board-Agenda.html">Board of Trustees</a>
+        <ul class="submenu">
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="PERS.html">Active Members</a>
+        <ul class="submenu">
+            <li><a href="PERS.html">PERS</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">State Trooper Plan A</a></li>
+            <li><a href="PlanB.html">State Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Retirees.html">Retirees</a>
+        <ul class="submenu">
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Employers.html">Participating Employers</a>
+        <ul class="submenu">
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employers Forms</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="Publications.html">Publications</a>
+        <ul class="submenu">
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="nav-buttons">
+      <button id="findItFastBtn">
+        <span class="button-icon">
+          <svg viewBox="0 0 24 24" fill="#fff"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+        </span>
+        Find It Fast
+      </button>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" class="service-btn" target="_blank">
+        <span class="button-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+              <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+              <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+            </svg>
+        </span>
+        Member/Retiree Self Service
+      </a>
+      <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" class="employer-login" target="_blank">
+        <span class="button-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+            </svg>
+        </span>
+        Employer Login
+      </a>
+    </div>
+    <div class="offcanvas-backdrop"></div>
+    <nav class="offcanvas-menu" aria-label="Mobile Menu">
+      <div class="offcanvas-header">
+        Menu
+        <button class="offcanvas-close" aria-label="Close menu">×</button>
+      </div>
+      <div class="offcanvas-buttons">
+        <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" class="service-btn" target="_blank">
+          <span class="button-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#fff">
+              <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
+              <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
+              <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
+            </svg>
+          </span>
+          Member/Retiree Self Service
+        </a>
+        <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" class="employer-login" target="_blank">
+          <span class="button-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
+              <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+            </svg>
+          </span> Employer Login
+        </a>
+        <button id="offcanvasFindItFastBtn" class="service-btn">
+          <span class="button-icon">
+            <svg viewBox="0 0 24 24" fill="#fff"><circle cx="11" cy="11" r="7"/><path d="M16.65 16.65l4.2 4.2-1.4 1.4-4.2-4.2"/></svg>
+          </span>
+          Find It Fast
+        </button>
+      </div>
+      <ul class="offcanvas-list">
+        <li>
+          <a href="Board-Agenda.html">Board of Trustees</a>
+          <ul class="offcanvas-submenu">
+            <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
+            <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
+            <li><a href="Board-Minutes.html">Board Minutes</a></li>
+            <li><a href="Committees.html">Committee Minutes</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="PERS.html">Active Members</a>
+          <ul class="offcanvas-submenu">
+            <li><a href="PERS.html">PERS</a></li>
+            <li><a href="PERS-TierII.html">PERS Tier II</a></li>
+            <li><a href="TRS.html">TRS</a></li>
+            <li><a href="TRS-TierII.html">TRS Tier II</a></li>
+            <li><a href="TDC.html">TDC Plan</a></li>
+            <li><a href="PlanA.html">State Trooper Plan A</a></li>
+            <li><a href="PlanB.html">State Trooper Plan B</a></li>
+            <li><a href="DSRS.html">DSRS</a></li>
+            <li><a href="JRS.html">JRS</a></li>
+            <li><a href="EMSRS.html">EMSRS</a></li>
+            <li><a href="MPFRS.html">MPFRS</a></li>
+            <li><a href="NRPORS.html">NRPORS</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="Retirees.html">Retirees</a>
+          <ul class="offcanvas-submenu">
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service</a></li>
+            <li><a href="Retirees.html">Forms</a></li>
+            <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="Employers.html">Participating Employers</a>
+          <ul class="offcanvas-submenu">
+            <li><a href="Employers.html">General Resources</a></li>
+            <li><a href="Employers-Forms.html">Employers Forms</a></li>
+            <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
+            <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="Publications.html">Publications</a>
+          <ul class="offcanvas-submenu">
+            <li><a href="Publications.html#GASB68">GASB 68</a></li>
+            <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
+            <li><a href="Publications.html#Financials">Financial Statement</a></li>
+            <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
+            <li><a href="Publications.html#Brochures">Brochures</a></li>
+            <li><a href="Publications.html#Newsletters">Newsletters</a></li>
+            <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </nav>
   <div id="mega-backdrop"></div>
-  <div id="mega-menu" role="dialog" aria-modal="true" aria-labelledby="findItFastTitle">
+  <div id="mega-menu">
     <div class="mega-header">
-      <h2 id="findItFastTitle">Find It Fast</h2>
-      <button id="mega-close" class="mega-close" aria-label="Close Find It Fast">&times;</button>
+      <h2>Find It Fast</h2>
+      <button id="mega-close" class="mega-close">×</button>
     </div>
     <div class="mega-content">
       <div class="mega-column">
@@ -308,13 +841,13 @@
       <div class="mega-column">
         <h3>Active Members</h3>
         <ul>
-          <li><a href="PERS.html">PERS</a></li>
+          <li><a href="PERS.html">PERS: Public Employees Retirement System</a></li>
           <li><a href="PERS-TierII.html">PERS Tier II</a></li>
-          <li><a href="TRS.html">TRS</a></li>
+          <li><a href="TRS.html">TRS: Teachers' Retirement System</a></li>
           <li><a href="TRS-TierII.html">TRS Tier II</a></li>
           <li><a href="TDC.html">TDC Plan</a></li>
-          <li><a href="PlanA.html">Trooper Plan A</a></li>
-          <li><a href="PlanB.html">Trooper Plan B</a></li>
+          <li><a href="PlanA.html">STATE TROOPER PLAN A</a></li>
+          <li><a href="PlanB.html">STATE TROOPER PLAN B</a></li>
           <li><a href="DSRS.html">DSRS</a></li>
           <li><a href="JRS.html">JRS</a></li>
           <li><a href="EMSRS.html">EMSRS</a></li>
@@ -325,10 +858,11 @@
       <div class="mega-column">
         <h3>Retirees</h3>
         <ul>
-          <li><a href="Retirees.html">Forms</a></li>
+          <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service Portal</a></li>
+          <li><a href="Retirees.html">Retiree Forms</a></li>
           <li><a href="Contact.html#Retirement">Contact Annuity Benefits</a></li>
-          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
           <li><a href="Forms/WVDF0255.pdf" target="_blank">DSRS Return to Covered Employment</a></li>
+          <li><a href="Forms/WVAF0006.pdf" target="_blank">Less Than Honorable Service</a></li>
         </ul>
       </div>
       <div class="mega-column">
@@ -336,19 +870,12 @@
         <ul>
           <li><a href="Employers.html">General Resources</a></li>
           <li><a href="Employers-Forms.html">Employer Forms</a></li>
-          <!--  -->
-          <li><a href="Employers-ESS-FRwalkthrough.html">FR Walkthrough Webinar</a></li>
-          <li><a href="Employers-Tier2.html">2015 Tier II Webinar Resources</a></li>
-          <li><a href="Employers-ESS-Webinar.html">ESS Portal Webinar</a></li>
-          <li><a href="Employers-COMPASS-OASIS-Webinar.html">COMPASS–OASIS Webinar</a></li>
-          <li><a href="Employers-COMPASS-WVEIS-webinar.html">COMPASS–WVEIS Webinar</a></li>
-          <li><a href="Employers-WVEIS-COMPASS-Review-Webinar.html">Review Webinar</a></li>
           <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" target="_blank">Employer Login</a></li>
           <li><a href="Contact.html#Employer">Contact Employer Reporting</a></li>
         </ul>
       </div>
       <div class="mega-column">
-        <h3>Publications &amp; Policies</h3>
+        <h3>Publications & Policies</h3>
         <ul>
           <li><a href="Publications.html#GASB68">GASB 68</a></li>
           <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
@@ -356,12 +883,13 @@
           <li><a href="Publications.html#Summary">Plan Summary Sheet</a></li>
           <li><a href="Publications.html#Brochures">Brochures</a></li>
           <li><a href="Publications.html#Newsletters">Newsletters</a></li>
-          <li><a href="Forms/OrgChart.pdf" target="_blank">Organizational Chart</a></li>
           <li><a href="PrivacyPolicy.html">Privacy Policy Notice</a></li>
         </ul>
       </div>
     </div>
   </div>
+
+
 <main>
 <div class="content-panel">
   <h1>Contact Us</h1>
@@ -432,15 +960,15 @@
   <table>
     <thead><tr><th>Name</th><th>Title</th><th>Phone</th><th>Email</th></tr></thead>
     <tbody>
-      <tr><td>Whittaker, Sharon</td><td>Death Claims &amp; Refunds Manager</td><td>(304) 957-3537</td><td><a href="mailto:Sharon.l.whittaker@wv.gov">Sharon.l.whittaker@wv.gov</a></td></tr>
-      <tr><td>Hudnall, Joshua</td><td>Death Claims &amp; Refunds Assistant Manager</td><td>(304) 352-6855</td><td><a href="mailto:Joshua.C.Hudnall@wv.gov">Joshua.C.Hudnall@wv.gov</a></td></tr>
+      <tr><td>Whittaker, Sharon</td><td>Death Claims & Refunds Manager</td><td>(304) 957-3537</td><td><a href="mailto:Sharon.l.whittaker@wv.gov">Sharon.l.whittaker@wv.gov</a></td></tr>
+      <tr><td>Hudnall, Joshua</td><td>Death Claims & Refunds Assistant Manager</td><td>(304) 352-6855</td><td><a href="mailto:Joshua.C.Hudnall@wv.gov">Joshua.C.Hudnall@wv.gov</a></td></tr>
       <tr><td>Cunningham, Shawn</td><td>Member Refunds</td><td>(304) 352-6801</td><td><a href="mailto:shawn.d.cunningham@wv.gov">shawn.d.cunningham@wv.gov</a></td></tr>
       <tr><td>Davis, Rachelle</td><td>Member/Retiree Death Claims</td><td>(304) 352-6795</td><td><a href="mailto:Rachelle.E.Davis@wv.gov">Rachelle.E.Davis@wv.gov</a></td></tr>
       <tr><td>Knapp, Ashley</td><td>Member Refunds</td><td>(304) 352-6797</td><td><a href="mailto:Ashley.B.Knapp@wv.gov">Ashley.B.Knapp@wv.gov</a></td></tr>
       <tr><td>May, Jenny</td><td>Member / Retiree Death Claims / RMD</td><td>(304) 352-6798</td><td><a href="mailto:Virginia.F.May@wv.gov">Virginia.F.May@wv.gov</a></td></tr>
       <tr><td>McCormick, Kimberly</td><td>Member / Retiree Death Claims / RMD</td><td>(304) 352-6800</td><td><a href="mailto:Kimberly.A.McCormick@wv.gov">Kimberly.A.McCormick@wv.gov</a></td></tr>
       <tr><td>Smith, Marquis</td><td>Member Refunds</td><td>(304) 352-6796</td><td><a href="mailto:marquis.j.smith@wv.gov">marquis.j.smith@wv.gov</a></td></tr>
-      <tr><td>Strickland, Paige</td><td>Death Claims &amp; Refunds Administrative Services Assistant</td><td>(304) 352-6802</td><td><a href="mailto:Paige.D.Strickland@wv.gov">Paige.D.Strickland@wv.gov</a></td></tr>
+      <tr><td>Strickland, Paige</td><td>Death Claims & Refunds Administrative Services Assistant</td><td>(304) 352-6802</td><td><a href="mailto:Paige.D.Strickland@wv.gov">Paige.D.Strickland@wv.gov</a></td></tr>
       <tr><td>Wolfe, Steve</td><td>Member Refunds / Rollover Distributions</td><td>(304) 352-6803</td><td><a href="mailto:Steven.C.Wolfe@wv.gov">Steven.C.Wolfe@wv.gov</a></td></tr>
     </tbody>
   </table>
@@ -547,42 +1075,101 @@
 </div>
 
 </main>
-  </div>
-  </div>
   <footer>
     <div class="footer-container">
       <img src="Images/WV.png" alt="WV State Logo"/>
       <div class="footer-text">
-        CPRB &copy; 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail.
+        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail.
         | <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
       </div>
     </div>
   </footer>
-  <!-- MEGA MENU SCRIPT -->
+  <!-- SCRIPT -->
   <script>
-    const megaBtn = document.getElementById('findItFastBtn');
-    const megaMenu = document.getElementById('mega-menu');
-    const megaBackdrop = document.getElementById('mega-backdrop');
-    const megaClose = document.getElementById('mega-close');
-    function openMegaMenu() {
-      megaMenu.style.display = 'block';
-      megaBackdrop.style.display = 'block';
-      document.body.style.overflow = 'hidden';
-      megaClose.focus();
-    }
-    function closeMegaMenu() {
-      megaMenu.style.display = 'none';
-      megaBackdrop.style.display = 'none';
-      document.body.style.overflow = '';
-      megaBtn.focus();
-    }
-    megaBtn.addEventListener('click', openMegaMenu);
-    megaClose.addEventListener('click', closeMegaMenu);
-    megaBackdrop.addEventListener('click', closeMegaMenu);
-    document.addEventListener('keydown', function(e) {
-      if (megaMenu.style.display === 'block' && (e.key === 'Escape' || e.key === 'Esc')) {
-        closeMegaMenu();
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const offcanvasMenu = document.querySelector('.offcanvas-menu');
+      const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
+      const offcanvasClose = document.querySelector('.offcanvas-close');
+      const offcanvasListItems = document.querySelectorAll('.offcanvas-list > li');
+      const offcanvasFindItFastBtn = document.getElementById('offcanvasFindItFastBtn');
+
+      const findItFastBtn = document.getElementById('findItFastBtn');
+      const megaMenu = document.getElementById('mega-menu');
+      const megaBackdrop = document.getElementById('mega-backdrop');
+      const megaClose = document.getElementById('mega-close');
+
+      function openOffcanvasMenu() {
+        if (offcanvasMenu && offcanvasBackdrop) {
+          offcanvasMenu.classList.add('open');
+          offcanvasBackdrop.classList.add('show');
+        }
       }
+
+      function closeOffcanvasMenu() {
+        if (offcanvasMenu && offcanvasBackdrop) {
+          offcanvasMenu.classList.remove('open');
+          offcanvasBackdrop.classList.remove('show');
+          offcanvasMenu.querySelectorAll('.offcanvas-submenu').forEach(menu => menu.classList.remove('show'));
+          offcanvasListItems.forEach(li => li.classList.remove('active'));
+        }
+      }
+
+      function openMegaMenu(e) {
+        e.preventDefault();
+        closeOffcanvasMenu(); 
+        if(megaBackdrop && megaMenu) {
+            megaBackdrop.style.display = 'block';
+            megaMenu.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeMegaMenu() {
+        if(megaBackdrop && megaMenu) {
+            megaBackdrop.style.display = 'none';
+            megaMenu.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+      }
+
+      if (navToggle) {
+        navToggle.addEventListener('click', openOffcanvasMenu);
+      }
+
+      if (offcanvasClose) {
+        offcanvasClose.addEventListener('click', closeOffcanvasMenu);
+      }
+
+      if (offcanvasBackdrop) {
+        offcanvasBackdrop.addEventListener('click', closeOffcanvasMenu);
+      }
+
+      offcanvasListItems.forEach(function(li) {
+        const a = li.querySelector('a');
+        const submenu = li.querySelector('.offcanvas-submenu');
+        if (submenu) {
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const parentLi = e.currentTarget.parentElement;
+            parentLi.classList.toggle('active');
+            submenu.classList.toggle('show');
+            offcanvasListItems.forEach(otherLi => {
+              if (otherLi !== parentLi) {
+                otherLi.classList.remove('active');
+                otherLi.querySelector('.offcanvas-submenu')?.classList.remove('show');
+              }
+            });
+          });
+        }
+      });
+      
+      if (findItFastBtn) findItFastBtn.addEventListener('click', openMegaMenu);
+      if (offcanvasFindItFastBtn) offcanvasFindItFastBtn.addEventListener('click', openMegaMenu);
+      
+      if (megaClose) megaClose.addEventListener('click', closeMegaMenu);
+      if (megaBackdrop) megaBackdrop.addEventListener('click', closeMegaMenu);
     });
   </script>
 </body>
