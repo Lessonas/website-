@@ -14,7 +14,7 @@
       --accent-color: #0066cc;
       --border-color: #ddd;
     }
-    /* --- Base & Header/Footer Styles --- */
+    
     * { 
       margin: 0; 
       padding: 0; 
@@ -182,6 +182,23 @@
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
         background: rgba(1,46,90,0.32); z-index: 1100;
       }
+      /* This hides the old */
+.offcanvas-submenu-toggle {
+    display: none !important;
+}
+
+
+.offcanvas-list > li:has(.offcanvas-submenu) > a::after {
+    content: '▼';
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.offcanvas-list > li.active > a::after {
+    transform: rotate(180deg);
+}
       .offcanvas-backdrop.show { display: block; }
       .offcanvas-menu {
         display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;

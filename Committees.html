@@ -214,6 +214,83 @@
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
         background: rgba(1,46,90,0.32); z-index: 1100;
       }
+      @media (max-width:900px) {
+  .offcanvas-backdrop {
+    display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(1,46,90,0.32); z-index: 1100;
+  }
+  .offcanvas-backdrop.show { display: block; }
+  .offcanvas-menu {
+    display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
+    width: 80vw; max-width: 340px; height: 100vh; background: #fff;
+    z-index: 1200; box-shadow: 3px 0 22px 0 rgba(1,46,90,0.11);
+    transition: left 0.26s cubic-bezier(.6,0,.26,1);
+    padding-bottom: 25px; overflow-y: auto;
+  }
+  .offcanvas-menu.open { left: 0; }
+  .offcanvas-header {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #012e5a; color: #fff; font-size: 1.14em;
+    font-family: 'Roboto',sans-serif; font-weight: 700;
+    padding: 15px 20px 13px 20px;
+  }
+  .offcanvas-close {
+    background: none; border: none; color: #fff; font-size: 2em; cursor: pointer; line-height: 1;
+  }
+  .offcanvas-buttons {
+    display: flex; flex-direction: column; gap: 12px; padding: 22px 18px 8px 18px;
+  }
+  .offcanvas-buttons a, .offcanvas-buttons button {
+    width: 100%; box-sizing: border-box; text-align: center;
+    font-size: 1em; border-radius: 7px; box-shadow: 0 2px 8px 0 rgba(1,46,90,0.06);
+    justify-content: center;
+  }
+  .offcanvas-list { list-style: none; margin: 0; padding: 0; font-size: 1.11em; }
+  .offcanvas-list > li { border-bottom: 1px solid #e6e6e6; }
+  .offcanvas-list > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 24px;
+    color: #012e5a;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none; /* Make sure this is present */
+    box-sizing: border-box; /* THIS FIXES THE OVERFLOW */
+  }
+  .offcanvas-list > li > a:hover,
+  .offcanvas-list > li > a:active {
+    background: #e9f3fe;
+    color: #0066cc;
+  }
+  .offcanvas-list > li.active > a {
+    background: #e9f3fe;
+    color: #0066cc;
+  }
+  /* HIDES the bad HTML button */
+  .offcanvas-submenu-toggle {
+    display: none !important;
+  }
+  /* CREATES the good CSS arrow */
+  .offcanvas-list > li:has(.offcanvas-submenu) > a::after {
+    content: '▼';
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: transform 0.2s;
+  }
+  .offcanvas-list > li.active > a::after {
+    transform: rotate(180deg);
+  }
+  .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-top: 1px solid #e6e6e6; }
+  .offcanvas-submenu.show { display: block; }
+  .offcanvas-submenu li a {
+    display: block; padding: 11px 36px 11px 44px; color: #24477c;
+    font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6;
+  }
+  .offcanvas-submenu li:last-child a { border-bottom: none; }
+}
+
       .offcanvas-backdrop.show { display: block; }
       .offcanvas-menu {
         display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
