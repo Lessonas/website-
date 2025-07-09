@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Retiree SelfService | WV Consolidated Public Retirement Board</title>
+  <title>RSS | WV Consolidated Public Retirement Board</title>
   <!-- Web Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
@@ -12,12 +12,21 @@
     :root {
       --primary-color: #012e5a;
       --accent-color: #0066cc;
+      --border-color: #ddd;
+    }
+    /* --- Base & Header/Footer Styles --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     body {
       display: flex; flex-direction: column; min-height: 100vh; margin: 0;
       font-family: 'Open Sans', Arial, sans-serif; background: #f9f9f9; color: #333; line-height: 1.6;
     }
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: var(--primary-color); }
+    a:hover { text-decoration: underline; color: var(--accent-color); }
+
     .top-bar {
       display: flex; align-items: center; flex-wrap: wrap;
       background: #012e5a; color: #fff; padding: 10px 20px; min-height: 70px;
@@ -33,42 +42,11 @@
       font-size: .87em; line-height: 1.4; max-width: 350px;
     }
     .top-right a { color: #ffc; text-decoration: none; }
-    .top-right a:hover { text-decoration: underline; }
+    .top-right a:hover { text-decoration: underline; color:#fff;}
     .nav-bar {
       display: flex; align-items: center; justify-content: space-between;
       background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       padding: 7px 20px; position: relative; z-index: 99;
-    }
-    .nav-toggle {
-      display: none;
-      align-items: center;
-      gap: 7px;
-      background: #e9f3fe;
-      border: 2px solid #0164cb;
-      border-radius: 12px;
-      color: #012e5a;
-      font-weight: 700;
-      font-size: 1.15em;
-      padding: 8px 14px 8px 13px;
-      box-shadow: 0 2px 6px rgba(1,46,90,0.07);
-      cursor: pointer;
-      transition: border 0.2s, background 0.2s;
-      margin-left: 0;
-      z-index: 1101;
-      user-select: none;
-    }
-    .nav-toggle span { font-size: 1.3em; margin-right: 6px;}
-    .nav-toggle .menu-text { font-size: 1em; font-weight: 700; margin-left: 6px; letter-spacing: .03em;}
-    @media (max-width: 900px) {
-      .top-bar { flex-direction: column; align-items: flex-start;}
-      .nav-toggle { display: flex; }
-      .nav-bar .main-menu,
-      .nav-bar .nav-buttons { display: none !important; }
-    }
-    @media (min-width: 901px) {
-      .nav-toggle { display: none; }
-      .main-menu { display: flex !important; }
-      .nav-buttons { display: flex !important; margin-left: auto; }
     }
     .main-menu { list-style: none; display: flex; gap: 16px; align-items: center; margin: 0; padding: 0; flex-wrap: wrap;}
     .main-menu li { position: relative; }
@@ -79,20 +57,21 @@
       display: inline-block;
       border-radius: 6px;
       transition: background 0.18s;
+      text-decoration: none;
     }
-    .main-menu > li > a:hover { background: #e9f3fe; color: var(--accent-color); }
+    .main-menu > li > a:hover { background: #e9f3fe; color: var(--accent-color); text-decoration: none; }
     .submenu {
       background: #fff; border: 1px solid #e6e6e6; border-radius: 7px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.09);
       display: none; position: absolute; top: 105%; left: 0;
-      min-width: 190px; z-index: 1000; list-style: none !important; padding: 5px 0;
+      min-width: 200px; z-index: 1000; list-style: none !important; padding: 5px 0;
     }
     .main-menu li:hover > .submenu,
     .main-menu li:focus-within > .submenu { display: block; }
     .submenu li a {
       display: block; padding: 8px 20px; white-space: nowrap; font-weight: 400; font-size: .98em;
     }
-    .submenu li a:hover { background: #f0f6ff; color: #005bb5; }
+    .submenu li a:hover { background: #f0f6ff; color: #005bb5; text-decoration: none; }
     .nav-buttons { display: flex; gap: 10px; align-items: center; }
     .service-btn, .employer-login, #findItFastBtn {
       background: #0066cc; color: #fff; padding: 8px 15px; border-radius: 4px;
@@ -104,87 +83,115 @@
     .button-icon { display: inline-flex; margin-right: 8px; }
     .button-icon svg { width: 18px; height: 18px; fill: #fff; }
 
-    @media (max-width:900px) {
+    footer {
+      background: var(--primary-color);
+      color: #fff;
+      padding: 22px 0 10px 0;
+      margin-top: auto;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 0 20px;
+    }
+    footer img {
+      width: 50px;
+      border-radius: 8px;
+      border: 2px solid #fff;
+      padding: 2px;
+    }
+    footer .footer-text {
+      flex: 1;
+      font-size: 0.98em;
+      text-align: right;
+    }
+    footer .footer-text a {
+      color: #ffc;
+      text-decoration: none;
+    }
+    footer .footer-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Main Content & Video Styles --- */
+    main {
+      flex: 1;
+      padding: 40px 10px 20px 10px;
+    }
+    .content-panel {
+      background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
+      width: 95%; max-width: 1100px; padding: 30px; box-sizing: border-box; margin: 0 auto;
+    }
+    .content-panel h1 {
+      font-size: 2.3em; color: var(--primary-color); margin: 0 0 1rem 0; font-weight: 800;
+      letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
+    }
+    .content-panel p {
+        font-size: 1.1em;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Responsive Video Container */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.67%; /* Aspect Ratio for 720x408 video */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: #000;
+      border-radius: 5px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      margin: 2rem auto;
+    }
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .video-caption {
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* --- Mobile & Off-Canvas Menu --- */
+    .nav-toggle {
+      display: none; align-items: center; gap: 7px; background: #e9f3fe; border: 2px solid #0164cb; border-radius: 12px;
+      color: #012e5a; font-weight: 700; font-size: 1.15em; padding: 8px 14px 8px 13px;
+      box-shadow: 0 2px 6px rgba(1,46,90,0.07); cursor: pointer; transition: border 0.2s, background 0.2s;
+      margin-left: 0; z-index: 1101; user-select: none;
+    }
+    .nav-toggle span { font-size: 1.3em; margin-right: 6px;}
+    .nav-toggle .menu-text { font-size: 1em; font-weight: 700; margin-left: 6px; letter-spacing: .03em;}
+    @media (max-width: 900px) {
+      .top-bar { flex-direction: column; align-items: flex-start;}
+      .nav-toggle { display: flex; }
+      .nav-bar .main-menu,
+      .nav-bar .nav-buttons { display: none !important; }
       .offcanvas-backdrop {
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
         background: rgba(1,46,90,0.32); z-index: 1100;
       }
-      @media (max-width:900px) {
-  .offcanvas-backdrop {
-    display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(1,46,90,0.32); z-index: 1100;
-  }
-  .offcanvas-backdrop.show { display: block; }
-  .offcanvas-menu {
-    display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
-    width: 80vw; max-width: 340px; height: 100vh; background: #fff;
-    z-index: 1200; box-shadow: 3px 0 22px 0 rgba(1,46,90,0.11);
-    transition: left 0.26s cubic-bezier(.6,0,.26,1);
-    padding-bottom: 25px; overflow-y: auto;
-  }
-  .offcanvas-menu.open { left: 0; }
-  .offcanvas-header {
-    display: flex; align-items: center; justify-content: space-between;
-    background: #012e5a; color: #fff; font-size: 1.14em;
-    font-family: 'Roboto',sans-serif; font-weight: 700;
-    padding: 15px 20px 13px 20px;
-  }
-  .offcanvas-close {
-    background: none; border: none; color: #fff; font-size: 2em; cursor: pointer; line-height: 1;
-  }
-  .offcanvas-buttons {
-    display: flex; flex-direction: column; gap: 12px; padding: 22px 18px 8px 18px;
-  }
-  .offcanvas-buttons a, .offcanvas-buttons button {
-    width: 100%; box-sizing: border-box; text-align: center;
-    font-size: 1em; border-radius: 7px; box-shadow: 0 2px 8px 0 rgba(1,46,90,0.06);
-    justify-content: center;
-  }
-  .offcanvas-list { list-style: none; margin: 0; padding: 0; font-size: 1.11em; }
-  .offcanvas-list > li { border-bottom: 1px solid #e6e6e6; }
-  .offcanvas-list > li > a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 24px;
-    color: #012e5a;
-    font-weight: 600;
-    width: 100%;
-    cursor: pointer;
-    text-decoration: none; 
-    box-sizing: border-box; 
-  }
-  .offcanvas-list > li > a:hover,
-  .offcanvas-list > li > a:active {
-    background: #e9f3fe;
-    color: #0066cc;
-  }
-  .offcanvas-list > li.active > a {
-    background: #e9f3fe;
-    color: #0066cc;
-  }
-  /* HIDES the bad HTML button */
-  .offcanvas-submenu-toggle {
-    display: none !important;
-  }
-  /* CREATES the good CSS arrow */
-  .offcanvas-list > li:has(.offcanvas-submenu) > a::after {
-    content: '▼';
-    font-size: 0.8em;
-    opacity: 0.7;
-    transition: transform 0.2s;
-  }
-  .offcanvas-list > li.active > a::after {
-    transform: rotate(180deg);
-  }
-  .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-top: 1px solid #e6e6e6; }
-  .offcanvas-submenu.show { display: block; }
-  .offcanvas-submenu li a {
-    display: block; padding: 11px 36px 11px 44px; color: #24477c;
-    font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6;
-  }
-  .offcanvas-submenu li:last-child a { border-bottom: none; }
-}
+      .offcanvas-submenu-toggle { display: none !important; }
+      .offcanvas-list > li:has(.offcanvas-submenu) > a::after {
+        content: '▼';
+        font-size: 0.8em;
+        opacity: 0.7;
+        transition: transform 0.2s ease-in-out;
+      }
+      .offcanvas-list > li.active > a::after {
+        transform: rotate(180deg);
+      }
       .offcanvas-backdrop.show { display: block; }
       .offcanvas-menu {
         display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
@@ -216,43 +223,26 @@
       .offcanvas-list > li > a {
         display: flex; align-items: center; justify-content: space-between;
         padding: 15px 24px; color: #012e5a; font-weight: 600;
-        width: 100%; background: none; cursor: pointer;
+        width: 100%; background: none; cursor: pointer; text-decoration: none;
       }
       .offcanvas-list > li > a:active, .offcanvas-list > li > a:hover { background: #e9f3fe; color: #0066cc;}
       .offcanvas-list > li.active > a { background: #e9f3fe; color: #0066cc; }
-      .offcanvas-submenu-toggle {
-        background: none; border: none; color: #012e5a; font-size: 1.1em; margin-left: 8px; cursor: pointer;
-        pointer-events: none;
-      }
-      .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-bottom: 1px solid #e6e6e6; }
+      .offcanvas-submenu-toggle { display: none; }
+      .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-top: 1px solid #e6e6e6; }
       .offcanvas-submenu.show { display: block; }
       .offcanvas-submenu li a {
         display: block; padding: 11px 36px 11px 44px; color: #24477c;
-        font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6;
+        font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6; text-decoration: none;
       }
       .offcanvas-submenu li:last-child a { border-bottom: none; }
     }
-    @media (min-width:901px) {
-      .offcanvas-menu,
-      .offcanvas-backdrop { display:none!important; }
+    @media (min-width: 901px) {
+      .nav-toggle, .offcanvas-menu, .offcanvas-backdrop { display: none !important; }
+      .main-menu { display: flex !important; }
+      .nav-buttons { display: flex !important; margin-left: auto; }
     }
-    main { flex: 1; background: #f9f9f9; display: flex; align-items: stretch; justify-content: center; padding: 40px 0 20px 0; }
-    .content-panel {
-      background: #fff; border-radius: 7px; box-shadow: 0 2px 4px rgba(0,0,0,0.10);
-      width: 95%; max-width: 1100px; padding: 38px 38px 32px 38px; box-sizing: border-box; margin: 0 auto;
-    }
-    .content-panel h1 {
-      font-size: 2.3em; color: #012e5a; margin-bottom: 0.2em; font-weight: 800;
-      letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
-    }
-    .content-panel h2, .content-panel h3 {
-      color: #005bb5; margin-top: 2.5em; font-size: 1.38em; letter-spacing: -0.5px; font-weight: 700;
-    }
-    .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
-    .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
-    .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
-    .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
-    .content-panel a:hover { text-decoration: underline; }
+
+    /* --- Mega Menu --- */
     #mega-backdrop {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.5); z-index: 9998;
@@ -264,7 +254,7 @@
     }
     .mega-header {
       display: flex; justify-content: space-between; align-items: center; padding: 20px 30px;
-      border-bottom: 1px solid #ddd; background: #f5f5f5; border-top-left-radius: 4px; border-top-right-radius: 4px;
+      border-bottom: 1px solid #ddd; background: #f5f5f5;
     }
     .mega-header h2 { margin: 0; font-size: 1.6em; color: #012e5a; }
     .mega-close { background: none; border: none; font-size: 1.8em; cursor: pointer; color: #666; transition: color .2s;}
@@ -276,29 +266,29 @@
     .mega-column li { margin-bottom: 10px;}
     .mega-column a { color: #0073e6; text-decoration: none; font-size: 1em;}
     .mega-column a:hover { text-decoration: underline;}
-    footer.footer { background: #012e5a; color: #fff; padding: 20px 0; }
-    .footer-container {
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 0 20px;
-    }
-    .footer-logo img { width: 50px; border: 2px solid #fff; padding: 5px; border-radius: 4px;}
-    .footer-text { flex: 1; text-align: right; font-size: 0.93em; line-height: 1.4;}
-    .footer-text a { color: #ffc; text-decoration: none;}
-    .footer-text a:hover { text-decoration: underline;}
-    @media (max-width: 1024px) {
-      .mega-column { flex: 1 1 45%; }
-      .content-panel { padding: 24px 8vw; }
-    }
+
+    /* --- Responsive Adjustments for Mobile View --- */
     @media (max-width: 768px) {
       main { padding: 18px 0; }
-      .content-panel { width: 98%; padding: 18px 2vw;}
+      .content-panel {
+        width: 100%;
+        padding: 24px 18px;
+        border-radius: 0;
+        box-shadow: none;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+      .content-panel h1 { font-size: 1.7em; letter-spacing: -0.5px; }
       .mega-content { flex-direction: column; gap: 16px;}
       .mega-column { flex: 1 1 100%; min-width: 0;}
+      footer { padding: 15px; }
       .footer-container { flex-direction: column; text-align: center;}
-      .footer-text { margin-top: 10px;}
+      footer .footer-text { margin-top: 10px; text-align: center; }
     }
   </style>
 </head>
 <body>
+  <!-- HEADER & NAVIGATION -->
   <div class="top-bar">
     <div class="top-left">
       <a href="index.html" class="logo"><img src="Images/Logo.png" alt="CPRB Logo"></a>
@@ -327,7 +317,7 @@
     </button>
     <ul class="main-menu">
       <li>
-        <a href="Board-Agenda.html">Board of Trustees</a>
+        <a href="#">Board of Trustees</a>
         <ul class="submenu">
             <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
             <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
@@ -336,7 +326,7 @@
         </ul>
       </li>
       <li>
-        <a href="PERS.html">Active Members</a>
+        <a href="#">Active Members</a>
         <ul class="submenu">
             <li><a href="PERS.html">PERS</a></li>
             <li><a href="PERS-TierII.html">PERS Tier II</a></li>
@@ -353,7 +343,7 @@
         </ul>
       </li>
       <li>
-        <a href="Retirees.html">Retirees</a>
+        <a href="#">Retirees</a>
         <ul class="submenu">
             <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service</a></li>
             <li><a href="Retirees.html">Forms</a></li>
@@ -361,7 +351,7 @@
         </ul>
       </li>
       <li>
-        <a href="Employers.html">Participating Employers</a>
+        <a href="#">Participating Employers</a>
         <ul class="submenu">
             <li><a href="Employers.html">General Resources</a></li>
             <li><a href="Employers-Forms.html">Employers Forms</a></li>
@@ -370,7 +360,7 @@
         </ul>
       </li>
       <li>
-        <a href="Publications.html">Publications</a>
+        <a href="#">Publications</a>
         <ul class="submenu">
             <li><a href="Publications.html#GASB68">GASB 68</a></li>
             <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
@@ -391,7 +381,7 @@
       </button>
       <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" class="service-btn" target="_blank">
         <span class="button-icon">
-           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#fff">
               <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
               <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
               <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
@@ -401,13 +391,14 @@
       </a>
       <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" class="employer-login" target="_blank">
         <span class="button-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
               <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
             </svg>
         </span>
         Employer Login
       </a>
     </div>
+    <!-- MOBILE OFF-CANVAS MENU -->
     <div class="offcanvas-backdrop"></div>
     <nav class="offcanvas-menu" aria-label="Mobile Menu">
       <div class="offcanvas-header">
@@ -417,7 +408,7 @@
       <div class="offcanvas-buttons">
         <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" class="service-btn" target="_blank">
           <span class="button-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#fff">
               <path d="M12 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zM19.942 32H4.058A4.062 4.062 0 0 1 0 27.942c0-6.616 5.383-12 12-12s12 5.384 12 12A4.062 4.062 0 0 1 19.942 32zM12 17.942c-5.514 0-10 4.486-10 10A2.06 2.06 0 0 0 4.058 30h15.884A2.06 2.06 0 0 0 22 27.942c0-5.514-4.486-10-10-10z"/>
               <path d="M20 16.942c-1.413 0-2.759.276-4 .762 4.095 1.601 7 5.576 7 10.238A3.058 3.058 0 0 1 19.942 31h8A3.058 3.058 0 0 0 31 27.942c0-6.075-4.925-11-11-11zM20 1a5.97 5.97 0 0 0-4 1.537 5.978 5.978 0 0 1 0 8.926A5.97 5.97 0 0 0 20 13a6 6 0 1 0 0-12z"/>
               <path d="M27.942 32h-8a1 1 0 1 1 0-2A2.06 2.06 0 0 0 22 27.942c0-4.142-2.498-7.795-6.364-9.307a1 1 0 0 1 0-1.863c1.408-.55 2.877-.83 4.364-.83 6.617 0 12 5.384 12 12A4.062 4.062 0 0 1 27.942 32zm-4.504-2h4.504A2.06 2.06 0 0 0 30 27.942c0-5.514-4.486-10-10-10-.419 0-.836.027-1.251.08C22.004 20.22 24 23.886 24 27.942c0 .75-.205 1.454-.562 2.058zM20 14a6.984 6.984 0 0 1-4.667-1.792.999.999 0 0 1-.001-1.489C16.392 9.77 17 8.413 17 7s-.607-2.768-1.668-3.72a1.002 1.002 0 0 1 .001-1.488A6.984 6.984 0 0 1 20 0c3.86 0 7 3.14 7 7s-3.14 7-7 7zm-2.503-2.677c.758.44 1.62.677 2.503.677 2.757 0 5-2.243 5-5s-2.243-5-5-5c-.884 0-1.745.236-2.503.677C18.463 3.903 19 5.426 19 7s-.537 3.097-1.503 4.323z"/>
@@ -427,7 +418,7 @@
         </a>
         <a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?userType=Employer" class="employer-login" target="_blank">
           <span class="button-icon">
-           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
               <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
             </svg>
           </span> Employer Login
@@ -441,7 +432,7 @@
       </div>
       <ul class="offcanvas-list">
         <li>
-          <a href="Board-Agenda.html">Board of Trustees<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <a href="#">Board of Trustees</a>
           <ul class="offcanvas-submenu">
             <li><a href="Board-Agenda.html">Annual Meeting Schedule</a></li>
             <li><a href="Board-Agenda.html">Meeting Agendas</a></li>
@@ -450,7 +441,7 @@
           </ul>
         </li>
         <li>
-          <a href="PERS.html">Active Members<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <a href="#">Active Members</a>
           <ul class="offcanvas-submenu">
             <li><a href="PERS.html">PERS</a></li>
             <li><a href="PERS-TierII.html">PERS Tier II</a></li>
@@ -467,7 +458,7 @@
           </ul>
         </li>
         <li>
-          <a href="Retirees.html">Retirees<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <a href="#">Retirees</a>
           <ul class="offcanvas-submenu">
             <li><a href="https://mywvretirement.wv.gov/Common/Pages/Login.aspx?retiree=true" target="_blank">Retiree Self Service</a></li>
             <li><a href="Retirees.html">Forms</a></li>
@@ -475,7 +466,7 @@
           </ul>
         </li>
         <li>
-          <a href="Employers.html">Participating Employers<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <a href="#">Participating Employers</a>
           <ul class="offcanvas-submenu">
             <li><a href="Employers.html">General Resources</a></li>
             <li><a href="Employers-Forms.html">Employers Forms</a></li>
@@ -484,7 +475,7 @@
           </ul>
         </li>
         <li>
-          <a href="Publications.html">Publications<button class="offcanvas-submenu-toggle" aria-label="Show submenu">▼</button></a>
+          <a href="#">Publications</a>
           <ul class="offcanvas-submenu">
             <li><a href="Publications.html#GASB68">GASB 68</a></li>
             <li><a href="Publications.html#AnnualReport">Annual Report</a></li>
@@ -498,6 +489,8 @@
       </ul>
     </nav>
   </nav>
+
+  <!-- MEGA MENU -->
   <div id="mega-backdrop"></div>
   <div id="mega-menu">
     <div class="mega-header">
@@ -564,17 +557,22 @@
       </div>
     </div>
   </div>
-<main>
- <div id="ContentPanel">
-  <p><strong>Retiree Self Service Tutorial:</strong> <br>(click the full-screen button in the lower right corner for best viewing)</p>
-  <video width="720" height="408" controls autoplay>
-    <source src="Videos/HowtoSelfservice.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
+
+ <main>
+  <div class="content-panel">
+    <h1>Retiree Self Service (RSS) Tutorial</h1>
+    <p>This video provides a step-by-step guide on how to use the Retiree Self Service portal. For the best viewing experience, we recommend using the full-screen button located in the video player's controls.</p>
+    <div class="video-container">
+        <video controls autoplay muted playsinline>
+            <source src="Videos/HowtoSelfservice.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <p class="video-caption">A guide to navigating the member/retiree self-service portal.</p>
+  </div>
 </main>
 
-  <!-- STICKY FOOTER AT THE BOTTOM -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-logo">
@@ -588,91 +586,83 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const navToggle = document.querySelector('.nav-toggle');
-      const offcanvasMenu = document.querySelector('.offcanvas-menu');
-      const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
-      const offcanvasClose = document.querySelector('.offcanvas-close');
-      const offcanvasListItems = document.querySelectorAll('.offcanvas-list > li');
-      const offcanvasFindItFastBtn = document.getElementById('offcanvasFindItFastBtn');
+  document.addEventListener('DOMContentLoaded', function () {
+    // --- Mega Menu Functionality ---
+    const findItFastBtn = document.getElementById('findItFastBtn');
+    const megaMenu = document.getElementById('mega-menu');
+    const megaBackdrop = document.getElementById('mega-backdrop');
+    const megaClose = document.getElementById('mega-close');
+    const offcanvasFindItFastBtn = document.getElementById('offcanvasFindItFastBtn');
 
-      const findItFastBtn = document.getElementById('findItFastBtn');
-      const megaMenu = document.getElementById('mega-menu');
-      const megaBackdrop = document.getElementById('mega-backdrop');
-      const megaClose = document.getElementById('mega-close');
-
-      function openOffcanvasMenu() {
-        if (offcanvasMenu && offcanvasBackdrop) {
-          offcanvasMenu.classList.add('open');
-          offcanvasBackdrop.classList.add('show');
-        }
+    function openMegaMenu() {
+      megaBackdrop.style.display = 'block';
+      megaMenu.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      // If mobile menu is open, close it
+      if (offcanvasMenu.classList.contains('open')) {
+          closeOffcanvasMenu();
       }
+    }
 
-      function closeOffcanvasMenu() {
-        if (offcanvasMenu && offcanvasBackdrop) {
-          offcanvasMenu.classList.remove('open');
-          offcanvasBackdrop.classList.remove('show');
-          offcanvasMenu.querySelectorAll('.offcanvas-submenu').forEach(menu => menu.classList.remove('show'));
-          offcanvasListItems.forEach(li => li.classList.remove('active'));
-        }
-      }
+    function closeMegaMenu() {
+      megaBackdrop.style.display = 'none';
+      megaMenu.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Desktop button
+    if (findItFastBtn) findItFastBtn.addEventListener('click', openMegaMenu);
+    // Mobile button
+    if (offcanvasFindItFastBtn) offcanvasFindItFastBtn.addEventListener('click', openMegaMenu);
+    
+    if (megaClose) megaClose.addEventListener('click', closeMegaMenu);
+    if (megaBackdrop) megaBackdrop.addEventListener('click', closeMegaMenu);
 
-      function openMegaMenu(e) {
-        e.preventDefault();
-        closeOffcanvasMenu(); 
-        if(megaBackdrop && megaMenu) {
-            megaBackdrop.style.display = 'block';
-            megaMenu.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-      }
+    // --- Off-Canvas Mobile Menu Functionality ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const offcanvasMenu = document.querySelector('.offcanvas-menu');
+    const offcanvasBackdrop = document.querySelector('.offcanvas-backdrop');
+    const offcanvasClose = document.querySelector('.offcanvas-close');
 
-      function closeMegaMenu() {
-        if(megaBackdrop && megaMenu) {
-            megaBackdrop.style.display = 'none';
-            megaMenu.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-      }
+    function openOffcanvasMenu() {
+      if (offcanvasBackdrop) offcanvasBackdrop.classList.add('show');
+      if (offcanvasMenu) offcanvasMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-      if (navToggle) {
-        navToggle.addEventListener('click', openOffcanvasMenu);
-      }
+    function closeOffcanvasMenu() {
+      if (offcanvasBackdrop) offcanvasBackdrop.classList.remove('show');
+      if (offcanvasMenu) offcanvasMenu.classList.remove('open');
+      document.body.style.overflow = 'auto';
+    }
+    
+    if (navToggle) navToggle.addEventListener('click', openOffcanvasMenu);
+    if (offcanvasClose) offcanvasClose.addEventListener('click', closeOffcanvasMenu);
+    if (offcanvasBackdrop) offcanvasBackdrop.addEventListener('click', closeOffcanvasMenu);
 
-      if (offcanvasClose) {
-        offcanvasClose.addEventListener('click', closeOffcanvasMenu);
-      }
-
-      if (offcanvasBackdrop) {
-        offcanvasBackdrop.addEventListener('click', closeOffcanvasMenu);
-      }
-
-      offcanvasListItems.forEach(function(li) {
-        const a = li.querySelector('a');
-        const submenu = li.querySelector('.offcanvas-submenu');
+    // Handle submenus in off-canvas menu
+    const offcanvasListItems = document.querySelectorAll('.offcanvas-list > li');
+    offcanvasListItems.forEach(item => {
+        const link = item.querySelector('a');
+        const submenu = item.querySelector('.offcanvas-submenu');
         if (submenu) {
-          a.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const parentLi = e.currentTarget.parentElement;
-            parentLi.classList.toggle('active');
-            submenu.classList.toggle('show');
-            offcanvasListItems.forEach(otherLi => {
-              if (otherLi !== parentLi) {
-                otherLi.classList.remove('active');
-                otherLi.querySelector('.offcanvas-submenu')?.classList.remove('show');
-              }
+            link.addEventListener('click', function (e) {
+                // Prevent navigation only if it's a menu toggle
+                if (link.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+                const currentlyActive = document.querySelector('.offcanvas-list > li.active');
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                    currentlyActive.querySelector('.offcanvas-submenu').classList.remove('show');
+                }
+                item.classList.toggle('active');
+                submenu.classList.toggle('show');
             });
-          });
         }
-      });
-      
-      if (findItFastBtn) findItFastBtn.addEventListener('click', openMegaMenu);
-      if (offcanvasFindItFastBtn) offcanvasFindItFastBtn.addEventListener('click', openMegaMenu);
-      
-      if (megaClose) megaClose.addEventListener('click', closeMegaMenu);
-      if (megaBackdrop) megaBackdrop.addEventListener('click', closeMegaMenu);
     });
+  });
   </script>
+
 </body>
 </html>
