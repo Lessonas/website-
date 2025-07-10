@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TRS | WV Consolidated Public Retirement Board</title>
+  <title>NRPORS | WV Consolidated Public Retirement Board</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
   <style>
@@ -107,82 +107,6 @@
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
         background: rgba(1,46,90,0.32); z-index: 1100;
       }
-      @media (max-width:900px) {
-  .offcanvas-backdrop {
-    display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(1,46,90,0.32); z-index: 1100;
-  }
-  .offcanvas-backdrop.show { display: block; }
-  .offcanvas-menu {
-    display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
-    width: 80vw; max-width: 340px; height: 100vh; background: #fff;
-    z-index: 1200; box-shadow: 3px 0 22px 0 rgba(1,46,90,0.11);
-    transition: left 0.26s cubic-bezier(.6,0,.26,1);
-    padding-bottom: 25px; overflow-y: auto;
-  }
-  .offcanvas-menu.open { left: 0; }
-  .offcanvas-header {
-    display: flex; align-items: center; justify-content: space-between;
-    background: #012e5a; color: #fff; font-size: 1.14em;
-    font-family: 'Roboto',sans-serif; font-weight: 700;
-    padding: 15px 20px 13px 20px;
-  }
-  .offcanvas-close {
-    background: none; border: none; color: #fff; font-size: 2em; cursor: pointer; line-height: 1;
-  }
-  .offcanvas-buttons {
-    display: flex; flex-direction: column; gap: 12px; padding: 22px 18px 8px 18px;
-  }
-  .offcanvas-buttons a, .offcanvas-buttons button {
-    width: 100%; box-sizing: border-box; text-align: center;
-    font-size: 1em; border-radius: 7px; box-shadow: 0 2px 8px 0 rgba(1,46,90,0.06);
-    justify-content: center;
-  }
-  .offcanvas-list { list-style: none; margin: 0; padding: 0; font-size: 1.11em; }
-  .offcanvas-list > li { border-bottom: 1px solid #e6e6e6; }
-  .offcanvas-list > li > a {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 24px;
-    color: #012e5a;
-    font-weight: 600;
-    width: 100%;
-    cursor: pointer;
-    text-decoration: none; 
-    box-sizing: border-box; 
-  }
-  .offcanvas-list > li > a:hover,
-  .offcanvas-list > li > a:active {
-    background: #e9f3fe;
-    color: #0066cc;
-  }
-  .offcanvas-list > li.active > a {
-    background: #e9f3fe;
-    color: #0066cc;
-  }
-  /* HIDES the bad HTML button */
-  .offcanvas-submenu-toggle {
-    display: none !important;
-  }
-  /* CREATES the good CSS arrow */
-  .offcanvas-list > li:has(.offcanvas-submenu) > a::after {
-    content: '▼';
-    font-size: 0.8em;
-    opacity: 0.7;
-    transition: transform 0.2s;
-  }
-  .offcanvas-list > li.active > a::after {
-    transform: rotate(180deg);
-  }
-  .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-top: 1px solid #e6e6e6; }
-  .offcanvas-submenu.show { display: block; }
-  .offcanvas-submenu li a {
-    display: block; padding: 11px 36px 11px 44px; color: #24477c;
-    font-weight: 500; font-size: .98em; border-bottom: 1px solid #e6e6e6;
-  }
-  .offcanvas-submenu li:last-child a { border-bottom: none; }
-}
       .offcanvas-backdrop.show { display: block; }
       .offcanvas-menu {
         display: flex; flex-direction: column; position: fixed; top: 0; left: -80vw;
@@ -214,15 +138,27 @@
       .offcanvas-list > li > a {
         display: flex; align-items: center; justify-content: space-between;
         padding: 15px 24px; color: #012e5a; font-weight: 600;
-        width: 100%; background: none; cursor: pointer;
+        width: 100%; cursor: pointer; text-decoration: none; box-sizing: border-box; 
       }
-      .offcanvas-list > li > a:active, .offcanvas-list > li > a:hover { background: #e9f3fe; color: #0066cc;}
-      .offcanvas-list > li.active > a { background: #e9f3fe; color: #0066cc; }
+      .offcanvas-list > li > a:hover,
+      .offcanvas-list > li > a:active {
+        background: #e9f3fe;
+        color: #0066cc;
+      }
+      .offcanvas-list > li.active > a {
+        background: #e9f3fe;
+        color: #0066cc;
+      }
       .offcanvas-submenu-toggle {
-        background: none; border: none; color: #012e5a; font-size: 1.1em; margin-left: 8px; cursor: pointer;
-        pointer-events: none;
+        display: none !important;
       }
-      .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-bottom: 1px solid #e6e6e6; }
+      .offcanvas-list > li:has(.offcanvas-submenu) > a::after {
+        content: '▼'; font-size: 0.8em; opacity: 0.7; transition: transform 0.2s;
+      }
+      .offcanvas-list > li.active > a::after {
+        transform: rotate(180deg);
+      }
+      .offcanvas-submenu { display: none; background: #f7fafd; padding: 0; border-top: 1px solid #e6e6e6; }
       .offcanvas-submenu.show { display: block; }
       .offcanvas-submenu li a {
         display: block; padding: 11px 36px 11px 44px; color: #24477c;
@@ -243,11 +179,28 @@
       font-size: 2.3em; color: #012e5a; margin-bottom: 0.2em; font-weight: 800;
       letter-spacing: -1.2px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;
     }
-    .content-panel h2, .content-panel h3 {
-      color: #005bb5; margin-top: 2.5em; font-size: 1.38em; letter-spacing: -0.5px; font-weight: 700;
+    .content-panel h2 {
+      color: #005bb5; margin-top: 2.2em; font-size: 1.38em; letter-spacing: -0.5px; font-weight: 700;
     }
-    .content-panel h3 { margin-top: 2em; font-size: 1.15em; }
-    .content-panel ul { list-style: disc inside; margin: 1.1em 0 1.8em 1.3em; padding: 0;}
+    .content-panel h3 {
+      color: #005bb5; margin-top: 2em; font-size: 1.15em; letter-spacing: -0.5px; font-weight: 700;
+    }
+    .content-panel h4 {
+      color: #012e5a;
+      margin-top: 1.8em;
+      margin-bottom: 0.5em;
+      font-size: 1.05em;
+      font-weight: 700;
+    }
+    .content-panel p { margin-bottom: 1em; } /* Added for consistent paragraph spacing */
+    .content-panel ul {
+      list-style: disc outside; /* Use standard bullets outside the text block */
+      margin: 1em 0 1.5em 0;     /* More balanced vertical margin */
+      padding-left: 25px;       /* Indent list for 'outside' bullets */
+    }
+    .content-panel p + ul, .content-panel h4 + ul {
+        margin-top: 0.5em; /* Reduce space between a p/h4 and a following list */
+    }
     .content-panel li { margin-bottom: 0.7em; font-size: 1.07em; }
     .content-panel a { color: #0073e6; text-decoration: none; font-weight: 500; }
     .content-panel a:hover { text-decoration: underline; }
@@ -270,7 +223,7 @@
     .mega-content { display: flex; flex-wrap: wrap; gap: 22px; padding: 22px 30px; justify-content: space-between;}
     .mega-column { flex: 1 1 220px; min-width: 220px; box-sizing: border-box;}
     .mega-column h3 { margin-top: 0; font-size: 1.17em; color: #005bb5; margin-bottom: 12px;}
-    .mega-column ul { list-style: none; margin: 0; padding: 0;}
+    .mega-column ul { list-style: none; margin: 0; padding: 0;} /* Reset list style for mega menu only */
     .mega-column li { margin-bottom: 10px;}
     .mega-column a { color: #0073e6; text-decoration: none; font-size: 1em;}
     .mega-column a:hover { text-decoration: underline;}
@@ -565,7 +518,7 @@
   <!-- MAIN CONTENT PANEL -->
   <main>
 <div class="content-panel">
-  <h1>NATURAL RESOURCES POLICE OFFICERS RETIREMENT SYSTEM (NRPORS)</h1>
+  <h1>Natural Resources Police Officers Retirement System (NRPORS)</h1>
   <p>
     The Natural Resources Police Officers Retirement System (NRPORS) was established for all Natural Resources Police Officers hired on or after January 2, 2021. NRPORS currently has more than 100 active members and 10 retired members.
   </p>
@@ -576,15 +529,8 @@
     "Board", when used in the following sections refers to the West Virginia Consolidated Public Retirement Board.
   </p>
   <nav class="page-nav">
-    <ul>
-      <!-- <li><a href="#contact">Contact Us</a></li>
-      <li><a href="#forms">Forms</a></li>
-      <li><a href="#self-service">Online Self-Service</a></li> -->
-    </ul>
+    <!-- Empty nav -->
   </nav>
-  <!-- <div style="margin:1em 0; font-size:90%;">
-    <a href="#">PDF print friendly version</a> | <a href="#">Print friendly version</a>
-  </div> -->
 
   <h2 id="retirement-benefits">RETIREMENT BENEFITS</h2>
   <p>
@@ -601,21 +547,21 @@
   <p>In order to qualify for regular retirement benefits, a member of NRPORS must meet one of the following requirements:</p>
   <p>While still in covered employment, a member may:</p>
   <ul>
-    <li>&#9670; Retire with full benefits at the age of 55 if age plus service equals or exceeds 70. Member must have 10 years of contributory service.</li>
+    <li>Retire with full benefits at the age of 55 if age plus service equals or exceeds 70. Member must have 10 years of contributory service.</li>
   </ul>
   <p>When covered employment has ceased, a member may:</p>
   <ul>
-    <li>&#9670; Retire with full benefits at age 55 with 15 years of service, of which 10 years must be contributory.</li>
-    <li>&#9670; Retire with full benefits at age 62 with 10 or more years of contributory service.</li>
+    <li>Retire with full benefits at age 55 with 15 years of service, of which 10 years must be contributory.</li>
+    <li>Retire with full benefits at age 62 with 10 or more years of contributory service.</li>
   </ul>
   <p>
     For retirements effective prior to July 1, 2025, a regular retirement benefit is an amount equal to 2.25% of a member's final average salary multiplied by the member's years of credited service, paid in equal monthly installments. For retirements effective on or after July 1, 2025, a regular retirement benefit is an amount equal to 2.5% of a member's final average salary multiplied by the member's years of credited service, paid in equal monthly installments. Final average salary refers to the average of the highest annual compensation received for covered employment by the member during any five consecutive plan years within the member's last ten years of service. A plan year is July 1 through June 30.
   </p>
-  <div style="margin:12px 0; font-family:monospace;">
+  <div style="margin:12px 0; padding: 10px; background: #f7fafd; border-left: 3px solid #0066cc; font-family:monospace; font-size: 0.9em; line-height: 1.7;">
     Annual Retirement Benefit =<br>
-    Final Average Salary x Years of Credited Service x 2.25% for retirements effective prior to July 1, 2025;<br>
+    Final Average Salary x Years of Credited Service x 2.25% (retirements before July 1, 2025);<br>
     or<br>
-    Final Average Salary x Years of Credited Service x 2.50% for retirements effective on or after July 1, 2025
+    Final Average Salary x Years of Credited Service x 2.50% (retirements on or after July 1, 2025)
   </div>
   <p>
     Retirement income payments shall commence on the first day of the calendar month following:<br>
@@ -630,8 +576,8 @@
   <h3>Annuity Options Upon Retirement</h3>
   <ul>
     <li><b>Straight Life Annuity:</b> A lifetime annuity payable monthly to the member determined under the regular benefit formula without adjustment. There are no death benefits payable under this option.</li>
-    <li><b>Joint &amp; Survivor Annuity:</b> A reduced annuity payable monthly to the member. Upon the death of the member, a reduced annuity of either 50%, 66 2/3 %, 75% or 100% of the original monthly amount, dependent on the original option elected by the member, is payable to the beneficiary. There is no change in the original monthly amount if the beneficiary pre-deceases the member.</li>
-    <li><b>Ten Years Certain &amp; Life Annuity:</b> A reduced annuity payable monthly for the member's lifetime, even if it exceeds 120 monthly payments. If the member dies before receiving 120 monthly payments, the remainder of the 120 monthly payments shall be payable to the member's beneficiary or the member's estate.</li>
+    <li><b>Joint & Survivor Annuity:</b> A reduced annuity payable monthly to the member. Upon the death of the member, a reduced annuity of either 50%, 66 2/3 %, 75% or 100% of the original monthly amount, dependent on the original option elected by the member, is payable to the beneficiary. There is no change in the original monthly amount if the beneficiary pre-deceases the member.</li>
+    <li><b>Ten Years Certain & Life Annuity:</b> A reduced annuity payable monthly for the member's lifetime, even if it exceeds 120 monthly payments. If the member dies before receiving 120 monthly payments, the remainder of the 120 monthly payments shall be payable to the member's beneficiary or the member's estate.</li>
     <li><b>Level Income Annuity:</b> An increased annuity payable monthly to the member until the member attains Social Security Retirement Age. After Social Security Retirement Age is met, the benefit is reduced by the estimated Primary Insurance Amount determined at retirement. The reduced benefit is payable monthly for the remaining lifetime of the member. There are no death benefits under this option.</li>
   </ul>
   <p>
@@ -750,18 +696,20 @@
     Information contained in this publication illustrates the Board's understanding of the current provisions of the West Virginia Code as it applies to the Natural Resources Police Officers Retirement System. These provisions are contained in the current plan statutes, and are subject to modification by the West Virginia Legislature each year. This is for general guidance purposes only. In the event there is a discrepancy between information contained in this brochure and the WV State Code and Rules or any applicable case law, the language in the Code and Rules or any applicable case law shall prevail.
   </p>
 </div>
-
   </main>
-
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-logo"><img src="Images/WV.png" alt="WV State Logo"></div>
-      <div class="footer-text">
-        CPRB © 2025 – State of West Virginia – The materials contained herein are intended for general guidance purposes only. In the event of any discrepancy, the State Code and Rules prevail. |
-        <a href="PrivacyPolicy.html">Privacy Policy Notice</a>
-      </div>
+  <div class="footer-container">
+    <img src="Images/WV.png" alt="WV State Logo" style="width:50px" />
+    <div class="footer-text">
+      CPRB © 2025 – State of West Virginia – The materials contained herein are intended
+      for general guidance only. In the event of any discrepancy between this site and
+      the WV Code & Rules, the Code & Rules prevail. |
+      <a href="PrivacyPolicy.html">Privacy Policy Notice</a> |
+      <a href="mailto:cprb.noreply@wv.gov?subject=%20Issue%20Report">Report An Issue</a>
     </div>
-  </footer>
+  </div>
+</footer>
  <script>
     document.addEventListener('DOMContentLoaded', function() {
       const navToggle = document.querySelector('.nav-toggle');
