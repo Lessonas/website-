@@ -379,41 +379,29 @@
       background: #f7f7fc; 
     }
 
-    /* Footer */
-    footer { 
-      background: var(--footer-bg); 
-      color: #fff; 
-      padding: 22px 0 10px 0; 
-      margin-top: auto;
+    .footer {
+        margin-top: 0 !important;
+      }
+      .footer-container {
+        padding: 20px 10px;
+      }
+    
+    @media (max-width: 600px) {
+      .content-panel { padding: 16px 3vw; }
+      .info-section, .form-section { padding: 16px 12px 14px 12px; }
+      .board-name { font-size: 1em; }
+      .top-right { font-size: 0.9em; }
+      .hero { min-height: 50vh; }
     }
-    .footer-container {
-      max-width: 1200px; 
-      margin: 0 auto; 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      flex-wrap: wrap; 
-      gap: 15px;
-      padding: 0 20px;
+    @media (max-width: 768px) {
+      .about-us { display: none; }
+      .hero { min-height: 40vh; }
     }
-    /* .footer-container img { 
-      width: 50px; 
-      border-radius: 8px; 
-      border: 2px solid #fff; 
-      padding: 2px;
-    } */
-    .footer-text { 
-      flex: 1;
-      font-size: 0.98em; 
-      text-align: right;
-    }
-    .footer-text a { 
-      color: var(--footer-accent); 
-      text-decoration: none;
-    }
-    .footer-text a:hover { 
-      text-decoration: underline;
-    }
+    footer { background: var(--primary-color); color: #fff; text-align: center; flex-shrink: 0; }
+    .footer-container { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
+    .footer-text a { color: #ffc; text-decoration: underline; }
+    
+    
 
     /* --- Responsive & Mobile Styles --- */
 
@@ -686,15 +674,7 @@
         flex: 1 1 100%; 
         min-width: 0;
       }
-      .footer-container { 
-        flex-direction: column; 
-        text-align: center;
-        gap: 10px;
-      }
-      .footer-text { 
-        margin-top: 10px;
-        text-align: center;
-      }
+      
     }
   </style>
 </head>

@@ -83,37 +83,7 @@
     .button-icon { display: inline-flex; margin-right: 8px; }
     .button-icon svg { width: 18px; height: 18px; fill: #fff; }
     
-    footer { 
-      background: var(--primary-color); 
-      color: #fff; 
-      padding: 22px 0 10px 0; 
-      margin-top: auto;
-    }
-    .footer-container {
-      max-width: 1200px; 
-      margin: 0 auto; 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      flex-wrap: wrap; 
-      gap: 15px;
-      padding: 0 20px;
-    }
-   /*  */
-    footer .footer-text { 
-      flex: 1;
-      font-size: 0.98em; 
-      text-align: right;
-    }
-    footer .footer-text a { 
-      color: #ffc; 
-      text-decoration: none;
-    }
-    footer .footer-text a:hover { 
-      text-decoration: underline;
-    }
     
-    /* --- Main Content & Video Styles --- */
     main { 
       flex: 1; 
       padding: 40px 10px 20px 10px; 
@@ -243,6 +213,27 @@
       .main-menu { display: flex !important; }
       .nav-buttons { display: flex !important; margin-left: auto; }
     }
+    .footer {
+        margin-top: 0 !important;
+      }
+      .footer-container {
+        padding: 20px 10px;
+      }
+    
+    @media (max-width: 600px) {
+      .content-panel { padding: 16px 3vw; }
+      .info-section, .form-section { padding: 16px 12px 14px 12px; }
+      .board-name { font-size: 1em; }
+      .top-right { font-size: 0.9em; }
+      .hero { min-height: 50vh; }
+    }
+    @media (max-width: 768px) {
+      .about-us { display: none; }
+      .hero { min-height: 40vh; }
+    }
+    footer { background: var(--primary-color); color: #fff; text-align: center; flex-shrink: 0; }
+    .footer-container { display: flex; align-items: center; justify-content: center; gap: 15px; padding: 20px; flex-wrap: wrap; }
+    .footer-text a { color: #ffc; text-decoration: underline; }
 
     /* --- Mega Menu --- */
     #mega-backdrop {
@@ -283,9 +274,7 @@
       .content-panel h1 { font-size: 1.5em; letter-spacing: -0.5px; }
       .mega-content { flex-direction: column; gap: 16px;}
       .mega-column { flex: 1 1 100%; min-width: 0;}
-      footer { padding: 15px; }
-      .footer-container { flex-direction: column; text-align: center;}
-      footer .footer-text { margin-top: 10px; text-align: center; }
+      
     }
   </style>
 </head>
